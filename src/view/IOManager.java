@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import controller.Control;
 import view.basic.HomePane;
 import view.basic.LoginPane;
+import view.section.CreateSectionPane;
+import view.section.SectionAllPane;
+import view.section.UpdateSectionPane;
 
 public class IOManager extends JFrame implements CustomEventAnswer {
 	
@@ -19,6 +22,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	
 	private LoginPane loginPane;
 	private HomePane homePane;
+	
+	private SectionAllPane sectionAllPane;
+	private CreateSectionPane createSectionPane;
+	private UpdateSectionPane updateSectionPane;
 
 	/**
 	 * Create the frame.
@@ -43,7 +50,22 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		homePane = new HomePane();
 		homePane.setSize(dim);
 		((HomePane) homePane).setEvent(control);
-		add(homePane);
+//		add(homePane);
+		
+		sectionAllPane = new SectionAllPane();
+		sectionAllPane.setSize(dim);
+		((SectionAllPane) sectionAllPane).setEvent(control);
+//		add(sectionAllPane);
+		
+		createSectionPane = new CreateSectionPane();
+		createSectionPane.setSize(dim);
+		((CreateSectionPane) createSectionPane).setEvent(control);
+//		add(createSectionPane);
+		
+		updateSectionPane = new UpdateSectionPane();
+		updateSectionPane.setSize(dim);
+		((UpdateSectionPane) updateSectionPane).setEvent(control);
+		add(updateSectionPane);
 	}
 
 }

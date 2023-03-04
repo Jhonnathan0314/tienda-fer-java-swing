@@ -72,8 +72,8 @@ public class LoginPane extends JPanel {
 		
 		userField = new JTextField();
 		userField.setBorder(new LineBorder(Color.WHITE, 1, true));
-		userField.setBounds(641, 320, 279, 49);
 		userField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		userField.setBounds(641, 320, 279, 49);
 		add(userField, 0);
 		
 		passwordLbl = new JLabel("Contraseña");
