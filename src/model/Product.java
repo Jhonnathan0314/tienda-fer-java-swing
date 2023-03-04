@@ -16,18 +16,20 @@ public class Product {
 	private int quantityAvailable;
 	private float saleValue;
 	private String packaging;
+	private String quantityPackaging;
 	private String quantityUnit;
 	private Date updateDate;
 	private Section section;
 	
 	//Metodos constructores
-	public Product(int id, String name, int quantityAvailable, float saleValue, String packaging, String quantityUnit, Date updateDate, Section section) {
+	public Product(int id, String name, int quantityAvailable, float saleValue, String packaging, String quantityPackaging, String quantityUnit, Date updateDate, Section section) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.quantityAvailable = quantityAvailable;
 		this.saleValue = saleValue;
 		this.packaging = packaging;
+		this.quantityPackaging = quantityPackaging;
 		this.quantityUnit = quantityUnit;
 		this.updateDate = updateDate;
 		this.section = section;
@@ -74,6 +76,14 @@ public class Product {
 
 	public void setPackaging(String packaging) {
 		this.packaging = packaging;
+	}
+
+	public String getQuantityPackaging() {
+		return quantityPackaging;
+	}
+
+	public void setQuantityPackaging(String quantityPackaging) {
+		this.quantityPackaging = quantityPackaging;
 	}
 
 	public String getQuantityUnit() {

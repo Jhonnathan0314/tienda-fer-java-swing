@@ -13,6 +13,9 @@ import view.product.UpdateProductPane;
 import view.section.CreateSectionPane;
 import view.section.SectionAllPane;
 import view.section.UpdateSectionPane;
+import view.supplier.CreateSupplierPane;
+import view.supplier.SupplierAllPane;
+import view.supplier.UpdateSupplierPane;
 
 public class IOManager extends JFrame implements CustomEventAnswer {
 	
@@ -34,6 +37,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	private CreateProductPane createProductPane;
 	private UpdateProductPane updateProductPane;
 
+	private SupplierAllPane supplierAllPane;
+	private CreateSupplierPane createSupplierPane;
+	private UpdateSupplierPane updateSupplierPane;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -87,7 +94,22 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		updateProductPane = new UpdateProductPane();
 		updateProductPane.setSize(dim);
 		((UpdateProductPane) updateProductPane).setEvent(control);
-		add(updateProductPane);
+//		add(updateProductPane);
+		
+		supplierAllPane = new SupplierAllPane();
+		supplierAllPane.setSize(dim);
+		((SupplierAllPane) supplierAllPane).setEvent(control);
+//		add(supplierAllPane);
+		
+		createSupplierPane = new CreateSupplierPane();
+		createSupplierPane.setSize(dim);
+		((CreateSupplierPane) createSupplierPane).setEvent(control);
+//		add(createSupplierPane);
+		
+		updateSupplierPane = new UpdateSupplierPane();
+		updateSupplierPane.setSize(dim);
+		((UpdateSupplierPane) updateSupplierPane).setEvent(control);
+		add(updateSupplierPane);
 	}
 
 }

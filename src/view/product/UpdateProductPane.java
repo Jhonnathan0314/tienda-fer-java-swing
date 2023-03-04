@@ -215,7 +215,7 @@ public class UpdateProductPane extends JPanel {
 		sectionField.setBounds(675, 554, 415, 36);
 		add(sectionField, 0);
 		
-		updateButton = new JButton("Crear");
+		updateButton = new JButton("Guardar");
 		updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		updateButton.setForeground(Color.WHITE);
 		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 22));

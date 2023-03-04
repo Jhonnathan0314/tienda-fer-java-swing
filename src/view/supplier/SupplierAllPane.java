@@ -1,4 +1,4 @@
-package view.section;
+package view.supplier;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -6,18 +6,22 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 
-public class UpdateSectionPane extends JPanel {
+public class SupplierAllPane extends JPanel {
 	/**
 	 * 
 	 */
@@ -28,16 +32,16 @@ public class UpdateSectionPane extends JPanel {
 	private JLabel background;
 	private JLabel footerLbl;
 	private JLabel containerLbl;
-	private JLabel nameLabel;
 	
-	private JTextField nameField;
-
 	private JButton sectionButton;
 	private JButton productButton;
 	private JButton supplierButton;
 	private JButton billButton;
 	private JButton orderButton;
-	private JButton updateButton;
+	private JButton searchButton;
+	
+	private JScrollPane scrollPane;
+	private JTable table;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
@@ -46,13 +50,15 @@ public class UpdateSectionPane extends JPanel {
 	
 	private Color greenButton = new Color(14, 150, 89);
 	private Color blueContainer = new Color(15, 51, 66);
+	private Color lightGray = new Color(218, 218, 218);
 	
 	private CustomEvent event;
+	private JTextField searchField;
 		
 	/**
 	 * Create the panel.
 	 */
-	public UpdateSectionPane() {
+	public SupplierAllPane() {
 		setLayout(null);
 		dim = super.getToolkit().getScreenSize();
 		
@@ -70,8 +76,8 @@ public class UpdateSectionPane extends JPanel {
 		sectionButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sectionButton.setForeground(Color.WHITE);
 		sectionButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		sectionButton.setBorder(new LineBorder(greenButton, 1, true));
-		sectionButton.setBackground(greenButton);
+		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
+		sectionButton.setBackground(blueContainer);
 		sectionButton.setBounds(29, 200, 234, 49);
 		add(sectionButton, 0);
 		
@@ -88,8 +94,8 @@ public class UpdateSectionPane extends JPanel {
 		supplierButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		supplierButton.setForeground(Color.WHITE);
 		supplierButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		supplierButton.setBorder(new LineBorder(blueContainer, 1, true));
-		supplierButton.setBackground(blueContainer);
+		supplierButton.setBorder(new LineBorder(greenButton, 1, true));
+		supplierButton.setBackground(greenButton);
 		supplierButton.setBounds(29, 360, 234, 49);
 		add(supplierButton, 0);
 		
@@ -111,38 +117,54 @@ public class UpdateSectionPane extends JPanel {
 		orderButton.setBounds(29, 520, 234, 49);
 		add(orderButton, 0);
 		
-		containerLbl = new JLabel("<html><body><center>Actualizar seccion</center></body></html>");
+		containerLbl = new JLabel("<html><body><center>Proveedores</center></body></html>");
 		containerLbl.setBackground(blueContainer);
 		containerLbl.setOpaque(true);
 		containerLbl.setForeground(Color.WHITE);
-		containerLbl.setSize(588, 315);
-		containerLbl.setLocation(596, 178);
+		containerLbl.setSize((int) dim.getWidth() - 360, (int) dim.getHeight() - 280);
+		containerLbl.setLocation(310, 70);
 		containerLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		containerLbl.setVerticalAlignment(SwingConstants.TOP);
 		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		add(containerLbl, 0);
 		
-		nameLabel = new JLabel("Nuevo nombre");
-		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		nameLabel.setForeground(Color.WHITE);
-		nameLabel.setBounds(675, 264, 415, 36);
-		add(nameLabel, 0);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(360, 200, 1072, 400);
+		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
+		add(scrollPane, 0);
 		
-		nameField = new JTextField();
-		nameField.setBorder(new LineBorder(Color.WHITE, 1, true));
-		nameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		nameField.setBounds(675, 326, 415, 36);
-		add(nameField, 0);
+		table = new JTable();
+		table.getTableHeader().setBackground(greenButton);
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 19));
+		table.getTableHeader().setBorder(new LineBorder(greenButton, 1, true));
+		table.getTableHeader().setResizingAllowed(true);
+		table.setBackground(lightGray);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		table.setRowHeight(25);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Id", "Nombre proveedor", "Nombre vendedor", "Telefono"
+			}
+		));
+		scrollPane.setViewportView(table);
 		
-		updateButton = new JButton("Guardar");
-		updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		updateButton.setForeground(Color.WHITE);
-		updateButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		updateButton.setBorder(new LineBorder(greenButton, 1, true));
-		updateButton.setBackground(greenButton);
-		updateButton.setBounds(675, 392, 415, 36);
-		add(updateButton, 0);
+		searchField = new JTextField();
+		searchField.setBorder(new LineBorder(Color.WHITE, 1, true));
+		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		searchField.setBounds(360, 140, 903, 40);
+		add(searchField, 0);
+		
+		searchButton = new JButton("Consultar");
+		searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		searchButton.setForeground(Color.WHITE);
+		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		searchButton.setBorder(new LineBorder(greenButton, 1, true));
+		searchButton.setBackground(greenButton);
+		searchButton.setBounds(1263, 140, 169, 40);
+		add(searchButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
 		footerLbl.setBackground(blueContainer);
