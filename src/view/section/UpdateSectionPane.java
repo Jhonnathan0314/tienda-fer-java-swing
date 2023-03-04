@@ -132,6 +132,7 @@ public class UpdateSectionPane extends JPanel {
 		nameField = new JTextField();
 		nameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		nameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		nameField.setHorizontalAlignment(SwingConstants.CENTER);
 		nameField.setBounds(675, 326, 415, 36);
 		add(nameField, 0);
 		

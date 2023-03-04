@@ -146,6 +146,7 @@ public class UpdateProductPane extends JPanel {
 		nameField = new JTextField();
 		nameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		nameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		nameField.setHorizontalAlignment(SwingConstants.CENTER);
 		nameField.setBounds(675, 134, 415, 36);
 		add(nameField, 0);
 		
@@ -159,6 +160,7 @@ public class UpdateProductPane extends JPanel {
 		quantityAvailableField = new JTextField();
 		quantityAvailableField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		quantityAvailableField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		quantityAvailableField.setHorizontalAlignment(SwingConstants.CENTER);
 		quantityAvailableField.setBounds(675, 218, 415, 36);
 		add(quantityAvailableField, 0);
 		
@@ -172,6 +174,7 @@ public class UpdateProductPane extends JPanel {
 		saleValueField = new JTextField();
 		saleValueField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		saleValueField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		saleValueField.setHorizontalAlignment(SwingConstants.CENTER);
 		saleValueField.setBounds(675, 302, 415, 36);
 		add(saleValueField, 0);
 		
@@ -185,6 +188,7 @@ public class UpdateProductPane extends JPanel {
 		packagingField = new JTextField();
 		packagingField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		packagingField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		packagingField.setHorizontalAlignment(SwingConstants.CENTER);
 		packagingField.setBounds(675, 386, 415, 36);
 		add(packagingField, 0);
 		
@@ -198,6 +202,7 @@ public class UpdateProductPane extends JPanel {
 		quantityPackagingField = new JTextField();
 		quantityPackagingField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		quantityPackagingField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		quantityPackagingField.setHorizontalAlignment(SwingConstants.CENTER);
 		quantityPackagingField.setBounds(675, 470, 415, 36);
 		add(quantityPackagingField, 0);
 		

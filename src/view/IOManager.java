@@ -7,6 +7,12 @@ import javax.swing.JFrame;
 import controller.Control;
 import view.basic.HomePane;
 import view.basic.LoginPane;
+import view.bill.BillAllPane;
+import view.bill.DetailBillPane;
+import view.bill.GenerateBillPane;
+import view.order.DetailOrderPane;
+import view.order.GenerateOrderPane;
+import view.order.OrderAllPane;
 import view.product.CreateProductPane;
 import view.product.ProductAllPane;
 import view.product.UpdateProductPane;
@@ -40,6 +46,14 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	private SupplierAllPane supplierAllPane;
 	private CreateSupplierPane createSupplierPane;
 	private UpdateSupplierPane updateSupplierPane;
+	
+	private BillAllPane billAllPane;
+	private DetailBillPane detailBillPane;
+	private GenerateBillPane generateBillPane;
+	
+	private OrderAllPane orderAllPane;
+	private DetailOrderPane detailOrderPane;
+	private GenerateOrderPane generateOrderPane;
 	
 	/**
 	 * Create the frame.
@@ -109,7 +123,37 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		updateSupplierPane = new UpdateSupplierPane();
 		updateSupplierPane.setSize(dim);
 		((UpdateSupplierPane) updateSupplierPane).setEvent(control);
-		add(updateSupplierPane);
+//		add(updateSupplierPane);
+		
+		billAllPane = new BillAllPane();
+		billAllPane.setSize(dim);
+		((BillAllPane) billAllPane).setEvent(control);
+//		add(billAllPane);
+		
+		detailBillPane = new DetailBillPane();
+		detailBillPane.setSize(dim);
+		((DetailBillPane) detailBillPane).setEvent(control);
+//		add(detailBillPane);
+		
+		generateBillPane = new GenerateBillPane();
+		generateBillPane.setSize(dim);
+		((GenerateBillPane) generateBillPane).setEvent(control);
+//		add(generateBillPane);
+		
+		orderAllPane = new OrderAllPane();
+		orderAllPane.setSize(dim);
+		((OrderAllPane) orderAllPane).setEvent(control);
+//		add(orderAllPane);
+		
+		detailOrderPane = new DetailOrderPane();
+		detailOrderPane.setSize(dim);
+		((DetailOrderPane) detailOrderPane).setEvent(control);
+//		add(detailOrderPane);
+		
+		generateOrderPane = new GenerateOrderPane();
+		generateOrderPane.setSize(dim);
+		((GenerateOrderPane) generateOrderPane).setEvent(control);
+		add(generateOrderPane);
 	}
 
 }

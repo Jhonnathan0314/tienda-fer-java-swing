@@ -1,4 +1,4 @@
-package view.section;
+package view.bill;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,16 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
-import view.ImageCellRenderer;
 
-import javax.swing.JTextField;
-
-public class SectionAllPane extends JPanel {
+public class DetailBillPane extends JPanel {
 	/**
 	 * 
 	 */
@@ -41,15 +39,13 @@ public class SectionAllPane extends JPanel {
 	private JButton billButton;
 	private JButton orderButton;
 	private JButton searchButton;
-	private JButton createButton;
+	private JButton returnButton;
 	
 	private JScrollPane scrollPane;
 	private JTable table;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
-	private String updateRoot = "src/img/update.png";
-	private String deleteRoot = "src/img/delete.png";
 
 	private Dimension dim;
 	
@@ -63,7 +59,7 @@ public class SectionAllPane extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SectionAllPane() {
+	public DetailBillPane() {
 		setLayout(null);
 		dim = super.getToolkit().getScreenSize();
 		
@@ -81,8 +77,8 @@ public class SectionAllPane extends JPanel {
 		sectionButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sectionButton.setForeground(Color.WHITE);
 		sectionButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		sectionButton.setBorder(new LineBorder(greenButton, 1, true));
-		sectionButton.setBackground(greenButton);
+		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
+		sectionButton.setBackground(blueContainer);
 		sectionButton.setBounds(29, 200, 234, 49);
 		add(sectionButton, 0);
 		
@@ -108,8 +104,8 @@ public class SectionAllPane extends JPanel {
 		billButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		billButton.setForeground(Color.WHITE);
 		billButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		billButton.setBorder(new LineBorder(blueContainer, 1, true));
-		billButton.setBackground(blueContainer);
+		billButton.setBorder(new LineBorder(greenButton, 1, true));
+		billButton.setBackground(greenButton);
 		billButton.setBounds(29, 440, 234, 49);
 		add(billButton, 0);
 		
@@ -122,7 +118,7 @@ public class SectionAllPane extends JPanel {
 		orderButton.setBounds(29, 520, 234, 49);
 		add(orderButton, 0);
 		
-		containerLbl = new JLabel("<html><body><center>Secciones</center></body></html>");
+		containerLbl = new JLabel("<html><body><center>Detalle factura<br>Fecha factura</center></body></html>");
 		containerLbl.setBackground(blueContainer);
 		containerLbl.setOpaque(true);
 		containerLbl.setForeground(Color.WHITE);
@@ -130,14 +126,14 @@ public class SectionAllPane extends JPanel {
 		containerLbl.setLocation(310, 70);
 		containerLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		containerLbl.setVerticalAlignment(SwingConstants.TOP);
-		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
+		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		add(containerLbl, 0);
 		
 		searchField = new JTextField();
 		searchField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		searchField.setHorizontalAlignment(SwingConstants.CENTER);
-		searchField.setBounds(360, 140, 903, 40);
+		searchField.setBounds(360, 170, 903, 40);
 		add(searchField, 0);
 		
 		searchButton = new JButton("Consultar");
@@ -146,11 +142,11 @@ public class SectionAllPane extends JPanel {
 		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		searchButton.setBorder(new LineBorder(greenButton, 1, true));
 		searchButton.setBackground(greenButton);
-		searchButton.setBounds(1263, 140, 169, 40);
+		searchButton.setBounds(1263, 170, 169, 40);
 		add(searchButton, 0);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(360, 200, 1072, 350);
+		scrollPane.setBounds(360, 230, 1072, 350);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
 		add(scrollPane, 0);
 		
@@ -165,27 +161,21 @@ public class SectionAllPane extends JPanel {
 		table.setRowHeight(25);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null}
 			},
 			new String[] {
-				"Id", "Nombre", "Actualizar", "Eliminar"
+				"Factura", "Producto", "Empaque", "Cantidad empaque", "Cantidad", "Valor unitario", "Valor total"
 			}
 		));
-		table.getColumnModel().getColumn(2).setCellRenderer(new ImageCellRenderer(updateRoot));
-		table.getColumnModel().getColumn(2).setMinWidth(100);
-		table.getColumnModel().getColumn(2).setMaxWidth(100);
-		table.getColumnModel().getColumn(3).setCellRenderer(new ImageCellRenderer(deleteRoot));
-		table.getColumnModel().getColumn(3).setMaxWidth(80);
 		scrollPane.setViewportView(table);
-		
-		createButton = new JButton("Crear");
-		createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		createButton.setForeground(Color.WHITE);
-		createButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		createButton.setBorder(new LineBorder(greenButton, 1, true));
-		createButton.setBackground(greenButton);
-		createButton.setBounds(800, 580, 169, 40);
-		add(createButton, 0);
+				
+		returnButton = new JButton("Volver");
+		returnButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		returnButton.setForeground(Color.WHITE);
+		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		returnButton.setBorder(new LineBorder(greenButton, 1, true));
+		returnButton.setBackground(greenButton);
+		returnButton.setBounds(800, 600, 169, 40);
+		add(returnButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
 		footerLbl.setBackground(blueContainer);

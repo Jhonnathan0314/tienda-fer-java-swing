@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
+import view.ImageCellRenderer;
 
 public class SupplierAllPane extends JPanel {
 	/**
@@ -39,12 +40,15 @@ public class SupplierAllPane extends JPanel {
 	private JButton billButton;
 	private JButton orderButton;
 	private JButton searchButton;
+	private JButton createButton;
 	
 	private JScrollPane scrollPane;
 	private JTable table;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
+	private String updateRoot = "src/img/update.png";
+	private String deleteRoot = "src/img/delete.png";
 
 	private Dimension dim;
 	
@@ -128,8 +132,24 @@ public class SupplierAllPane extends JPanel {
 		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		add(containerLbl, 0);
 		
+		searchField = new JTextField();
+		searchField.setBorder(new LineBorder(Color.WHITE, 1, true));
+		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		searchField.setHorizontalAlignment(SwingConstants.CENTER);
+		searchField.setBounds(360, 140, 903, 40);
+		add(searchField, 0);
+		
+		searchButton = new JButton("Consultar");
+		searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		searchButton.setForeground(Color.WHITE);
+		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		searchButton.setBorder(new LineBorder(greenButton, 1, true));
+		searchButton.setBackground(greenButton);
+		searchButton.setBounds(1263, 140, 169, 40);
+		add(searchButton, 0);
+		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(360, 200, 1072, 400);
+		scrollPane.setBounds(360, 200, 1072, 350);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
 		add(scrollPane, 0);
 		
@@ -144,27 +164,27 @@ public class SupplierAllPane extends JPanel {
 		table.setRowHeight(25);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null}
 			},
 			new String[] {
-				"Id", "Nombre proveedor", "Nombre vendedor", "Telefono"
+				"Id", "Nombre proveedor", "Nombre vendedor", "Telefono", "Actualizar", "Eliminar"
 			}
 		));
+		table.getColumnModel().getColumn(4).setCellRenderer(new ImageCellRenderer(updateRoot));
+		table.getColumnModel().getColumn(4).setMinWidth(100);
+		table.getColumnModel().getColumn(4).setMaxWidth(100);
+		table.getColumnModel().getColumn(5).setCellRenderer(new ImageCellRenderer(deleteRoot));
+		table.getColumnModel().getColumn(5).setMaxWidth(80);
 		scrollPane.setViewportView(table);
 		
-		searchField = new JTextField();
-		searchField.setBorder(new LineBorder(Color.WHITE, 1, true));
-		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		searchField.setBounds(360, 140, 903, 40);
-		add(searchField, 0);
-		
-		searchButton = new JButton("Consultar");
-		searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		searchButton.setForeground(Color.WHITE);
-		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		searchButton.setBorder(new LineBorder(greenButton, 1, true));
-		searchButton.setBackground(greenButton);
-		searchButton.setBounds(1263, 140, 169, 40);
-		add(searchButton, 0);
+		createButton = new JButton("Crear");
+		createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		createButton.setForeground(Color.WHITE);
+		createButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		createButton.setBorder(new LineBorder(greenButton, 1, true));
+		createButton.setBackground(greenButton);
+		createButton.setBounds(800, 580, 169, 40);
+		add(createButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
 		footerLbl.setBackground(blueContainer);

@@ -1,6 +1,7 @@
 package view.basic;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import controller.CustomEvent;
 import javax.swing.JLabel;
@@ -32,7 +33,7 @@ public class LoginPane extends JPanel {
 	private JLabel footerLbl;
 	
 	private JTextField userField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 
 	private JButton loginButton; 
 	
@@ -73,6 +74,7 @@ public class LoginPane extends JPanel {
 		userField = new JTextField();
 		userField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		userField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		userField.setHorizontalAlignment(SwingConstants.CENTER);
 		userField.setBounds(641, 320, 279, 49);
 		add(userField, 0);
 		
@@ -82,10 +84,11 @@ public class LoginPane extends JPanel {
 		passwordLbl.setBounds(660, 389, 241, 37);
 		add(passwordLbl, 0);
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		passwordField.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		passwordField.setBounds(641, 445, 279, 49);
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		add(passwordField, 0);
 		
 		loginButton = new JButton("Ingresar");

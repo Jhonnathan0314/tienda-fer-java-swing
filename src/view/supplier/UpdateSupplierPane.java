@@ -138,6 +138,7 @@ public class UpdateSupplierPane extends JPanel {
 		supplierNameField = new JTextField();
 		supplierNameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		supplierNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		supplierNameField.setHorizontalAlignment(SwingConstants.CENTER);
 		supplierNameField.setBounds(675, 224, 415, 36);
 		add(supplierNameField, 0);
 		
@@ -151,6 +152,7 @@ public class UpdateSupplierPane extends JPanel {
 		sellerNameField = new JTextField();
 		sellerNameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		sellerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		sellerNameField.setHorizontalAlignment(SwingConstants.CENTER);
 		sellerNameField.setBounds(675, 308, 415, 36);
 		add(sellerNameField, 0);
 		
@@ -164,6 +166,7 @@ public class UpdateSupplierPane extends JPanel {
 		phoneField = new JTextField();
 		phoneField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		phoneField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneField.setBounds(675, 392, 415, 36);
 		add(phoneField, 0);
 		
