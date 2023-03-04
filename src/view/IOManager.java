@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import controller.Control;
 import view.basic.HomePane;
 import view.basic.LoginPane;
+import view.product.CreateProductPane;
+import view.product.ProductAllPane;
+import view.product.UpdateProductPane;
 import view.section.CreateSectionPane;
 import view.section.SectionAllPane;
 import view.section.UpdateSectionPane;
@@ -26,6 +29,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	private SectionAllPane sectionAllPane;
 	private CreateSectionPane createSectionPane;
 	private UpdateSectionPane updateSectionPane;
+	
+	private ProductAllPane productAllPane;
+	private CreateProductPane createProductPane;
+	private UpdateProductPane updateProductPane;
 
 	/**
 	 * Create the frame.
@@ -65,7 +72,22 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		updateSectionPane = new UpdateSectionPane();
 		updateSectionPane.setSize(dim);
 		((UpdateSectionPane) updateSectionPane).setEvent(control);
-		add(updateSectionPane);
+//		add(updateSectionPane);
+		
+		productAllPane = new ProductAllPane();
+		productAllPane.setSize(dim);
+		((ProductAllPane) productAllPane).setEvent(control);
+//		add(productAllPane);
+		
+		createProductPane = new CreateProductPane();
+		createProductPane.setSize(dim);
+		((CreateProductPane) createProductPane).setEvent(control);
+//		add(createProductPane);
+		
+		updateProductPane = new UpdateProductPane();
+		updateProductPane.setSize(dim);
+		((UpdateProductPane) updateProductPane).setEvent(control);
+		add(updateProductPane);
 	}
 
 }
