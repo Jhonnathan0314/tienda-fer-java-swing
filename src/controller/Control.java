@@ -15,6 +15,9 @@ public class Control implements CustomEvent {
 	private CustomEventAnswer answer;
 
 	public void init() {
+		Conexion conexion = new Conexion();
+		conexion.getConexion();
+		
 		IOManager frame = new IOManager();
 		frame.setVisible(true);
 	}

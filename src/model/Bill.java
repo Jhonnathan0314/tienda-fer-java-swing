@@ -13,11 +13,11 @@ public class Bill {
 	//Declaracion de variables
 	private int id;
 	private Date date;
-	private int totalValue;
+	private float totalValue;
 	private Date updateDate;
 	
 	//Metodos constructores
-	public Bill(int id, Date date, int totalValue, Date updateDate) {
+	public Bill(int id, Date date, float totalValue, Date updateDate) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -44,11 +44,11 @@ public class Bill {
 		this.date = date;
 	}
 
-	public int getTotalValue() {
+	public float getTotalValue() {
 		return totalValue;
 	}
 
-	public void setTotalValue(int totalValue) {
+	public void setTotalValue(float totalValue) {
 		this.totalValue = totalValue;
 	}
 

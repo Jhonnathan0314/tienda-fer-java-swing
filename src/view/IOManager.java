@@ -153,7 +153,7 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		generateOrderPane = new GenerateOrderPane();
 		generateOrderPane.setSize(dim);
 		((GenerateOrderPane) generateOrderPane).setEvent(control);
-		add(generateOrderPane);
+//		add(generateOrderPane);
 	}
 
 }
