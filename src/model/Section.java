@@ -3,7 +3,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
@@ -13,10 +13,10 @@ public class Section {
 	//Declaracion de variables
 	private int id;
 	private String name;
-	private Date updateDate;
+	private Timestamp updateDate;
 	
 	//Metodos constructores
-	public Section(int id, String name, Date updateDate) {
+	public Section(int id, String name, Timestamp updateDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -42,14 +42,12 @@ public class Section {
 		this.name = name;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	
-	
+		
 }

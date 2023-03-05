@@ -3,8 +3,7 @@
  */
 package model;
 
-import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
@@ -12,14 +11,14 @@ import java.sql.Date;
  */
 public class Supplier {
 	//Declaracion de variables
-	private int id;
+	private String id;
 	private String supplierName;
 	private String sellerName;
-	private BigInteger phone;
-	private Date updateDate;
+	private String phone;
+	private Timestamp updateDate;
 	
 	//Metodos constructores
-	public Supplier(int id, String supplierName, String sellerName, BigInteger phone, Date updateDate) {
+	public Supplier(String id, String supplierName, String sellerName, String phone, Timestamp updateDate) {
 		super();
 		this.id = id;
 		this.supplierName = supplierName;
@@ -31,11 +30,11 @@ public class Supplier {
 	public Supplier() { }
 
 	//Metodos get y set
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -55,19 +54,19 @@ public class Supplier {
 		this.sellerName = sellerName;
 	}
 
-	public BigInteger getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(BigInteger phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
 }

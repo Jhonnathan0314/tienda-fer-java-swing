@@ -22,6 +22,7 @@ public class Conexion {
 			String user = "root";
 			String password = "Ias2023*.";
 			connect = DriverManager.getConnection(url, user, password);
+			System.out.println("Confirmacion ------------> Realice una conexion");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error --> al cargar el Driver");
 		} catch (SQLException e) {

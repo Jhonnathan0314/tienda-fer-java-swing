@@ -15,12 +15,12 @@ public interface SupplierRepository {
 
 	public List<Supplier> findAll();
 	
-	public Supplier findById(int id);
+	public Supplier findById(String id);
 	
-	public Supplier create(Supplier section);
+	public Supplier create(Supplier supplier);
 	
-	public Supplier update(int id, Supplier section);
+	public Supplier update(String id, Supplier supplier);
 	
-	public boolean deleteById(int id);
+	public boolean deleteById(String id);
 	
 }

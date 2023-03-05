@@ -3,7 +3,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
@@ -17,11 +17,11 @@ public class Product {
 	private float saleValue;
 	private String packaging;
 	private String quantityPackaging;
-	private Date updateDate;
+	private Timestamp updateDate;
 	private Section section;
 	
 	//Metodos constructores
-	public Product(int id, String name, int quantityAvailable, float saleValue, String packaging, String quantityPackaging, Date updateDate, Section section) {
+	public Product(int id, String name, int quantityAvailable, float saleValue, String packaging, String quantityPackaging, Timestamp updateDate, Section section) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -84,11 +84,11 @@ public class Product {
 		this.quantityPackaging = quantityPackaging;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
 
