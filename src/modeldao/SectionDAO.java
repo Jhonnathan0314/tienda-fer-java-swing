@@ -20,7 +20,7 @@ import repositories.SectionRepository;
  *
  */
 public class SectionDAO implements SectionRepository {
-
+	//Declaracion de variables
 	private Connection connection = null;
 	
 	public SectionDAO(Connection connection) {

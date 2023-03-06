@@ -3,7 +3,6 @@
  */
 package repositories;
 
-import java.sql.Date;
 import java.util.List;
 
 import model.Bill;
@@ -18,11 +17,13 @@ public interface BillRepository {
 	
 	public Bill findById(int id);
 
-	public List<Bill> findByDate(Date date);
+	public List<Bill> findByYear(int year);
+
+	public List<Bill> findByYearAndMonth(int year, int month);
+
+	public List<Bill> findByYearAndMonthAndDay(int year, int month, int day);
 	
-	public Bill create(Bill section);
-	
-	public Bill update(int id, Bill section);
+	public Bill create(Bill bill);
 	
 	public boolean deleteById(int id);
 	

@@ -20,7 +20,7 @@ import repositories.SupplierRepository;
  *
  */
 public class SupplierDAO implements SupplierRepository {
-
+	//Declaracion de variables
 	private Connection connection = null;
 	
 	public SupplierDAO(Connection connection) {

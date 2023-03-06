@@ -13,14 +13,8 @@ import model.DetailOrder;
  */
 public interface DetailOrderRepository {
 
-	public List<DetailOrder> findAll();
+	public List<DetailOrder> findByOrder(int orderId);
 	
-	public DetailOrder findById(int id);
-	
-	public DetailOrder create(DetailOrder section);
-	
-	public DetailOrder update(int id, DetailOrder section);
-	
-	public boolean deleteById(int id);
+	public DetailOrder insert(DetailOrder detailOrder);
 	
 }

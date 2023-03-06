@@ -3,7 +3,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
@@ -12,18 +12,16 @@ import java.sql.Date;
 public class Order {
 	//Declaracion de variables
 	private int id;
-	private Date date;
+	private Timestamp date;
 	private float totalValue;
-	private Date updateDate;
 	private Supplier supplier;
 	
 	//Metodos constructores
-	public Order(int id, Date date, float totalValue, Date updateDate, Supplier supplier) {
+	public Order(int id, Timestamp date, float totalValue, Supplier supplier) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.totalValue = totalValue;
-		this.updateDate = updateDate;
 		this.supplier = supplier;
 	}
 
@@ -38,11 +36,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
@@ -52,14 +50,6 @@ public class Order {
 
 	public void setTotalValue(float totalValue) {
 		this.totalValue = totalValue;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 
 	public Supplier getSupplier() {
