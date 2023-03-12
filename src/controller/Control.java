@@ -19,6 +19,7 @@ import modeldao.OrderDAO;
 import modeldao.ProductDAO;
 import modeldao.SectionDAO;
 import modeldao.SupplierDAO;
+import modeldao.UserSecurityDAO;
 import view.CustomEventAnswer;
 import view.IOManager;
 
@@ -104,10 +105,7 @@ public class Control implements CustomEvent {
 //		System.out.println(product.getName() + "; Seccion: " + product.getSection().getName());
 		
 //		boolean isDeleted = productDAO.deleteById(568);
-		
-//		IOManager frame = new IOManager();
-//		frame.setVisible(true);
-		
+			
 		supplierDAO = new SupplierDAO(conexion.getConnect());
 		
 //		List<Supplier> suppliers = supplierDAO.findAll();
@@ -248,41 +246,48 @@ public class Control implements CustomEvent {
 		detailOrderDAO.setOrderDAO(orderDAO);
 		detailOrderDAO.setProductDAO(productDAO);
 		
-		DetailOrder detailOrder = new DetailOrder();
+//		DetailOrder detailOrder = new DetailOrder();
 		
-		Product product = new Product();
-		product = productDAO.findById(1);
+//		Product product = new Product();
+//		product = productDAO.findById(1);
 		
-		Order order = new Order();
-		order.setId(1);
+//		Order order = new Order();
+//		order.setId(1);
 		
-		detailOrder.setProduct(product);
-		detailOrder.setOrder(order);
-		detailOrder.setOrderedQuantity(5);
-		detailOrder.setReceivedQuantity(4);
-		detailOrder.setUnitValue(1600);
-		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
-		detailOrderDAO.insert(detailOrder);
+//		detailOrder.setProduct(product);
+//		detailOrder.setOrder(order);
+//		detailOrder.setOrderedQuantity(5);
+//		detailOrder.setReceivedQuantity(4);
+//		detailOrder.setUnitValue(1600);
+//		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
+//		detailOrderDAO.insert(detailOrder);
 		
-		detailOrder = new DetailOrder();
-		product = new Product();
-		product = productDAO.findById(2);
+//		detailOrder = new DetailOrder();
+//		product = new Product();
+//		product = productDAO.findById(2);
 		
-		order = new Order();
-		order.setId(1);
+//		order = new Order();
+//		order.setId(1);
 		
-		detailOrder.setProduct(product);
-		detailOrder.setOrder(order);
-		detailOrder.setOrderedQuantity(6);
-		detailOrder.setReceivedQuantity(6);
-		detailOrder.setUnitValue(1600);
-		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
-		detailOrderDAO.insert(detailOrder);
+//		detailOrder.setProduct(product);
+//		detailOrder.setOrder(order);
+//		detailOrder.setOrderedQuantity(6);
+//		detailOrder.setReceivedQuantity(6);
+//		detailOrder.setUnitValue(1600);
+//		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
+//		detailOrderDAO.insert(detailOrder);
 		
-		List<DetailOrder> detailOrders = detailOrderDAO.findByOrder(1);
-		for(DetailOrder detailOrder2 : detailOrders) {
-			System.out.println("producto: " + detailOrder2.getProduct().getName());
-		}
+//		List<DetailOrder> detailOrders = detailOrderDAO.findByOrder(1);
+//		for(DetailOrder detailOrder2 : detailOrders) {
+//			System.out.println("producto: " + detailOrder2.getProduct().getName());
+//		}
+		
+//		UserSecurityDAO userSecurityDAO = new UserSecurityDAO(conexion.getConnect());
+//		boolean isValid = userSecurityDAO.checkPassword("admin", "tiendadonalolaa");
+//		System.out.println("isvalid: " + isValid);
+		
+		IOManager frame = new IOManager();
+		frame.setVisible(true);
 	}
 
 	public CustomEventAnswer getAnswer() {
