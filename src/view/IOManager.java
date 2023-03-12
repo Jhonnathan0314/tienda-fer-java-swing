@@ -73,87 +73,113 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		loginPane = new LoginPane();
 		loginPane.setSize(dim);
 		((LoginPane) loginPane).setEvent(control);
-//		add(loginPane);
+		add(loginPane);
 		
 		homePane = new HomePane();
 		homePane.setSize(dim);
 		((HomePane) homePane).setEvent(control);
-//		add(homePane);
+		homePane.setVisible(false);
+		add(homePane);
 		
 		sectionAllPane = new SectionAllPane();
 		sectionAllPane.setSize(dim);
 		((SectionAllPane) sectionAllPane).setEvent(control);
-//		add(sectionAllPane);
+		sectionAllPane.setVisible(false);
+		add(sectionAllPane);
 		
 		createSectionPane = new CreateSectionPane();
 		createSectionPane.setSize(dim);
 		((CreateSectionPane) createSectionPane).setEvent(control);
-//		add(createSectionPane);
+		createSectionPane.setVisible(false);
+		add(createSectionPane);
 		
 		updateSectionPane = new UpdateSectionPane();
 		updateSectionPane.setSize(dim);
 		((UpdateSectionPane) updateSectionPane).setEvent(control);
-//		add(updateSectionPane);
+		updateSectionPane.setVisible(false);
+		add(updateSectionPane);
 		
 		productAllPane = new ProductAllPane();
 		productAllPane.setSize(dim);
 		((ProductAllPane) productAllPane).setEvent(control);
-//		add(productAllPane);
+		productAllPane.setVisible(false);
+		add(productAllPane);
 		
 		createProductPane = new CreateProductPane();
 		createProductPane.setSize(dim);
 		((CreateProductPane) createProductPane).setEvent(control);
-//		add(createProductPane);
+		createProductPane.setVisible(false);
+		add(createProductPane);
 		
 		updateProductPane = new UpdateProductPane();
 		updateProductPane.setSize(dim);
 		((UpdateProductPane) updateProductPane).setEvent(control);
-//		add(updateProductPane);
+		updateProductPane.setVisible(false);
+		add(updateProductPane);
 		
 		supplierAllPane = new SupplierAllPane();
 		supplierAllPane.setSize(dim);
 		((SupplierAllPane) supplierAllPane).setEvent(control);
-//		add(supplierAllPane);
+		supplierAllPane.setVisible(false);
+		add(supplierAllPane);
 		
 		createSupplierPane = new CreateSupplierPane();
 		createSupplierPane.setSize(dim);
 		((CreateSupplierPane) createSupplierPane).setEvent(control);
-//		add(createSupplierPane);
+		createSupplierPane.setVisible(false);
+		add(createSupplierPane);
 		
 		updateSupplierPane = new UpdateSupplierPane();
 		updateSupplierPane.setSize(dim);
 		((UpdateSupplierPane) updateSupplierPane).setEvent(control);
-//		add(updateSupplierPane);
+		updateSupplierPane.setVisible(false);
+		add(updateSupplierPane);
 		
 		billAllPane = new BillAllPane();
 		billAllPane.setSize(dim);
 		((BillAllPane) billAllPane).setEvent(control);
-//		add(billAllPane);
+		billAllPane.setVisible(false);
+		add(billAllPane);
 		
 		detailBillPane = new DetailBillPane();
 		detailBillPane.setSize(dim);
 		((DetailBillPane) detailBillPane).setEvent(control);
-//		add(detailBillPane);
+		detailBillPane.setVisible(false);
+		add(detailBillPane);
 		
 		generateBillPane = new GenerateBillPane();
 		generateBillPane.setSize(dim);
 		((GenerateBillPane) generateBillPane).setEvent(control);
-//		add(generateBillPane);
+		generateBillPane.setVisible(false);
+		add(generateBillPane);
 		
 		orderAllPane = new OrderAllPane();
 		orderAllPane.setSize(dim);
 		((OrderAllPane) orderAllPane).setEvent(control);
-//		add(orderAllPane);
+		orderAllPane.setVisible(false);
+		add(orderAllPane);
 		
 		detailOrderPane = new DetailOrderPane();
 		detailOrderPane.setSize(dim);
 		((DetailOrderPane) detailOrderPane).setEvent(control);
-//		add(detailOrderPane);
+		detailOrderPane.setVisible(false);
+		add(detailOrderPane);
 		
 		generateOrderPane = new GenerateOrderPane();
 		generateOrderPane.setSize(dim);
 		((GenerateOrderPane) generateOrderPane).setEvent(control);
+		generateOrderPane.setVisible(false);
 		add(generateOrderPane);
+	}
+
+	@Override
+	public void isValidResponse(boolean isValid) {
+		if(isValid) {
+			((LoginPane) loginPane).setVisible(false);
+			((HomePane) homePane).setVisible(true);
+		}else {
+			((LoginPane) loginPane).setValid(isValid);			
+		}
 	}
 
 }

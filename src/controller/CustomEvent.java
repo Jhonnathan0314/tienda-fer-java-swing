@@ -8,5 +8,7 @@ package controller;
  *
  */
 public interface CustomEvent {
+	
+	public void validateUserLogin(String username, String password);
 
 }

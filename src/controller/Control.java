@@ -3,15 +3,6 @@
  */
 package controller;
 
-import java.util.List;
-
-import model.Bill;
-import model.DetailBill;
-import model.DetailOrder;
-import model.Order;
-import model.Product;
-import model.Section;
-import model.Supplier;
 import modeldao.BillDAO;
 import modeldao.DetailBillDAO;
 import modeldao.DetailOrderDAO;
@@ -36,14 +27,31 @@ public class Control implements CustomEvent {
 	private DetailBillDAO detailBillDAO;
 	private OrderDAO orderDAO;
 	private DetailOrderDAO detailOrderDAO;
+	private UserSecurityDAO userSecurityDAO;
 	
 	private CustomEventAnswer answer;
-
-	public void init() {
+	
+	public Control() {
 		Conexion conexion = new Conexion();
 		conexion.getConexion();
-		
 		sectionDAO = new SectionDAO(conexion.getConnect());
+		productDAO = new ProductDAO(conexion.getConnect());
+		productDAO.setSectionDAO(sectionDAO);
+		supplierDAO = new SupplierDAO(conexion.getConnect());
+		billDAO = new BillDAO(conexion.getConnect());
+		detailBillDAO = new DetailBillDAO(conexion.getConnect());
+		detailBillDAO.setBillDAO(billDAO);
+		detailBillDAO.setProductDAO(productDAO);
+		orderDAO = new OrderDAO(conexion.getConnect());
+		orderDAO.setSupplierDAO(supplierDAO);
+		detailOrderDAO = new DetailOrderDAO(conexion.getConnect());
+		detailOrderDAO.setOrderDAO(orderDAO);
+		detailOrderDAO.setProductDAO(productDAO);
+		userSecurityDAO = new UserSecurityDAO(conexion.getConnect());
+	}
+
+	public void init() {
+		
 		
 //		List<Section> sections = sectionDAO.findAll();
 //		for(Section section : sections) {
@@ -65,8 +73,6 @@ public class Control implements CustomEvent {
 //		System.out.println(isDeleted);
 		
 
-		productDAO = new ProductDAO(conexion.getConnect());
-		productDAO.setSectionDAO(sectionDAO);
 		
 //		List<Product> products = productDAO.findAll();
 //		for(Product product : products) {
@@ -106,7 +112,6 @@ public class Control implements CustomEvent {
 		
 //		boolean isDeleted = productDAO.deleteById(568);
 			
-		supplierDAO = new SupplierDAO(conexion.getConnect());
 		
 //		List<Supplier> suppliers = supplierDAO.findAll();
 //		for(Supplier supplier : suppliers) {
@@ -133,7 +138,6 @@ public class Control implements CustomEvent {
 //		boolean isDeleted = supplierDAO.deleteById("3125543042");
 //		System.out.println(isDeleted);
 		
-		billDAO = new BillDAO(conexion.getConnect());
 		
 //		List<Bill> bills = billDAO.findAll();
 //		for(Bill bill : bills) {
@@ -165,9 +169,6 @@ public class Control implements CustomEvent {
 //		boolean isDeleted = billDAO.deleteById(1);
 //		System.out.println(isDeleted);
 		
-		detailBillDAO = new DetailBillDAO(conexion.getConnect());
-		detailBillDAO.setBillDAO(billDAO);
-		detailBillDAO.setProductDAO(productDAO);
 		
 //		DetailBill detailBill = new DetailBill();
 		
@@ -203,8 +204,6 @@ public class Control implements CustomEvent {
 //			System.out.println("producto: " + detailBill2.getProduct().getName());
 //		}
 		
-		orderDAO = new OrderDAO(conexion.getConnect());
-		orderDAO.setSupplierDAO(supplierDAO);
 		
 //		List<Order> orders = orderDAO.findAll();
 //		for(Order order : orders) {
@@ -242,9 +241,6 @@ public class Control implements CustomEvent {
 //		boolean isDeleted = orderDAO.deleteById(1);
 //		System.out.println(isDeleted);
 		
-		detailOrderDAO = new DetailOrderDAO(conexion.getConnect());
-		detailOrderDAO.setOrderDAO(orderDAO);
-		detailOrderDAO.setProductDAO(productDAO);
 		
 //		DetailOrder detailOrder = new DetailOrder();
 		
@@ -282,8 +278,7 @@ public class Control implements CustomEvent {
 //			System.out.println("producto: " + detailOrder2.getProduct().getName());
 //		}
 		
-//		UserSecurityDAO userSecurityDAO = new UserSecurityDAO(conexion.getConnect());
-//		boolean isValid = userSecurityDAO.checkPassword("admin", "tiendadonalolaa");
+//		boolean isValid = userSecurityDAO.checkPassword("admin", "tiendadonalola");
 //		System.out.println("isvalid: " + isValid);
 		
 		IOManager frame = new IOManager();
@@ -296,6 +291,12 @@ public class Control implements CustomEvent {
 
 	public void setAnswer(CustomEventAnswer answer) {
 		this.answer = answer;
+	}
+
+	@Override
+	public void validateUserLogin(String username, String password) {
+		boolean isValid = userSecurityDAO.checkPassword(username, password);
+		answer.isValidResponse(isValid);
 	}
 	
 }

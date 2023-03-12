@@ -9,4 +9,6 @@ package view;
  */
 public interface CustomEventAnswer {
 
+	public void isValidResponse(boolean isValid);
+	
 }

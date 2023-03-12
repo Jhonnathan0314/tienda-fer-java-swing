@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,7 +21,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
-public class LoginPane extends JPanel {
+public class LoginPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -44,6 +46,8 @@ public class LoginPane extends JPanel {
 	
 	private Color greenButton = new Color(14, 150, 89);
 	private Color footer = new Color(15, 51, 66);
+	
+	private boolean isValid;
 	
 	private CustomEvent event;
 		
@@ -98,6 +102,8 @@ public class LoginPane extends JPanel {
 		loginButton.setBorder(new LineBorder(greenButton, 1, true));
 		loginButton.setBackground(greenButton);
 		loginButton.setBounds(641, 532, 279, 49);
+		loginButton.setActionCommand("login");
+		loginButton.addActionListener(this);
 		add(loginButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -110,6 +116,15 @@ public class LoginPane extends JPanel {
 		footerLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(footerLbl, 0);
 		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(loginButton.getActionCommand())) {
+			String username = userField.getText();
+			String password = new String(passwordField.getPassword());
+			event.validateUserLogin(username, password);
+		}
 	}
 	
 	private void setImageLabel(JLabel label, String root) {
@@ -129,5 +144,17 @@ public class LoginPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+		if(!isValid) {
+			passwordField.setText("");
+			passwordField.setBorder(new LineBorder(Color.RED, 3, true));
+		}
 	}
 }
