@@ -15,6 +15,8 @@ public interface SectionRepository {
 	
 	public List<Section> findAll();
 	
+	public List<Section> findByName(String searchName);
+	
 	public Section findById(int id);
 	
 	public Section create(Section section);

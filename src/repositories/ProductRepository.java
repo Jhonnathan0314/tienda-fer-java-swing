@@ -21,6 +21,8 @@ public interface ProductRepository {
 	
 	public List<Product> findBySection(int idSection);
 	
+	public List<Product> findScarceProducts();
+	
 	public Product create(Product product);
 	
 	public Product update(int id, Product product);

@@ -49,6 +49,30 @@ public class SectionDAO implements SectionRepository {
 		}
         return sections;
 	}
+	
+	@Override
+	public List<Section> findByName(String searchName) {
+		List<Section> sections = new ArrayList<>();
+		String query = "SELECT * FROM section WHERE name like ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setString(1, "%" + searchName + "%");
+			try (ResultSet resultSet = statement.executeQuery()) {
+	        	int id;
+	        	String name;
+	        	Timestamp updateDate;
+	            while (resultSet.next()) {
+	                id = resultSet.getInt("id");
+	                name = resultSet.getString("name");
+	                updateDate = resultSet.getTimestamp("update_date");
+	                sections.add(new Section(id, name, updateDate));
+	            }
+	        }
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sections;
+	}
 
 	@Override
 	public Section findById(int id) {

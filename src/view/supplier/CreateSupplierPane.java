@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,7 +19,7 @@ import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
 
-public class CreateSupplierPane extends JPanel {
+public class CreateSupplierPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -28,11 +30,13 @@ public class CreateSupplierPane extends JPanel {
 	private JLabel background;
 	private JLabel footerLbl;
 	private JLabel containerLbl;
-	
+
+	private JLabel supplierIdLabel;
 	private JLabel supplierNameLabel;
 	private JLabel sellerNameLabel;
 	private JLabel phoneLabel;
-	
+
+	private JTextField supplierIdField;
 	private JTextField supplierNameField;
 	private JTextField sellerNameField;
 	private JTextField phoneField;
@@ -121,53 +125,67 @@ public class CreateSupplierPane extends JPanel {
 		containerLbl.setBackground(blueContainer);
 		containerLbl.setOpaque(true);
 		containerLbl.setForeground(Color.WHITE);
-		containerLbl.setSize((int) dim.getWidth() - 600, (int) dim.getHeight() - 450);
+		containerLbl.setSize((int) dim.getWidth() - 600, (int) dim.getHeight() - 370);
 		containerLbl.setLocation(420, 130);
 		containerLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		containerLbl.setVerticalAlignment(SwingConstants.TOP);
 		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		add(containerLbl, 0);
 		
+		supplierIdLabel = new JLabel("NIT o documento del proveedor");
+		supplierIdLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		supplierIdLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		supplierIdLabel.setForeground(Color.WHITE);
+		supplierIdLabel.setBounds(675, 186, 415, 36);
+		add(supplierIdLabel, 0);
+		
+		supplierIdField = new JTextField();
+		supplierIdField.setBorder(new LineBorder(Color.WHITE, 1, true));
+		supplierIdField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		supplierIdField.setHorizontalAlignment(SwingConstants.CENTER);
+		supplierIdField.setBounds(675, 224, 415, 36);
+		add(supplierIdField, 0);
+		
 		supplierNameLabel = new JLabel("Nombre del proveedor");
 		supplierNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		supplierNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		supplierNameLabel.setForeground(Color.WHITE);
-		supplierNameLabel.setBounds(675, 186, 415, 36);
+		supplierNameLabel.setBounds(675, 270, 415, 36);
 		add(supplierNameLabel, 0);
 		
 		supplierNameField = new JTextField();
 		supplierNameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		supplierNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		supplierNameField.setHorizontalAlignment(SwingConstants.CENTER);
-		supplierNameField.setBounds(675, 224, 415, 36);
+		supplierNameField.setBounds(675, 308, 415, 36);
 		add(supplierNameField, 0);
 		
 		sellerNameLabel = new JLabel("Nombre del vendedor");
 		sellerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		sellerNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		sellerNameLabel.setForeground(Color.WHITE);
-		sellerNameLabel.setBounds(675, 270, 415, 36);
+		sellerNameLabel.setBounds(675, 354, 415, 36);
 		add(sellerNameLabel, 0);
 		
 		sellerNameField = new JTextField();
 		sellerNameField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		sellerNameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		sellerNameField.setHorizontalAlignment(SwingConstants.CENTER);
-		sellerNameField.setBounds(675, 308, 415, 36);
+		sellerNameField.setBounds(675, 392, 415, 36);
 		add(sellerNameField, 0);
 		
 		phoneLabel = new JLabel("Telefono");
 		phoneLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		phoneLabel.setForeground(Color.WHITE);
-		phoneLabel.setBounds(675, 354, 415, 36);
+		phoneLabel.setBounds(675, 438, 415, 36);
 		add(phoneLabel, 0);
 		
 		phoneField = new JTextField();
 		phoneField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		phoneField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
-		phoneField.setBounds(675, 392, 415, 36);
+		phoneField.setBounds(675, 476, 415, 36);
 		add(phoneField, 0);
 		
 		createButton = new JButton("Crear");
@@ -176,7 +194,9 @@ public class CreateSupplierPane extends JPanel {
 		createButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		createButton.setBorder(new LineBorder(greenButton, 1, true));
 		createButton.setBackground(greenButton);
-		createButton.setBounds(675, 460, 415, 36);
+		createButton.setBounds(675, 544, 415, 36);
+		createButton.setActionCommand("create");
+		createButton.addActionListener(this);
 		add(createButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -189,6 +209,17 @@ public class CreateSupplierPane extends JPanel {
 		footerLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(footerLbl, 0);
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(createButton.getActionCommand())) {
+			String supplierId = supplierIdField.getText();
+			String supplierName = supplierNameField.getText();
+			String sellerName = sellerNameField.getText();
+			String phone = phoneField.getText();
+			event.createSupplier(supplierId, supplierName, sellerName, phone);
+		}
 	}
 	
 	private void setImageLabel(JLabel label, String root) {

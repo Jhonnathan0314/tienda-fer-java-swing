@@ -54,6 +54,33 @@ public class SupplierDAO implements SupplierRepository {
 		}
         return suppliers;
 	}
+	
+	@Override
+	public List<Supplier> findByName(String searchName) {
+		List<Supplier> suppliers = new ArrayList<>();
+		String query = "SELECT * FROM supplier WHERE supplier_name like ?";
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setString(1, "%" + searchName + "%");
+			try (ResultSet resultSet = statement.executeQuery()) {
+            	String id;
+                String supplierName, sellerName;
+                String phone;
+                Timestamp updateDate;
+	            while (resultSet.next()) {
+                    id = resultSet.getString("id");
+                    supplierName = resultSet.getString("supplier_name");
+                    sellerName = resultSet.getString("seller_name");
+                    phone = resultSet.getString("phone");
+                    updateDate = resultSet.getTimestamp("update_date");
+	                suppliers.add(new Supplier(id, supplierName, sellerName, phone, updateDate));
+	            }
+	        }
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return suppliers;
+	}
 
 	@Override
 	public Supplier findById(String id) {

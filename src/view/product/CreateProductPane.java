@@ -5,6 +5,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -16,10 +20,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
+import model.Section;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class CreateProductPane extends JPanel {
+public class CreateProductPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -60,6 +66,8 @@ public class CreateProductPane extends JPanel {
 	
 	private Color greenButton = new Color(14, 150, 89);
 	private Color blueContainer = new Color(15, 51, 66);
+	
+	private List<Section> sections = new LinkedList<>();
 	
 	private CustomEvent event;
 		
@@ -215,11 +223,9 @@ public class CreateProductPane extends JPanel {
 		add(sectionLabel, 0);
 		
 		sectionField = new JComboBox<String>();
-		sectionField.setModel(new DefaultComboBoxModel<String>(new String[] {"Comida", "Bebida", "Prueba"}));
 		sectionField.setBorder(new LineBorder(Color.WHITE, 1, true));
 		sectionField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		sectionField.setBounds(675, 554, 415, 36);
-		add(sectionField, 0);
 		
 		createButton = new JButton("Crear");
 		createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -228,6 +234,8 @@ public class CreateProductPane extends JPanel {
 		createButton.setBorder(new LineBorder(greenButton, 1, true));
 		createButton.setBackground(greenButton);
 		createButton.setBounds(675, 600, 415, 36);
+		createButton.setActionCommand("create");
+		createButton.addActionListener(this);
 		add(createButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -240,6 +248,26 @@ public class CreateProductPane extends JPanel {
 		footerLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(footerLbl, 0);
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(createButton.getActionCommand())) {
+			String name = nameField.getText();
+			int quantityAvailable = Integer.parseInt(quantityAvailableField.getText());
+			float saleValue = Float.parseFloat(saleValueField.getText());
+			String packaging = packagingField.getText();
+			String quantityPackaging = quantityPackagingField.getText();
+			String sectionName = String.valueOf(sectionField.getSelectedItem());
+			int sectionId = 0;
+			for(int i = 0; i < sections.size(); i++) {
+				if(sections.get(i).getName().equals(sectionName)) {
+					sectionId = sections.get(i).getId();
+					i = sections.size();
+				}
+			}
+			event.createProduct(name, quantityAvailable, saleValue, packaging, quantityPackaging, sectionId); 
+		}
 	}
 	
 	private void setImageLabel(JLabel label, String root) {
@@ -259,5 +287,20 @@ public class CreateProductPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+
+	public List<Section> getSections() {
+		return sections;
+	}
+
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+		String[] sectionsObj = new String[sections.size()];
+		for(int i = 0; i < sections.size(); i++) {
+			sectionsObj[i] = sections.get(i).getName();
+		}
+		DefaultComboBoxModel<String> sectionsComboBox = new DefaultComboBoxModel<String>(sectionsObj);
+		sectionField.setModel(sectionsComboBox);
+		add(sectionField, 0);
 	}
 }

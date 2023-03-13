@@ -5,6 +5,12 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -17,12 +23,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
+import model.Order;
+import view.ButtonCellRenderer;
 import view.ImageCellRenderer;
 
-public class OrderAllPane extends JPanel {
+public class OrderAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
@@ -42,6 +51,8 @@ public class OrderAllPane extends JPanel {
 	private JButton searchButton;
 	private JButton generateButton;
 	
+	private JTextField searchField;
+
 	private JScrollPane scrollPane;
 	private JTable table;
 
@@ -55,8 +66,9 @@ public class OrderAllPane extends JPanel {
 	private Color blueContainer = new Color(15, 51, 66);
 	private Color lightGray = new Color(218, 218, 218);
 	
+	private List<Order> orders = new LinkedList<>();
+	
 	private CustomEvent event;
-	private JTextField searchField;
 		
 	/**
 	 * Create the panel.
@@ -72,7 +84,9 @@ public class OrderAllPane extends JPanel {
 		
 		logo = new JLabel("");
 		logo.setBounds(109, 80, 80, 80);
+		logo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		setImageLabel(logo, logoRoot);
+		logo.addMouseListener(this);
 		add(logo, 0);
 		
 		sectionButton = new JButton("Secciones");
@@ -82,8 +96,10 @@ public class OrderAllPane extends JPanel {
 		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
 		sectionButton.setBackground(blueContainer);
 		sectionButton.setBounds(29, 200, 234, 49);
+		sectionButton.setActionCommand("sections");
+		sectionButton.addActionListener(this);
 		add(sectionButton, 0);
-		
+
 		productButton = new JButton("Productos");
 		productButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		productButton.setForeground(Color.WHITE);
@@ -91,8 +107,10 @@ public class OrderAllPane extends JPanel {
 		productButton.setBorder(new LineBorder(blueContainer, 1, true));
 		productButton.setBackground(blueContainer);
 		productButton.setBounds(29, 280, 234, 49);
+		productButton.setActionCommand("products");
+		productButton.addActionListener(this);
 		add(productButton, 0);
-		
+
 		supplierButton = new JButton("Proveedores");
 		supplierButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		supplierButton.setForeground(Color.WHITE);
@@ -100,8 +118,10 @@ public class OrderAllPane extends JPanel {
 		supplierButton.setBorder(new LineBorder(blueContainer, 1, true));
 		supplierButton.setBackground(blueContainer);
 		supplierButton.setBounds(29, 360, 234, 49);
+		supplierButton.setActionCommand("suppliers");
+		supplierButton.addActionListener(this);
 		add(supplierButton, 0);
-		
+
 		billButton = new JButton("Facturas");
 		billButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		billButton.setForeground(Color.WHITE);
@@ -109,15 +129,19 @@ public class OrderAllPane extends JPanel {
 		billButton.setBorder(new LineBorder(blueContainer, 1, true));
 		billButton.setBackground(blueContainer);
 		billButton.setBounds(29, 440, 234, 49);
+		billButton.setActionCommand("bills");
+		billButton.addActionListener(this);
 		add(billButton, 0);
-		
+
 		orderButton = new JButton("Pedidos");
 		orderButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		orderButton.setForeground(Color.WHITE);
 		orderButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		orderButton.setBorder(new LineBorder(greenButton, 1, true));
-		orderButton.setBackground(greenButton);
+		orderButton.setBorder(new LineBorder(blueContainer, 1, true));
+		orderButton.setBackground(blueContainer);
 		orderButton.setBounds(29, 520, 234, 49);
+		orderButton.setActionCommand("orders");
+		orderButton.addActionListener(this);
 		add(orderButton, 0);
 		
 		containerLbl = new JLabel("<html><body><center>Pedidos</center></body></html>");
@@ -194,6 +218,39 @@ public class OrderAllPane extends JPanel {
 		
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
+			event.goToSectionFromOrder();
+		}
+		if(e.getActionCommand().equals(productButton.getActionCommand())) {
+			event.goToProductFromOrder();
+		}
+		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
+			event.goToSupplierFromOrder();
+		}
+		if(e.getActionCommand().equals(billButton.getActionCommand())) {
+			event.goToBillFromOrder();
+		}
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		event.goToHomeFromOrder();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
+	
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -211,5 +268,40 @@ public class OrderAllPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+		DefaultTableModel model = new DefaultTableModel(
+				new Object[][] { },
+				new String[] {
+						"Id", "Fecha", "Valor total", "Proveedor", "Detalle"
+				}
+		) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+		};
+		
+		table.setModel(model);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		table.setDefaultRenderer(Object.class, centerRenderer);
+		
+		ButtonCellRenderer buttonRenderer = new ButtonCellRenderer(viewRoot);
+		for(int i = 0; i < orders.size(); i++) {
+			model.addRow(new Object[] {
+					orders.get(i).getId(), orders.get(i).getDate(), orders.get(i).getTotalValue(), orders.get(i).getSupplier().getSupplierName(), buttonRenderer
+			});
+		};
+		table.getColumn("Detalle").setCellRenderer(buttonRenderer);
+		scrollPane.setViewportView(table);
 	}
 }

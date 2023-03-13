@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,7 +19,7 @@ import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
 
-public class CreateSectionPane extends JPanel {
+public class CreateSectionPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -73,6 +75,8 @@ public class CreateSectionPane extends JPanel {
 		sectionButton.setBorder(new LineBorder(greenButton, 1, true));
 		sectionButton.setBackground(greenButton);
 		sectionButton.setBounds(29, 200, 234, 49);
+		sectionButton.setActionCommand("sections");
+		sectionButton.addActionListener(this);
 		add(sectionButton, 0);
 		
 		productButton = new JButton("Productos");
@@ -143,6 +147,8 @@ public class CreateSectionPane extends JPanel {
 		createButton.setBorder(new LineBorder(greenButton, 1, true));
 		createButton.setBackground(greenButton);
 		createButton.setBounds(675, 392, 415, 36);
+		createButton.setActionCommand("create");
+		createButton.addActionListener(this);
 		add(createButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -155,6 +161,17 @@ public class CreateSectionPane extends JPanel {
 		footerLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(footerLbl, 0);
 		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
+			event.goToSectionFromCreateSection();
+		}
+		if(e.getActionCommand().equals(createButton.getActionCommand())) {
+			String name = nameField.getText();
+			event.createSection(name);
+		}
 	}
 	
 	private void setImageLabel(JLabel label, String root) {

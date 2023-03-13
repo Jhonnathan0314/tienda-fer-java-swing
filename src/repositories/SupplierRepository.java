@@ -15,6 +15,8 @@ public interface SupplierRepository {
 
 	public List<Supplier> findAll();
 	
+	public List<Supplier> findByName(String searchName);
+	
 	public Supplier findById(String id);
 	
 	public Supplier create(Supplier supplier);

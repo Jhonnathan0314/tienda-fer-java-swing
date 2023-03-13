@@ -1,10 +1,16 @@
 package view;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import controller.Control;
+import model.Bill;
+import model.Order;
+import model.Product;
+import model.Section;
+import model.Supplier;
 import view.basic.HomePane;
 import view.basic.LoginPane;
 import view.bill.BillAllPane;
@@ -173,13 +179,279 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void isValidResponse(boolean isValid) {
+	public void isValidResponse(boolean isValid, List<Product> products) {
 		if(isValid) {
 			((LoginPane) loginPane).setVisible(false);
+			((HomePane) homePane).setProducts(products);
 			((HomePane) homePane).setVisible(true);
 		}else {
 			((LoginPane) loginPane).setValid(isValid);			
 		}
+	}
+	
+	@Override
+	public void goToHomeFromSection(List<Product> products) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((HomePane) homePane).setProducts(products);
+		((HomePane) homePane).setVisible(true);
+	}
+
+	@Override
+	public void goToHomeFromProduct(List<Product> products) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((HomePane) homePane).setProducts(products);
+		((HomePane) homePane).setVisible(true);
+	}
+
+	@Override
+	public void goToHomeFromSupplier(List<Product> products) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((HomePane) homePane).setProducts(products);
+		((HomePane) homePane).setVisible(true);
+	}
+
+	@Override
+	public void goToHomeFromBill(List<Product> products) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((HomePane) homePane).setProducts(products);
+		((HomePane) homePane).setVisible(true);
+	}
+
+	@Override
+	public void goToHomeFromOrder(List<Product> products) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((HomePane) homePane).setProducts(products);
+		((HomePane) homePane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromHome(List<Section> sections) {
+		((HomePane) homePane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromProduct(List<Section> sections) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromSupplier(List<Section> sections) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromBill(List<Section> sections) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromOrder(List<Section> sections) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromHome(List<Product> products) {
+		((HomePane) homePane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromSection(List<Product> products) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromSupplier(List<Product> products) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromBill(List<Product> products) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromOrder(List<Product> products) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromHome(List<Supplier> suppliers) {
+		((HomePane) homePane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromSection(List<Supplier> suppliers) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromProduct(List<Supplier> suppliers) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromBill(List<Supplier> suppliers) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromOrder(List<Supplier> suppliers) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromHome(List<Bill> bills) {
+		((HomePane) homePane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromSection(List<Bill> bills) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromProduct(List<Bill> bills) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromSupplier(List<Bill> bills) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromOrder(List<Bill> bills) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromHome(List<Order> orders) {
+		((HomePane) homePane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromSection(List<Order> orders) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromProduct(List<Order> orders) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromSupplier(List<Order> orders) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromBill(List<Order> orders) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToCreateSection() {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((CreateSectionPane) createSectionPane).setVisible(true);
+	}
+
+	@Override
+	public void goToCreateProduct(List<Section> sections) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((CreateProductPane) createProductPane).setSections(sections);
+		((CreateProductPane) createProductPane).setVisible(true);
+	}
+
+	@Override
+	public void goToCreateSupplier() {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((CreateSupplierPane) createSupplierPane).setVisible(true);
+	}
+	
+	@Override
+	public void filteredSectionsResponse(List<Section> sections) {
+		((SectionAllPane) sectionAllPane).setSections(sections);
+	}
+
+	@Override
+	public void filteredProductsByNameResponse(List<Product> products) {
+		((ProductAllPane) productAllPane).setProducts(products);
+	}
+
+	@Override
+	public void filteredSuppliersBySupplierNameResponse(List<Supplier> suppliers) {
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+	}
+
+	@Override
+	public void goToSectionFromCreateSection(List<Section> sections) {
+		((CreateSectionPane) createSectionPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromCreateProduct(List<Product> products) {
+		((CreateProductPane) createProductPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromCreateSupplier(List<Supplier> suppliers) {
+		((CreateSupplierPane) createSupplierPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
 }
