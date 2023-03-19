@@ -1,7 +1,7 @@
 /**
  * 
  */
-package view;
+package view.table;
 
 import java.awt.Component;
 import java.awt.Image;

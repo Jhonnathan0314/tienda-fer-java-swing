@@ -3,6 +3,9 @@
  */
 package controller;
 
+import model.Product;
+import model.Section;
+
 /**
  * @author JONATAN FRANCO
  *
@@ -10,6 +13,7 @@ package controller;
 public interface CustomEvent {
 	
 	public void validateUserLogin(String username, String password);
+	
 	
 	public void goToHomeFromSection();
 	
@@ -21,6 +25,7 @@ public interface CustomEvent {
 	
 	public void goToHomeFromOrder();
 	
+	
 	public void goToSectionFromHome();
 
 	public void goToSectionFromProduct();
@@ -30,6 +35,7 @@ public interface CustomEvent {
 	public void goToSectionFromBill();
 
 	public void goToSectionFromOrder();
+	
 	
 	public void goToProductFromHome();
 	
@@ -41,6 +47,7 @@ public interface CustomEvent {
 
 	public void goToProductFromOrder();
 	
+	
 	public void goToSupplierFromHome();
 
 	public void goToSupplierFromSection();
@@ -50,6 +57,7 @@ public interface CustomEvent {
 	public void goToSupplierFromBill();
 
 	public void goToSupplierFromOrder();
+	
 	
 	public void goToBillFromHome();
 
@@ -61,6 +69,7 @@ public interface CustomEvent {
 
 	public void goToBillFromOrder();
 	
+	
 	public void goToOrderFromHome();
 
 	public void goToOrderFromSection();
@@ -71,13 +80,21 @@ public interface CustomEvent {
 
 	public void goToOrderFromBill();
 	
+	
 	public void goToCreateSection();
 
 	public void goToCreateProduct();
 
 	public void goToCreateSupplier();
 	
+	
+	public void goToUpdateSection(int idSelected);
+	
+	public void goToUpdateProduct(int idSelected);
+	
+	
 	public void goToSectionFromCreateSection();
+	
 	
 	public void udpateFilterSections(String searchName);
 
@@ -85,11 +102,23 @@ public interface CustomEvent {
 
 	public void udpateFilterSuppliers(String searchName);
 
+	
 	public void createSection(String name);
 
 	public void createProduct(String name, int quantityAvailable, float saleValue, String packaging,
 			String quantityPackaging, int sectionId);
 
 	public void createSupplier(String supplierId, String supplierName, String sellerName, String phone);
+
+	
+	public void updateSection(Section section);
+
+	public void updateProduct(Product product);
+	
+	
+	public void deleteSectionById(int idSelected);
+
+
+	public void deleteProductById(int idSelected);
 
 }

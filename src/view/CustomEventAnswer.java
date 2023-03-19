@@ -19,6 +19,7 @@ public interface CustomEventAnswer {
 
 	public void isValidResponse(boolean isValid, List<Product> products);
 	
+	
 	public void goToHomeFromSection(List<Product> products);
 	
 	public void goToHomeFromProduct(List<Product> products);
@@ -28,6 +29,7 @@ public interface CustomEventAnswer {
 	public void goToHomeFromBill(List<Product> products);
 	
 	public void goToHomeFromOrder(List<Product> products);
+	
 	
 	public void goToSectionFromHome(List<Section> sections);
 
@@ -39,6 +41,7 @@ public interface CustomEventAnswer {
 
 	public void goToSectionFromOrder(List<Section> sections);
 	
+	
 	public void goToProductFromHome(List<Product> products);
 
 	public void goToProductFromSection(List<Product> products);
@@ -48,6 +51,7 @@ public interface CustomEventAnswer {
 	public void goToProductFromBill(List<Product> products);
 
 	public void goToProductFromOrder(List<Product> products);
+	
 	
 	public void goToSupplierFromHome(List<Supplier> suppliers);
 
@@ -59,6 +63,7 @@ public interface CustomEventAnswer {
 
 	public void goToSupplierFromOrder(List<Supplier> suppliers);
 	
+	
 	public void goToBillFromHome(List<Bill> bills);
 
 	public void goToBillFromSection(List<Bill> bills);
@@ -68,6 +73,7 @@ public interface CustomEventAnswer {
 	public void goToBillFromSupplier(List<Bill> bills);
 
 	public void goToBillFromOrder(List<Bill> bills);
+	
 	
 	public void goToOrderFromHome(List<Order> orders);
 
@@ -79,11 +85,18 @@ public interface CustomEventAnswer {
 
 	public void goToOrderFromBill(List<Order> orders);
 	
+	
 	public void goToCreateSection();
 
 	public void goToCreateProduct(List<Section> sections);
 
 	public void goToCreateSupplier();
+
+	
+	public void goToUpdateSection(Section section);
+
+	public void goToUpdateProduct(Product product, List<Section> sections);
+	
 	
 	public void filteredSectionsResponse(List<Section> sections);
 
@@ -91,10 +104,21 @@ public interface CustomEventAnswer {
 
 	public void filteredSuppliersBySupplierNameResponse(List<Supplier> suppliers);
 	
+	
 	public void goToSectionFromCreateSection(List<Section> sections);
 
 	public void goToProductFromCreateProduct(List<Product> products);
 
 	public void goToSupplierFromCreateSupplier(List<Supplier> suppliers);
 	
+
+	public void goToSectionFromUpdateSection(List<Section> sections);
+
+	public void goToProductFromUpdateProduct(List<Product> products);
+	
+	
+	public void refreshSections(List<Section> sections);
+
+	public void refreshProducts(List<Product> products);
+
 }

@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 import model.Supplier;
-import view.ButtonCellRenderer;
+import view.table.ButtonCellRenderer;
 
 public class SupplierAllPane extends JPanel implements ActionListener, MouseListener {
 	/**

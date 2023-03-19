@@ -505,6 +505,21 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goToUpdateSection(int idSelected) {
+		Section section = new Section();
+		section = sectionDAO.findById(idSelected);
+		answer.goToUpdateSection(section);
+	}
+
+	@Override
+	public void goToUpdateProduct(int idSelected) {
+		Product product = new Product();
+		product = productDAO.findById(idSelected);
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToUpdateProduct(product, sections);
+	}
+
+	@Override
 	public void goToSectionFromCreateSection() {
 		List<Section> sections = sectionDAO.findAll();
 		answer.goToSectionFromCreateSection(sections);
@@ -562,6 +577,34 @@ public class Control implements CustomEvent {
 		supplier = supplierDAO.create(supplier);
 		List<Supplier> suppliers = supplierDAO.findAll();
 		answer.goToSupplierFromCreateSupplier(suppliers);
+	}
+
+	@Override
+	public void updateSection(Section section) {
+		sectionDAO.update(section.getId(), section);
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromUpdateSection(sections);
+	}
+
+	@Override
+	public void updateProduct(Product product) {
+		productDAO.update(product.getId(), product);
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromUpdateProduct(products);
+	}
+
+	@Override
+	public void deleteSectionById(int idSelected) {
+		sectionDAO.deleteById(idSelected);
+		List<Section> sections = sectionDAO.findAll();
+		answer.refreshSections(sections);
+	}
+
+	@Override
+	public void deleteProductById(int idSelected) {
+		productDAO.deleteById(idSelected);
+		List<Product> products = productDAO.findAll();
+		answer.refreshProducts(products);
 	}
 
 }

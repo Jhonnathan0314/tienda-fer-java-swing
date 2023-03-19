@@ -417,6 +417,21 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
 		((CreateSupplierPane) createSupplierPane).setVisible(true);
 	}
+
+	@Override
+	public void goToUpdateSection(Section section) {
+		((SectionAllPane) sectionAllPane).setVisible(false);
+		((UpdateSectionPane) updateSectionPane).setSection(section);
+		((UpdateSectionPane) updateSectionPane).setVisible(true);
+	}
+
+	@Override
+	public void goToUpdateProduct(Product product, List<Section> sections) {
+		((ProductAllPane) productAllPane).setVisible(false);
+		((UpdateProductPane) updateProductPane).setSections(sections);
+		((UpdateProductPane) updateProductPane).setProduct(product);
+		((UpdateProductPane) updateProductPane).setVisible(true);
+	}
 	
 	@Override
 	public void filteredSectionsResponse(List<Section> sections) {
@@ -452,6 +467,30 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
 		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
 		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromUpdateSection(List<Section> sections) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromUpdateProduct(List<Product> products) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void refreshSections(List<Section> sections) {
+		((SectionAllPane) sectionAllPane).setSections(sections);
+	}
+
+	@Override
+	public void refreshProducts(List<Product> products) {
+		((ProductAllPane) productAllPane).setProducts(products);
 	}
 
 }

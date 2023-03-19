@@ -28,8 +28,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 import model.Order;
-import view.ButtonCellRenderer;
 import view.ImageCellRenderer;
+import view.table.ButtonCellRenderer;
 
 public class OrderAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
