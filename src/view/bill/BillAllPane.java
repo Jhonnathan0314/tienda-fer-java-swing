@@ -127,7 +127,7 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 		billButton.setForeground(Color.WHITE);
 		billButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		billButton.setBorder(new LineBorder(blueContainer, 1, true));
-		billButton.setBackground(blueContainer);
+		billButton.setBackground(greenButton);
 		billButton.setBounds(29, 440, 234, 49);
 		add(billButton, 0);
 

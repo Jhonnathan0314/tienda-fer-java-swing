@@ -533,6 +533,180 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goToProductFromCreateSection() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromCreateSection(products);
+	}
+
+	@Override
+	public void goToSupplierFromCreateSection() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromCreateSection(suppliers);
+	}
+
+	@Override
+	public void goToBillFromCreateSection() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromCreateSection(bills);
+	}
+
+	@Override
+	public void goToOrderFromCreateSection() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromCreateSection(orders);
+	}
+
+	@Override
+	public void goToSectionFromUpdateSection() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromUpdateSection(sections);
+	}
+
+	@Override
+	public void goToProductFromUpdateSection() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromUpdateSection(products);
+	}
+
+	@Override
+	public void goToSupplierFromUpdateSection() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromUpdateSection(suppliers);
+	}
+
+	@Override
+	public void goToBillFromUpdateSection() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromUpdateSection(bills);
+	}
+
+	@Override
+	public void goToOrderFromUpdateSection() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromUpdateSection(orders);
+	}
+
+	@Override
+	public void goToSectionFromCreateProduct() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromCreateProduct(sections);
+	}
+
+	@Override
+	public void goToProductFromCreateProduct() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromCreateProduct(products);
+	}
+
+	@Override
+	public void goToSupplierFromCreateProduct() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromCreateProduct(suppliers);
+	}
+
+	@Override
+	public void goToBillFromCreateProduct() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromCreateProduct(bills);
+	}
+
+	@Override
+	public void goToOrderFromCreateProduct() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromCreateProduct(orders);
+	}
+
+	@Override
+	public void goToSectionFromUpdateProduct() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromUpdateProduct(sections);
+	}
+
+	@Override
+	public void goToProductFromUpdateProduct() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromUpdateProduct(products);
+	}
+
+	@Override
+	public void goToSupplierFromUpdateProduct() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromUpdateProduct(suppliers);
+	}
+
+	@Override
+	public void goToBillFromUpdateProduct() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromUpdateProduct(bills);
+	}
+
+	@Override
+	public void goToOrderFromUpdateProduct() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromUpdateProduct(orders);
+	}
+
+	@Override
+	public void goToSectionFromCreateSupplier() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromCreateSupplier(sections);
+	}
+
+	@Override
+	public void goToProductFromCreateSupplier() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromCreateSupplier(products);
+	}
+
+	@Override
+	public void goToSupplierFromCreateSupplier() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromCreateSupplier(suppliers);
+	}
+
+	@Override
+	public void goToBillFromCreateSupplier() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromCreateSupplier(bills);
+	}
+
+	@Override
+	public void goToOrderFromCreateSupplier() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromCreateSupplier(orders);
+	}
+
+	@Override
+	public void goToSectionFromUpdateSupplier() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromUpdateSupplier(sections);
+	}
+
+	@Override
+	public void goToProductFromUpdateSupplier() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromUpdateSupplier(products);
+	}
+
+	@Override
+	public void goToSupplierFromUpdateSupplier() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromUpdateSupplier(suppliers);
+	}
+
+	@Override
+	public void goToBillFromUpdateSupplier() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromUpdateSupplier(bills);
+	}
+
+	@Override
+	public void goToOrderFromUpdateSupplier() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromUpdateSupplier(orders);
+	}
+
+	@Override
 	public void udpateFilterSections(String searchName) {
 		List<Section> sections = sectionDAO.findByName(searchName);
 		answer.filteredSectionsResponse(sections);

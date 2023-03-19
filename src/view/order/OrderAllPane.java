@@ -138,7 +138,7 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		orderButton.setForeground(Color.WHITE);
 		orderButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		orderButton.setBorder(new LineBorder(blueContainer, 1, true));
-		orderButton.setBackground(blueContainer);
+		orderButton.setBackground(greenButton);
 		orderButton.setBounds(29, 520, 234, 49);
 		orderButton.setActionCommand("orders");
 		orderButton.addActionListener(this);

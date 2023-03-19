@@ -463,8 +463,148 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
+	public void goToProductFromCreateSection(List<Product> products) {
+		((CreateSectionPane) createSectionPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromCreateSection(List<Supplier> suppliers) {
+		((CreateSectionPane) createSectionPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromCreateSection(List<Bill> bills) {
+		((CreateSectionPane) createSectionPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromCreateSection(List<Order> orders) {
+		((CreateSectionPane) createSectionPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromUpdateSection(List<Section> sections) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromUpdateSection(List<Product> products) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromUpdateSection(List<Supplier> suppliers) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromUpdateSection(List<Bill> bills) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromUpdateSection(List<Order> orders) {
+		((UpdateSectionPane) updateSectionPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromCreateProduct(List<Section> sections) {
+		((CreateProductPane) createProductPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
 	public void goToProductFromCreateProduct(List<Product> products) {
 		((CreateProductPane) createProductPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromCreateProduct(List<Supplier> suppliers) {
+		((CreateProductPane) createProductPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromCreateProduct(List<Bill> bills) {
+		((CreateProductPane) createProductPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromCreateProduct(List<Order> orders) {
+		((CreateProductPane) createProductPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromUpdateProduct(List<Section> sections) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+	
+	@Override
+	public void goToProductFromUpdateProduct(List<Product> products) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromUpdateProduct(List<Supplier> suppliers) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromUpdateProduct(List<Bill> bills) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromUpdateProduct(List<Order> orders) {
+		((UpdateProductPane) updateProductPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromCreateSupplier(List<Section> sections) {
+		((CreateSupplierPane) createSupplierPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromCreateSupplier(List<Product> products) {
+		((CreateSupplierPane) createSupplierPane).setVisible(false);
 		((ProductAllPane) productAllPane).setProducts(products);
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
@@ -477,15 +617,29 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToSectionFromUpdateSection(List<Section> sections) {
-		((UpdateSectionPane) updateSectionPane).setVisible(false);
+	public void goToBillFromCreateSupplier(List<Bill> bills) {
+		((CreateSupplierPane) createSupplierPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromCreateSupplier(List<Order> orders) {
+		((CreateSupplierPane) createSupplierPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSectionFromUpdateSupplier(List<Section> sections) {
+		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
 		((SectionAllPane) sectionAllPane).setSections(sections);
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
 	@Override
-	public void goToProductFromUpdateProduct(List<Product> products) {
-		((UpdateProductPane) updateProductPane).setVisible(false);
+	public void goToProductFromUpdateSupplier(List<Product> products) {
+		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
 		((ProductAllPane) productAllPane).setProducts(products);
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
@@ -495,6 +649,20 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
 		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
 		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromUpdateSupplier(List<Bill> bills) {
+		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromUpdateSupplier(List<Order> orders) {
+		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
 	@Override

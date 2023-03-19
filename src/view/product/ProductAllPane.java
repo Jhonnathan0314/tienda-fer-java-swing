@@ -100,7 +100,7 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 		productButton.setForeground(Color.WHITE);
 		productButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		productButton.setBorder(new LineBorder(blueContainer, 1, true));
-		productButton.setBackground(blueContainer);
+		productButton.setBackground(greenButton);
 		productButton.setBounds(29, 280, 234, 49);
 		add(productButton, 0);
 

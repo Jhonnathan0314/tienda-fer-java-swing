@@ -75,7 +75,7 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		sectionButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sectionButton.setForeground(Color.WHITE);
 		sectionButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		sectionButton.setBorder(new LineBorder(greenButton, 1, true));
+		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
 		sectionButton.setBackground(greenButton);
 		sectionButton.setBounds(29, 200, 234, 49);
 		sectionButton.setActionCommand("sections");
@@ -89,6 +89,8 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		productButton.setBorder(new LineBorder(blueContainer, 1, true));
 		productButton.setBackground(blueContainer);
 		productButton.setBounds(29, 280, 234, 49);
+		productButton.setActionCommand("products");
+		productButton.addActionListener(this);
 		add(productButton, 0);
 
 		supplierButton = new JButton("Proveedores");
@@ -98,6 +100,8 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		supplierButton.setBorder(new LineBorder(blueContainer, 1, true));
 		supplierButton.setBackground(blueContainer);
 		supplierButton.setBounds(29, 360, 234, 49);
+		supplierButton.setActionCommand("suppliers");
+		supplierButton.addActionListener(this);
 		add(supplierButton, 0);
 
 		billButton = new JButton("Facturas");
@@ -107,6 +111,8 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		billButton.setBorder(new LineBorder(blueContainer, 1, true));
 		billButton.setBackground(blueContainer);
 		billButton.setBounds(29, 440, 234, 49);
+		billButton.setActionCommand("bills");
+		billButton.addActionListener(this);
 		add(billButton, 0);
 
 		orderButton = new JButton("Pedidos");
@@ -116,6 +122,8 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		orderButton.setBorder(new LineBorder(blueContainer, 1, true));
 		orderButton.setBackground(blueContainer);
 		orderButton.setBounds(29, 520, 234, 49);
+		orderButton.setActionCommand("orders");
+		orderButton.addActionListener(this);
 		add(orderButton, 0);
 
 		containerLbl = new JLabel("<html><body><center>Actualizar seccion</center></body></html>");
@@ -169,8 +177,21 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
-			event.goToSectionFromCreateSection();
+			event.goToSectionFromUpdateSection();
 		}
+		if(e.getActionCommand().equals(productButton.getActionCommand())) {
+			event.goToProductFromUpdateSection();
+		}
+		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
+			event.goToSupplierFromUpdateSection();
+		}
+		if(e.getActionCommand().equals(billButton.getActionCommand())) {
+			event.goToBillFromUpdateSection();
+		}
+		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
+			event.goToOrderFromUpdateSection();
+		}
+		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
 			String name = nameField.getText();
 			section.setName(name);

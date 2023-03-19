@@ -96,17 +96,21 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
 		sectionButton.setBackground(blueContainer);
 		sectionButton.setBounds(29, 200, 234, 49);
+		sectionButton.setActionCommand("sections");
+		sectionButton.addActionListener(this);
 		add(sectionButton, 0);
-		
+
 		productButton = new JButton("Productos");
 		productButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		productButton.setForeground(Color.WHITE);
 		productButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		productButton.setBorder(new LineBorder(greenButton, 1, true));
+		productButton.setBorder(new LineBorder(blueContainer, 1, true));
 		productButton.setBackground(greenButton);
 		productButton.setBounds(29, 280, 234, 49);
+		productButton.setActionCommand("products");
+		productButton.addActionListener(this);
 		add(productButton, 0);
-		
+
 		supplierButton = new JButton("Proveedores");
 		supplierButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		supplierButton.setForeground(Color.WHITE);
@@ -114,8 +118,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		supplierButton.setBorder(new LineBorder(blueContainer, 1, true));
 		supplierButton.setBackground(blueContainer);
 		supplierButton.setBounds(29, 360, 234, 49);
+		supplierButton.setActionCommand("suppliers");
+		supplierButton.addActionListener(this);
 		add(supplierButton, 0);
-		
+
 		billButton = new JButton("Facturas");
 		billButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		billButton.setForeground(Color.WHITE);
@@ -123,8 +129,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		billButton.setBorder(new LineBorder(blueContainer, 1, true));
 		billButton.setBackground(blueContainer);
 		billButton.setBounds(29, 440, 234, 49);
+		billButton.setActionCommand("bills");
+		billButton.addActionListener(this);
 		add(billButton, 0);
-		
+
 		orderButton = new JButton("Pedidos");
 		orderButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		orderButton.setForeground(Color.WHITE);
@@ -132,6 +140,8 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		orderButton.setBorder(new LineBorder(blueContainer, 1, true));
 		orderButton.setBackground(blueContainer);
 		orderButton.setBounds(29, 520, 234, 49);
+		orderButton.setActionCommand("orders");
+		orderButton.addActionListener(this);
 		add(orderButton, 0);
 		
 		containerLbl = new JLabel("<html><body><center>Crear producto</center></body></html>");
@@ -252,6 +262,22 @@ public class CreateProductPane extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
+			event.goToSectionFromCreateProduct();
+		}
+		if(e.getActionCommand().equals(productButton.getActionCommand())) {
+			event.goToProductFromCreateProduct();
+		}
+		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
+			event.goToSupplierFromCreateProduct();
+		}
+		if(e.getActionCommand().equals(billButton.getActionCommand())) {
+			event.goToBillFromCreateProduct();
+		}
+		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
+			event.goToOrderFromCreateProduct();
+		}
+		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
 			String name = nameField.getText();
 			int quantityAvailable = Integer.parseInt(quantityAvailableField.getText());

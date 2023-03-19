@@ -112,7 +112,7 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		supplierButton.setForeground(Color.WHITE);
 		supplierButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		supplierButton.setBorder(new LineBorder(blueContainer, 1, true));
-		supplierButton.setBackground(blueContainer);
+		supplierButton.setBackground(greenButton);
 		supplierButton.setBounds(29, 360, 234, 49);
 		add(supplierButton, 0);
 

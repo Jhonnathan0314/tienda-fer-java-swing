@@ -97,6 +97,69 @@ public interface CustomEvent {
 	
 	
 	public void goToSectionFromCreateSection();
+
+	public void goToProductFromCreateSection();
+
+	public void goToSupplierFromCreateSection();
+
+	public void goToBillFromCreateSection();
+
+	public void goToOrderFromCreateSection();
+
+
+	public void goToSectionFromUpdateSection();
+
+	public void goToProductFromUpdateSection();
+
+	public void goToSupplierFromUpdateSection();
+
+	public void goToBillFromUpdateSection();
+
+	public void goToOrderFromUpdateSection();
+	
+	
+	public void goToSectionFromCreateProduct();
+
+	public void goToProductFromCreateProduct();
+
+	public void goToSupplierFromCreateProduct();
+
+	public void goToBillFromCreateProduct();
+
+	public void goToOrderFromCreateProduct();
+	
+	
+	public void goToSectionFromUpdateProduct();
+
+	public void goToProductFromUpdateProduct();
+
+	public void goToSupplierFromUpdateProduct();
+
+	public void goToBillFromUpdateProduct();
+
+	public void goToOrderFromUpdateProduct();
+	
+
+	public void goToSectionFromCreateSupplier();
+
+	public void goToProductFromCreateSupplier();
+
+	public void goToSupplierFromCreateSupplier();
+
+	public void goToBillFromCreateSupplier();
+
+	public void goToOrderFromCreateSupplier();
+
+	
+	public void goToSectionFromUpdateSupplier();
+
+	public void goToProductFromUpdateSupplier();
+
+	public void goToSupplierFromUpdateSupplier();
+
+	public void goToBillFromUpdateSupplier();
+
+	public void goToOrderFromUpdateSupplier();
 	
 	
 	public void udpateFilterSections(String searchName);

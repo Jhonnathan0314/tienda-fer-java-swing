@@ -92,7 +92,7 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 		sectionButton.setForeground(Color.WHITE);
 		sectionButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		sectionButton.setBorder(new LineBorder(blueContainer, 1, true));
-		sectionButton.setBackground(blueContainer);
+		sectionButton.setBackground(greenButton);
 		sectionButton.setBounds(29, 200, 234, 49);
 		add(sectionButton, 0);
 
