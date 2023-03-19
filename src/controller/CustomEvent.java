@@ -5,6 +5,7 @@ package controller;
 
 import model.Product;
 import model.Section;
+import model.Supplier;
 
 /**
  * @author JONATAN FRANCO
@@ -91,6 +92,8 @@ public interface CustomEvent {
 	public void goToUpdateSection(int idSelected);
 	
 	public void goToUpdateProduct(int idSelected);
+
+	public void goToUpdateSupplier(String idSelected);
 	
 	
 	public void goToSectionFromCreateSection();
@@ -114,11 +117,14 @@ public interface CustomEvent {
 	public void updateSection(Section section);
 
 	public void updateProduct(Product product);
+
+	public void updateSupplier(Supplier supplier);
 	
 	
 	public void deleteSectionById(int idSelected);
 
-
 	public void deleteProductById(int idSelected);
+
+	public void deleteSupplierById(String idSelected);
 
 }

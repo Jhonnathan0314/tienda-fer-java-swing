@@ -96,6 +96,8 @@ public interface CustomEventAnswer {
 	public void goToUpdateSection(Section section);
 
 	public void goToUpdateProduct(Product product, List<Section> sections);
+
+	public void goToUpdateSupplier(Supplier supplier);
 	
 	
 	public void filteredSectionsResponse(List<Section> sections);
@@ -116,9 +118,13 @@ public interface CustomEventAnswer {
 
 	public void goToProductFromUpdateProduct(List<Product> products);
 	
+	public void goToSupplierFromUpdateSupplier(List<Supplier> suppliers);
+
 	
 	public void refreshSections(List<Section> sections);
 
 	public void refreshProducts(List<Product> products);
+
+	public void refreshSuppliers(List<Supplier> suppliers);
 
 }

@@ -23,12 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 import model.Supplier;
-import view.table.ButtonCellRenderer;
+import view.table.RenderTable;
 
 public class SupplierAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
@@ -37,18 +36,12 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 	private static final long serialVersionUID = 1L;
 	
 	//Declaracion de variables
-	private JLabel logo;
-	private JLabel background;
-	private JLabel footerLbl;
-	private JLabel containerLbl;
+	private JLabel logo, background, footerLbl, containerLbl;
 	
-	private JButton sectionButton;
-	private JButton productButton;
-	private JButton supplierButton;
-	private JButton billButton;
-	private JButton orderButton;
-	private JButton searchButton;
-	private JButton createButton;
+	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, searchButton, createButton, updateButton, deleteButton;
+
+	private ImageIcon image;
+	private Icon icon;
 	
 	private JTextField searchField;
 
@@ -67,6 +60,9 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 	private Color lightGray = new Color(218, 218, 218);
 	
 	private List<Supplier> suppliers = new LinkedList<>();
+	
+	private int column, row;
+	private String idSelected;
 	
 	private CustomEvent event;
 		
@@ -171,6 +167,26 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		searchButton.addActionListener(this);
 		add(searchButton, 0);
 		
+		updateButton = new JButton();
+		updateButton.setBackground(lightGray);
+		updateButton.setBorder(null);
+		image = new ImageIcon(updateRoot);
+		icon = new ImageIcon(
+			image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+		);
+		updateButton.setIcon(icon);
+		updateButton.setName("update");
+		
+		deleteButton = new JButton();
+		deleteButton.setBackground(lightGray);
+		deleteButton.setBorder(null);
+		image = new ImageIcon(deleteRoot);
+		icon = new ImageIcon(
+				image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+			);
+		deleteButton.setIcon(icon);
+		deleteButton.setName("delete");
+		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(360, 200, 1072, 350);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
@@ -185,6 +201,7 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		table.setBackground(lightGray);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		table.setRowHeight(25);
+		table.addMouseListener(this);
 		
 		createButton = new JButton("Crear");
 		createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -235,7 +252,25 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		event.goToHomeFromSupplier();
+//		event.goToHomeFromProduct();
+		
+		column = table.getColumnModel().getColumnIndexAtX(e.getX());
+		row = e.getY()/table.getRowHeight();
+		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
+			Object obj = table.getValueAt(row, column);
+			if(obj instanceof JButton) {
+				((JButton) obj).doClick();
+				JButton botones = (JButton) obj;
+				if(botones.getName().equals("update")) {
+					idSelected = String.valueOf(table.getModel().getValueAt(row, 0));
+					event.goToUpdateSupplier(idSelected);
+				}
+				if(botones.getName().equals("delete")) {
+					idSelected = String.valueOf(table.getModel().getValueAt(row, 0));
+					event.deleteSupplierById(idSelected);
+				}
+			}
+		}	
 	}
 
 	@Override
@@ -275,34 +310,27 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 
 	public void setSuppliers(List<Supplier> suppliers) {
 		this.suppliers = suppliers;
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] { },
-				new String[] {
-						"Id", "Nombre proveedor", "Nombre vendedor", "Telefono", "Actualizar", "Eliminar"
-				}
-		) {
+		
+		table.setDefaultRenderer(Object.class, new RenderTable());
+		
+		DefaultTableModel model = new DefaultTableModel(){
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
 		};
 		
-		table.setModel(model);
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-		table.setDefaultRenderer(Object.class, centerRenderer);
-		
-		ButtonCellRenderer updateButtonRenderer = new ButtonCellRenderer(updateRoot);
-		ButtonCellRenderer deleteButtonRenderer = new ButtonCellRenderer(deleteRoot);
+		model.setColumnIdentifiers(new String[] {"Id", "Nombre proveedor", "Nombre vendedor", "Telefono", "Actualizar", "Eliminar"});
+
 		for(int i = 0; i < suppliers.size(); i++) {
-			model.addRow(new Object[] {
-					suppliers.get(i).getId(), suppliers.get(i).getSupplierName(), suppliers.get(i).getSellerName(), suppliers.get(i).getPhone(), updateButtonRenderer, deleteButtonRenderer
-			});
+			Object struct[] = { suppliers.get(i).getId(), suppliers.get(i).getSupplierName(), suppliers.get(i).getSellerName(), suppliers.get(i).getPhone(), updateButton, deleteButton };
+			model.addRow(struct);
 		};
-		table.getColumn("Actualizar").setCellRenderer(updateButtonRenderer);
-		table.getColumn("Eliminar").setCellRenderer(deleteButtonRenderer);
+
+		table.setModel(model);
+
 		scrollPane.setViewportView(table);
 	}
 }

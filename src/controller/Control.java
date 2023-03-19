@@ -520,6 +520,13 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goToUpdateSupplier(String idSelected) {
+		Supplier supplier = new Supplier();
+		supplier = supplierDAO.findById(idSelected);
+		answer.goToUpdateSupplier(supplier);
+	}
+
+	@Override
 	public void goToSectionFromCreateSection() {
 		List<Section> sections = sectionDAO.findAll();
 		answer.goToSectionFromCreateSection(sections);
@@ -594,6 +601,13 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void updateSupplier(Supplier supplier) {
+		supplierDAO.update(supplier.getId(), supplier);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromUpdateSupplier(suppliers);
+	}
+
+	@Override
 	public void deleteSectionById(int idSelected) {
 		sectionDAO.deleteById(idSelected);
 		List<Section> sections = sectionDAO.findAll();
@@ -605,6 +619,13 @@ public class Control implements CustomEvent {
 		productDAO.deleteById(idSelected);
 		List<Product> products = productDAO.findAll();
 		answer.refreshProducts(products);
+	}
+
+	@Override
+	public void deleteSupplierById(String idSelected) {
+		supplierDAO.deleteById(idSelected);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.refreshSuppliers(suppliers);
 	}
 
 }

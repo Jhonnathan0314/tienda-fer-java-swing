@@ -432,6 +432,13 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((UpdateProductPane) updateProductPane).setProduct(product);
 		((UpdateProductPane) updateProductPane).setVisible(true);
 	}
+
+	@Override
+	public void goToUpdateSupplier(Supplier supplier) {
+		((SupplierAllPane) supplierAllPane).setVisible(false);
+		((UpdateSupplierPane) updateSupplierPane).setSupplier(supplier);
+		((UpdateSupplierPane) updateSupplierPane).setVisible(true);
+	}
 	
 	@Override
 	public void filteredSectionsResponse(List<Section> sections) {
@@ -484,6 +491,13 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
+	public void goToSupplierFromUpdateSupplier(List<Supplier> suppliers) {
+		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
 	public void refreshSections(List<Section> sections) {
 		((SectionAllPane) sectionAllPane).setSections(sections);
 	}
@@ -491,6 +505,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	@Override
 	public void refreshProducts(List<Product> products) {
 		((ProductAllPane) productAllPane).setProducts(products);
+	}
+
+	@Override
+	public void refreshSuppliers(List<Supplier> suppliers) {
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
 	}
 
 }
