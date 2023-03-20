@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import model.Bill;
+import model.DetailBill;
 import model.Order;
 import model.Product;
 import model.Section;
@@ -39,6 +40,8 @@ public class Control implements CustomEvent {
 	
 	private CustomEventAnswer answer;
 	
+	public Control(String empty) { }
+	
 	public Control() {
 		Conexion conexion = new Conexion();
 		conexion.getConexion();
@@ -59,236 +62,6 @@ public class Control implements CustomEvent {
 	}
 
 	public void init() {
-		
-		
-//		List<Section> sections = sectionDAO.findAll();
-//		for(Section section : sections) {
-//			System.out.println(section.getName());
-//		}
-		
-//		Section section = new Section();
-//		section.setName("PRUEBA CREAR");
-//		section = sectionDAO.create(section);
-		
-//		Section section = new Section();
-//		section.setName("PRUEBA ACTUALIZAR");
-//		section = sectionDAO.update(11, section);
-	
-//		section = sectionDAO.findById(11);
-//		System.out.println(section.getName());
-		
-//		boolean isDeleted = sectionDAO.deleteById(11);
-//		System.out.println(isDeleted);
-		
-
-		
-//		List<Product> products = productDAO.findAll();
-//		for(Product product : products) {
-//			System.out.println(product.getName() + "; Seccion: " + product.getSection().getName());
-//		}
-		
-//		List<Product> products = productDAO.findByName("COCA");
-//		for(Product product : products) {
-//			System.out.println(product.getName() + "; Seccion: " + product.getSection().getName());
-//		}		
-		
-//		List<Product> products = productDAO.findBySection(3);
-//		for(Product product : products) {
-//			System.out.println(product.getName() + "; Seccion: " + product.getSection().getName());
-//		}		
-		
-//		Product product = new Product();
-//		product.setName("PRUEBA CREAR");
-//		product.setQuantityAvailable(0);
-//		product.setSaleValue(1000);
-//		product.setPackaging("CAJA");
-//		product.setQuantityPackaging("1000ml");
-//		product.setSection(new Section(1, "", null));
-//		productDAO.create(product);
-		
-//		Product product = new Product();
-//		product.setName("PRUEBA ACTUALIZAR");
-//		product.setQuantityAvailable(5);
-//		product.setSaleValue(10000);
-//		product.setPackaging("BOLSA");
-//		product.setQuantityPackaging("900ml");
-//		product.setSection(new Section(1, "", null));
-//		productDAO.update(568, product);
-		
-//		product = productDAO.findById(568);
-//		System.out.println(product.getName() + "; Seccion: " + product.getSection().getName());
-		
-//		boolean isDeleted = productDAO.deleteById(568);
-			
-		
-//		List<Supplier> suppliers = supplierDAO.findAll();
-//		for(Supplier supplier : suppliers) {
-//			System.out.println(supplier.getSupplierName());
-//		}
-		
-//		Supplier supplier = new Supplier();
-//		supplier.setId("3125543042");
-//		supplier.setSupplierName("PRUEBA CREAR");
-//		supplier.setSellerName("PRUEBA CREAR");
-//		supplier.setPhone("18000111222");
-//		supplier = supplierDAO.create(supplier);
-//		
-//		Supplier supplier = new Supplier();
-//		supplier.setId("3125543042");
-//		supplier.setSupplierName("PRUEBA ACTUALIZAR");
-//		supplier.setSellerName("PRUEBA ACTUALIZAR");
-//		supplier.setPhone("18000111333");
-//		supplier = supplierDAO.update("3125543042", supplier);
-	
-//		supplier = supplierDAO.findById("3125543042");
-//		System.out.println(supplier.getSupplierName());
-		
-//		boolean isDeleted = supplierDAO.deleteById("3125543042");
-//		System.out.println(isDeleted);
-		
-		
-//		List<Bill> bills = billDAO.findAll();
-//		for(Bill bill : bills) {
-//			System.out.println(bill.getId() + "; tv: " + bill.getTotalValue() + "; dt: " + bill.getDate());
-//		}
-		
-//		Bill bill = new Bill();
-//		bill.setTotalValue(10000);
-//		billDAO.create(bill);
-		
-//		bill = billDAO.findById(2);
-//		System.out.println(bill.getId() + "; tv: " + bill.getTotalValue() + "; dt: " + bill.getDate());
-		
-//		List<Bill> bills = billDAO.findByYear(2023);
-//		for(Bill bill : bills) {
-//			System.out.println(bill.getId() + "; tv: " + bill.getTotalValue() + "; dt: " + bill.getDate());
-//		}
-		
-//		List<Bill> bills = billDAO.findByYearAndMonth(2023, 03);
-//		for(Bill bill : bills) {
-//			System.out.println(bill.getId() + "; tv: " + bill.getTotalValue() + "; dt: " + bill.getDate());
-//		}
-		
-//		List<Bill> bills = billDAO.findByYearAndMonthAndDay(2023, 3, 5);
-//		for(Bill bill : bills) {
-//			System.out.println(bill.getId() + "; tv: " + bill.getTotalValue() + "; dt: " + bill.getDate());
-//		}
-		
-//		boolean isDeleted = billDAO.deleteById(1);
-//		System.out.println(isDeleted);
-		
-		
-//		DetailBill detailBill = new DetailBill();
-		
-//		Product product = new Product();
-//		product = productDAO.findById(1);
-		
-//		Bill bill = new Bill();
-//		bill.setId(2);
-		
-//		detailBill.setProduct(product);
-//		detailBill.setBill(bill);
-//		detailBill.setQuantity(3);
-//		detailBill.setUnitValue(product.getSaleValue());
-//		detailBill.setTotalValue(detailBill.getQuantity() * detailBill.getUnitValue());
-//		detailBillDAO.insert(detailBill);
-		
-//		detailBill = new DetailBill();
-//		product = new Product();
-//		product = productDAO.findById(2);
-		
-//		bill = new Bill();
-//		bill.setId(2);
-		
-//		detailBill.setProduct(product);
-//		detailBill.setBill(bill);
-//		detailBill.setQuantity(2);
-//		detailBill.setUnitValue(product.getSaleValue());
-//		detailBill.setTotalValue(detailBill.getQuantity() * detailBill.getUnitValue());
-//		detailBillDAO.insert(detailBill);
-		
-//		List<DetailBill> detailBills = detailBillDAO.findByBill(2);
-//		for(DetailBill detailBill2 : detailBills) {
-//			System.out.println("producto: " + detailBill2.getProduct().getName());
-//		}
-		
-		
-//		List<Order> orders = orderDAO.findAll();
-//		for(Order order : orders) {
-//			System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-//		}
-		
-//		Order order = new Order();
-//		order.setTotalValue(10000);
-//		order.setSupplier(new Supplier("0", "", "", "", null));
-//		orderDAO.create(order);
-		
-//		order = orderDAO.findById(1);
-//		System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-		
-//		List<Order> orders = orderDAO.findByYear(2023);
-//		for(Order order : orders) {
-//			System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-//		}
-		
-//		List<Order> orders = orderDAO.findByYearAndMonth(2023, 3);
-//		for(Order order : orders) {
-//			System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-//		}
-		
-//		List<Order> orders = orderDAO.findByYearAndMonthAndDay(2023, 3, 5);
-//		for(Order order : orders) {
-//			System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-//		}
-		
-//		List<Order> orders = orderDAO.findBySupplier("0");
-//		for(Order order : orders) {
-//			System.out.println(order.getId() + "; tv: " + order.getTotalValue() + "; dt: " + order.getDate());
-//		}
-		
-//		boolean isDeleted = orderDAO.deleteById(1);
-//		System.out.println(isDeleted);
-		
-		
-//		DetailOrder detailOrder = new DetailOrder();
-		
-//		Product product = new Product();
-//		product = productDAO.findById(1);
-		
-//		Order order = new Order();
-//		order.setId(1);
-		
-//		detailOrder.setProduct(product);
-//		detailOrder.setOrder(order);
-//		detailOrder.setOrderedQuantity(5);
-//		detailOrder.setReceivedQuantity(4);
-//		detailOrder.setUnitValue(1600);
-//		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
-//		detailOrderDAO.insert(detailOrder);
-		
-//		detailOrder = new DetailOrder();
-//		product = new Product();
-//		product = productDAO.findById(2);
-		
-//		order = new Order();
-//		order.setId(1);
-		
-//		detailOrder.setProduct(product);
-//		detailOrder.setOrder(order);
-//		detailOrder.setOrderedQuantity(6);
-//		detailOrder.setReceivedQuantity(6);
-//		detailOrder.setUnitValue(1600);
-//		detailOrder.setTotalValue(detailOrder.getReceivedQuantity() * detailOrder.getUnitValue());
-//		detailOrderDAO.insert(detailOrder);
-		
-//		List<DetailOrder> detailOrders = detailOrderDAO.findByOrder(1);
-//		for(DetailOrder detailOrder2 : detailOrders) {
-//			System.out.println("producto: " + detailOrder2.getProduct().getName());
-//		}
-		
-//		boolean isValid = userSecurityDAO.checkPassword("admin", "tiendadonalola");
-//		System.out.println("isvalid: " + isValid);
-		
 		IOManager frame = new IOManager();
 		frame.setVisible(true);
 	}
@@ -707,6 +480,42 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goToSectionFromDetailBill() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromDetailBill(sections);
+	}
+
+	@Override
+	public void goToProductFromDetailBill() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromDetailBill(products);
+	}
+
+	@Override
+	public void goToSupplierFromDetailBill() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromDetailBill(suppliers);
+	}
+
+	@Override
+	public void goToBillFromDetailBill() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromDetailBill(bills);
+	}
+
+	@Override
+	public void goToOrderFromDetailBill() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromDetailBill(orders);
+	}
+
+	@Override
+	public void goToBillFromGenerateBill() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromGenerateBill(bills);
+	}
+
+	@Override
 	public void udpateFilterSections(String searchName) {
 		List<Section> sections = sectionDAO.findByName(searchName);
 		answer.filteredSectionsResponse(sections);
@@ -734,8 +543,7 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
-	public void createProduct(String name, int quantityAvailable, float saleValue, String packaging,
-			String quantityPackaging, int sectionId) {
+	public void createProduct(String name, int quantityAvailable, float saleValue, String packaging, String quantityPackaging, int sectionId) {
 		Product product = new Product();
 		product.setName(name);
 		product.setQuantityAvailable(quantityAvailable);
@@ -758,6 +566,16 @@ public class Control implements CustomEvent {
 		supplier = supplierDAO.create(supplier);
 		List<Supplier> suppliers = supplierDAO.findAll();
 		answer.goToSupplierFromCreateSupplier(suppliers);
+	}
+
+	@Override
+	public void goGenerateBill() {
+		Bill bill = new Bill();
+		bill.setTotalValue(0);
+		bill = billDAO.create(bill);
+		bill = billDAO.findById(bill.getId());
+		List<Product> products = productDAO.findAll();
+		answer.goGenerateBill(bill, products);
 	}
 
 	@Override
@@ -800,6 +618,35 @@ public class Control implements CustomEvent {
 		supplierDAO.deleteById(idSelected);
 		List<Supplier> suppliers = supplierDAO.findAll();
 		answer.refreshSuppliers(suppliers);
+	}
+
+	@Override
+	public void deleteBillById(int idSelected) {
+		billDAO.deleteById(idSelected);
+		List<Bill> bills = billDAO.findAll();
+		answer.refreshBills(bills);
+	}
+
+	@Override
+	public void viewDetailBill(int idSelected) {
+		Bill bill = billDAO.findById(idSelected);
+		List<DetailBill> detailsBill = detailBillDAO.findByBill(idSelected);
+		answer.goToDetailBill(detailsBill, bill);
+	}
+
+	@Override
+	public void findProductsByName(String searchName) {
+		List<Product> products = productDAO.findByName(searchName);
+		answer.returnProductsFindedByName(products);
+	}
+
+	@Override
+	public void generateDetailBill(List<DetailBill> detailsBill) {
+		for(int i = 0; i < detailsBill.size(); i++) {
+			detailBillDAO.insert(detailsBill.get(i));
+		}
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromGenerateBill(bills);
 	}
 
 }

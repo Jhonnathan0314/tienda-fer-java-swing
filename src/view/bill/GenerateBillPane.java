@@ -5,11 +5,19 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,9 +28,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
-import view.ImageCellRenderer;
+import model.Bill;
+import model.DetailBill;
+import model.Product;
+import view.table.RenderTable;
 
-public class GenerateBillPane extends JPanel {
+public class GenerateBillPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
@@ -42,6 +53,8 @@ public class GenerateBillPane extends JPanel {
 	private JTextField searchField;
 	private JTextField searchStockField;
 
+	private JComboBox<String> productsFindedField;
+
 	private JButton sectionButton;
 	private JButton productButton;
 	private JButton supplierButton;
@@ -51,6 +64,10 @@ public class GenerateBillPane extends JPanel {
 	private JButton addButton;
 	private JButton cancelButton;
 	private JButton generateButton;
+	private JButton deleteButton;
+	
+	private ImageIcon image;
+	private Icon icon;
 	
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -65,6 +82,15 @@ public class GenerateBillPane extends JPanel {
 	private Color redButton = new Color(255, 92, 92);
 	private Color blueContainer = new Color(15, 51, 66);
 	private Color lightGray = new Color(218, 218, 218);
+	
+	private Bill bill;
+	private List<DetailBill> detailsBill = new LinkedList<>();
+	private List<Product> products = new LinkedList<>();
+	private Product productSelected;
+	private DetailBill detailBill;
+
+	private int column, row, idSelected;
+	private float totalValue = 0;
 	
 	private CustomEvent event;
 		
@@ -166,7 +192,7 @@ public class GenerateBillPane extends JPanel {
 		searchField.setBorder(new LineBorder(Color.GRAY, 1, true));
 		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		searchField.setHorizontalAlignment(SwingConstants.CENTER);
-		searchField.setBounds(440, 190, 863, 40);
+		searchField.setBounds(440, 190, 803, 40);
 		add(searchField, 0);
 		
 		searchButton = new JButton("Consultar");
@@ -176,9 +202,20 @@ public class GenerateBillPane extends JPanel {
 		searchButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		searchButton.setBackground(greenButton);
 		searchButton.setBounds(1243, 190, 109, 40);
+		searchButton.setActionCommand("search");
+		searchButton.addActionListener(this);
 		add(searchButton, 0);
 		
-		stockLbl = new JLabel("Stock disponible: {variable}");
+		productsFindedField = new JComboBox<String>();
+		productsFindedField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		productsFindedField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		productsFindedField.setBounds(440, 190, 803, 40);
+		productsFindedField.addActionListener(this);
+		productsFindedField.setActionCommand("product");
+		add(productsFindedField, 0);
+		productsFindedField.setVisible(false);
+		
+		stockLbl = new JLabel("Stock disponible: ");
 		stockLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		stockLbl.setBounds(490, 250, 220, 33);
 		add(stockLbl, 0);
@@ -197,7 +234,19 @@ public class GenerateBillPane extends JPanel {
 		addButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		addButton.setBackground(greenButton);
 		addButton.setBounds(1163, 250, 129, 35);
+		addButton.addActionListener(this);
+		addButton.setActionCommand("add");
 		add(addButton, 0);
+		
+		deleteButton = new JButton();
+		deleteButton.setBackground(lightGray);
+		deleteButton.setBorder(null);
+		image = new ImageIcon(deleteRoot);
+		icon = new ImageIcon(
+				image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+			);
+		deleteButton.setIcon(icon);
+		deleteButton.setName("delete");
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(360, 310, 1072, 180);
@@ -213,19 +262,9 @@ public class GenerateBillPane extends JPanel {
 		table.setBackground(lightGray);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		table.setRowHeight(25);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null}
-			},
-			new String[] {
-				"Producto", "Cantidad", "Valor unitario", "Valor total", "Eliminar"
-			}
-		));
-		table.getColumnModel().getColumn(4).setCellRenderer(new ImageCellRenderer(deleteRoot));
-		table.getColumnModel().getColumn(4).setMaxWidth(80);
-		scrollPane.setViewportView(table);
+		table.addMouseListener(this);
 		
-		totalValueLbl = new JLabel("Valor total: ${variable}");
+		totalValueLbl = new JLabel("Valor total: $" + totalValue);
 		totalValueLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		totalValueLbl.setBounds(1240, 500, 200, 33);
 		add(totalValueLbl, 0);
@@ -237,6 +276,8 @@ public class GenerateBillPane extends JPanel {
 		cancelButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		cancelButton.setBackground(redButton);
 		cancelButton.setBounds(450, 530, 129, 40);
+		cancelButton.addActionListener(this);
+		cancelButton.setActionCommand("cancel");
 		add(cancelButton, 0);
 		
 		generateButton = new JButton("Generar");
@@ -246,6 +287,8 @@ public class GenerateBillPane extends JPanel {
 		generateButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		generateButton.setBackground(greenButton);
 		generateButton.setBounds(1200, 530, 129, 40);
+		generateButton.addActionListener(this);
+		generateButton.setActionCommand("generate");
 		add(generateButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -259,6 +302,118 @@ public class GenerateBillPane extends JPanel {
 		add(footerLbl, 0);
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(searchButton.getActionCommand())){
+			if(searchButton.getText().equals("Consultar")) {
+				updateFindedProducts();
+			}else {
+				productsFindedField.setVisible(false);
+				searchButton.setText("Consultar");
+				searchField.setText("");
+				searchField.setVisible(true);
+			}
+		}
+		if(e.getActionCommand().equals(productsFindedField.getActionCommand())) {
+			productSelected = new Product();
+			productSelected.setName(String.valueOf(productsFindedField.getSelectedItem()));
+			for(int i = 0; i < products.size(); i++) {
+				if(products.get(i).getName().equals(productSelected.getName())) {
+					productSelected = products.get(i);
+					i = products.size();
+				}
+			}
+			stockLbl.setText("Stock disponible: " + productSelected.getQuantityAvailable());
+		}
+		if(e.getActionCommand().equals(addButton.getActionCommand())) {
+			int quantitySelected = Integer.parseInt(searchStockField.getText());
+			detailBill = new DetailBill();
+			detailBill.setProduct(productSelected);
+			detailBill.setQuantity(quantitySelected);
+			detailBill.setUnitValue(productSelected.getSaleValue());
+			detailBill.setTotalValue(productSelected.getSaleValue() * quantitySelected);
+			detailBill.setBill(bill);
+			detailsBill.add(detailBill);
+			setDetailsBill(detailsBill);
+			
+			totalValue += detailBill.getTotalValue();
+
+			for(int i = 0; i < products.size(); i++) {
+				if(productSelected.getId() == products.get(i).getId()) {
+					products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() - quantitySelected);
+					i = products.size();
+				}
+			}
+			stockLbl.setText("Stock disponible: ");
+			searchStockField.setText("");
+			
+			totalValueLbl.setText("Valor total: $" + totalValue);
+			
+			productsFindedField.setVisible(false);
+			searchButton.setText("Consultar");
+			searchField.setText("");
+			searchField.setVisible(true);
+		}
+		if(e.getActionCommand().equals(cancelButton.getActionCommand())) {
+			event.deleteBillById(bill.getId());
+			event.goToBillFromGenerateBill();
+		}
+		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
+			event.generateDetailBill(detailsBill);
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		column = table.getColumnModel().getColumnIndexAtX(e.getX());
+		row = e.getY()/table.getRowHeight();
+		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
+			Object obj = table.getValueAt(row, column);
+			if(obj instanceof JButton) {
+				((JButton) obj).doClick();
+				JButton botones = (JButton) obj;
+				if(botones.getName().equals("delete")) {
+					idSelected = Integer.parseInt(String.valueOf(table.getModel().getValueAt(row, 0)));
+					for(int i = 0; i < detailsBill.size(); i++) {
+						if(detailsBill.get(i).getProduct().getId() == idSelected) {
+							for(int j = 0; j < products.size(); j++) {
+								if(products.get(j).getId() == idSelected) {
+									products.get(j).setQuantityAvailable(products.get(j).getQuantityAvailable() + detailsBill.get(i).getQuantity());
+									stockLbl.setText("Stock disponible: ");
+									searchStockField.setText("");
+
+									totalValue -= detailsBill.get(i).getTotalValue();
+									totalValueLbl.setText("Valor total: $" + totalValue);
+									
+									productsFindedField.setVisible(false);
+									searchButton.setText("Consultar");
+									searchField.setText("");
+									searchField.setVisible(true);
+									j = products.size();
+								}
+							}
+							detailsBill.remove(i);
+							setDetailsBill(detailsBill);
+							i = detailsBill.size();
+						}
+					}
+				}
+			}
+		}	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
 	
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
@@ -277,5 +432,88 @@ public class GenerateBillPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+
+		billCodeLbl.setText("Codigo factura: " + bill.getId());
+		billDateLbl.setText("Fecha: " + bill.getDate());
+		totalValueLbl.setText("Valor compra: $" + bill.getTotalValue());
+	}
+
+	public List<DetailBill> getDetailsBill() {
+		return detailsBill;
+	}
+
+	public void setDetailsBill(List<DetailBill> detailsBill) {
+		this.detailsBill = detailsBill;
+		
+		table.setDefaultRenderer(Object.class, new RenderTable());
+		
+		DefaultTableModel model = new DefaultTableModel(){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		
+		model.setColumnIdentifiers(new String[] { "Id", "Producto", "Cantidad", "Valor unitario", "Valor total", "Eliminar" });
+
+		for(int i = 0; i < detailsBill.size(); i++) {
+			Object struct[] = { detailsBill.get(i).getProduct().getId(), detailsBill.get(i).getProduct().getName(), detailsBill.get(i).getQuantity(), detailsBill.get(i).getUnitValue(), detailsBill.get(i).getTotalValue(), deleteButton };
+			model.addRow(struct);
+		};
+
+		table.setModel(model);
+
+		scrollPane.setViewportView(table);
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	private void updateFindedProducts() {
+		List<Product> findedProducts = new LinkedList<>();
+		String searchName = searchField.getText();
+		for(int i = 0; i < products.size(); i++) {
+			if(products.get(i).getName().toUpperCase().contains(searchName.toUpperCase())) {
+				findedProducts.add(products.get(i));
+			}
+		}
+		
+		String[] productsObj = new String[findedProducts.size()];
+		for(int i = 0; i < findedProducts.size(); i++) {
+			productsObj[i] = findedProducts.get(i).getName();
+		}
+		DefaultComboBoxModel<String> sectionsComboBox = new DefaultComboBoxModel<String>(productsObj);
+		productsFindedField.setModel(sectionsComboBox);
+		
+		searchField.setVisible(false);
+		
+		searchButton.setText("Volver");
+		
+		productsFindedField.setVisible(true);
+		
+		productSelected = new Product();
+		productSelected.setName(String.valueOf(productsFindedField.getSelectedItem()));
+		for(int i = 0; i < findedProducts.size(); i++) {
+			if(findedProducts.get(i).getName().equals(productSelected.getName())) {
+				productSelected = findedProducts.get(i);
+				i = products.size();
+			}
+		}
+		stockLbl.setText("Stock disponible: " + productSelected.getQuantityAvailable());
 	}
 }

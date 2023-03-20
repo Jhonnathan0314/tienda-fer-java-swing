@@ -6,6 +6,7 @@ package view;
 import java.util.List;
 
 import model.Bill;
+import model.DetailBill;
 import model.Order;
 import model.Product;
 import model.Section;
@@ -172,11 +173,35 @@ public interface CustomEventAnswer {
 	
 	public void goToOrderFromUpdateSupplier(List<Order> orders);
 
+
+	public void goToSectionFromDetailBill(List<Section> sections);
+
+	public void goToProductFromDetailBill(List<Product> products);
+
+	public void goToSupplierFromDetailBill(List<Supplier> suppliers);
+
+	public void goToBillFromDetailBill(List<Bill> bills);
+
+	public void goToOrderFromDetailBill(List<Order> orders);
+	
+
+	public void goToBillFromGenerateBill(List<Bill> bills);
+	
 	
 	public void refreshSections(List<Section> sections);
 
 	public void refreshProducts(List<Product> products);
 
 	public void refreshSuppliers(List<Supplier> suppliers);
+
+	public void refreshBills(List<Bill> bills);
+
+
+	public void goGenerateBill(Bill bill, List<Product> products);
+
+	public void goToDetailBill(List<DetailBill> detailsBill, Bill bill);
+
+
+	public void returnProductsFindedByName(List<Product> products);
 
 }

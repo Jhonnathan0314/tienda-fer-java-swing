@@ -15,7 +15,7 @@ public class Run {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Control control = new Control();
+		Control control = new Control("no connection");
 		control.init();
 	}
 

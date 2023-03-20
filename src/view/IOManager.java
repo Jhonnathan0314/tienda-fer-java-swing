@@ -1,12 +1,14 @@
 package view;
 
 import java.awt.Dimension;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
 
 import controller.Control;
 import model.Bill;
+import model.DetailBill;
 import model.Order;
 import model.Product;
 import model.Section;
@@ -666,6 +668,48 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
+	public void goToSectionFromDetailBill(List<Section> sections) {
+		((DetailBillPane) detailBillPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromDetailBill(List<Product> products) {
+		((DetailBillPane) detailBillPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromDetailBill(List<Supplier> suppliers) {
+		((DetailBillPane) detailBillPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromDetailBill(List<Bill> bills) {
+		((DetailBillPane) detailBillPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromDetailBill(List<Order> orders) {
+		((DetailBillPane) detailBillPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromGenerateBill(List<Bill> bills) {
+		((GenerateBillPane) generateBillPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
 	public void refreshSections(List<Section> sections) {
 		((SectionAllPane) sectionAllPane).setSections(sections);
 	}
@@ -678,6 +722,33 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	@Override
 	public void refreshSuppliers(List<Supplier> suppliers) {
 		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+	}
+
+	@Override
+	public void refreshBills(List<Bill> bills) {
+		((BillAllPane) billAllPane).setBills(bills);
+	}
+
+	@Override
+	public void goGenerateBill(Bill bill, List<Product> products) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((GenerateBillPane) generateBillPane).setBill(bill);
+		((GenerateBillPane) generateBillPane).setDetailsBill(new LinkedList<>());
+		((GenerateBillPane) generateBillPane).setProducts(products);
+		((GenerateBillPane) generateBillPane).setVisible(true);
+	}
+
+	@Override
+	public void goToDetailBill(List<DetailBill> detailsBill, Bill bill) {
+		((BillAllPane) billAllPane).setVisible(false);
+		((DetailBillPane) detailBillPane).setBill(bill);
+		((DetailBillPane) detailBillPane).setDetailsBill(detailsBill);
+		((DetailBillPane) detailBillPane).setVisible(true);
+	}
+
+	@Override
+	public void returnProductsFindedByName(List<Product> products) {
+		((GenerateBillPane) generateBillPane).setProducts(products);
 	}
 
 }

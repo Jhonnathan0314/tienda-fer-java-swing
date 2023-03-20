@@ -321,6 +321,7 @@ public class CreateProductPane extends JPanel implements ActionListener {
 
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
+		
 		String[] sectionsObj = new String[sections.size()];
 		for(int i = 0; i < sections.size(); i++) {
 			sectionsObj[i] = sections.get(i).getName();
