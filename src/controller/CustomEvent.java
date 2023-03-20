@@ -6,6 +6,7 @@ package controller;
 import java.util.List;
 
 import model.DetailBill;
+import model.DetailOrder;
 import model.Product;
 import model.Section;
 import model.Supplier;
@@ -175,8 +176,22 @@ public interface CustomEvent {
 
 	public void goToOrderFromDetailBill();
 	
+	
+	public void goToSectionFromDetailOrder();
+
+	public void goToProductFromDetailOrder();
+
+	public void goToSupplierFromDetailOrder();
+
+	public void goToBillFromDetailOrder();
+
+	public void goToOrderFromDetailOrder();
+	
 
 	public void goToBillFromGenerateBill();
+	
+
+	public void goToOrderFromGenerateOrder();
 	
 	
 	public void udpateFilterSections(String searchName);
@@ -193,6 +208,8 @@ public interface CustomEvent {
 	public void createSupplier(String supplierId, String supplierName, String sellerName, String phone);
 
 	public void goGenerateBill();
+
+	public void goGenerateOrder();
 	
 	
 	public void updateSection(Section section);
@@ -210,13 +227,19 @@ public interface CustomEvent {
 
 	public void deleteBillById(int idSelected);
 
+	public void deleteOrderById(int idSelected);
+
 	
 	public void viewDetailBill(int idSelected);
 
+	public void viewDetailOrder(int idSelected);
 
+	
 	public void findProductsByName(String searchName);
 
 
 	public void generateDetailBill(List<DetailBill> detailsBill);
+
+	public void generateDetailOrder(List<DetailOrder> detailsOrder);
 
 }

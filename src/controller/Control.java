@@ -3,11 +3,11 @@
  */
 package controller;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import model.Bill;
 import model.DetailBill;
+import model.DetailOrder;
 import model.Order;
 import model.Product;
 import model.Section;
@@ -516,6 +516,42 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goToOrderFromGenerateOrder() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromGenerateOrder(orders);
+	}
+
+	@Override
+	public void goToSectionFromDetailOrder() {
+		List<Section> sections = sectionDAO.findAll();
+		answer.goToSectionFromDetailOrder(sections);
+	}
+
+	@Override
+	public void goToProductFromDetailOrder() {
+		List<Product> products = productDAO.findAll();
+		answer.goToProductFromDetailOrder(products);
+	}
+
+	@Override
+	public void goToSupplierFromDetailOrder() {
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToSupplierFromDetailOrder(suppliers);
+	}
+
+	@Override
+	public void goToBillFromDetailOrder() {
+		List<Bill> bills = billDAO.findAll();
+		answer.goToBillFromDetailOrder(bills);
+	}
+
+	@Override
+	public void goToOrderFromDetailOrder() {
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromDetailOrder(orders);
+	}
+
+	@Override
 	public void udpateFilterSections(String searchName) {
 		List<Section> sections = sectionDAO.findByName(searchName);
 		answer.filteredSectionsResponse(sections);
@@ -579,6 +615,19 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void goGenerateOrder() {
+		Order order = new Order();
+		order.setTotalValue(0);
+		Supplier supplier = new Supplier();
+		supplier.setId("0");
+		order.setSupplier(supplier);
+		order = orderDAO.create(order);
+		order = orderDAO.findById(order.getId());
+		List<Product> products = productDAO.findAll();
+		answer.goGenerateOrder(order, products);
+	}
+
+	@Override
 	public void updateSection(Section section) {
 		sectionDAO.update(section.getId(), section);
 		List<Section> sections = sectionDAO.findAll();
@@ -628,10 +677,24 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
+	public void deleteOrderById(int idSelected) {
+		orderDAO.deleteById(idSelected);
+		List<Order> orders = orderDAO.findAll();
+		answer.refreshOrders(orders);
+	}
+
+	@Override
 	public void viewDetailBill(int idSelected) {
 		Bill bill = billDAO.findById(idSelected);
 		List<DetailBill> detailsBill = detailBillDAO.findByBill(idSelected);
 		answer.goToDetailBill(detailsBill, bill);
+	}
+
+	@Override
+	public void viewDetailOrder(int idSelected) {
+		Order order = orderDAO.findById(idSelected);
+		List<DetailOrder> detailsOrder = detailOrderDAO.findByOrder(idSelected);
+		answer.goToDetailOrder(detailsOrder, order);
 	}
 
 	@Override
@@ -647,6 +710,15 @@ public class Control implements CustomEvent {
 		}
 		List<Bill> bills = billDAO.findAll();
 		answer.goToBillFromGenerateBill(bills);
+	}
+
+	@Override
+	public void generateDetailOrder(List<DetailOrder> detailsOrder) {
+		for(int i = 0; i < detailsOrder.size(); i++) {
+			detailOrderDAO.insert(detailsOrder.get(i));
+		}
+		List<Order> orders = orderDAO.findAll();
+		answer.goToOrderFromGenerateOrder(orders);
 	}
 
 }

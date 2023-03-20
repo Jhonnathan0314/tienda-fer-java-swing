@@ -23,13 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 import model.Order;
-import view.ImageCellRenderer;
-import view.table.ButtonCellRenderer;
+import view.table.RenderTable;
 
 public class OrderAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
@@ -50,6 +48,11 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 	private JButton orderButton;
 	private JButton searchButton;
 	private JButton generateButton;
+	private JButton detailButton;
+	private JButton deleteButton;
+	
+	private ImageIcon image;
+	private Icon icon;
 	
 	private JTextField searchField;
 
@@ -59,6 +62,7 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
 	private String viewRoot = "src/img/view.png";
+	private String deleteRoot = "src/img/delete.png";
 
 	private Dimension dim;
 	
@@ -67,6 +71,8 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 	private Color lightGray = new Color(218, 218, 218);
 	
 	private List<Order> orders = new LinkedList<>();
+	
+	private int column, row, idSelected;
 	
 	private CustomEvent event;
 		
@@ -171,6 +177,26 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		searchButton.setBounds(1263, 140, 169, 40);
 		add(searchButton, 0);
 		
+		detailButton = new JButton();
+		detailButton.setBackground(lightGray);
+		detailButton.setBorder(null);
+		image = new ImageIcon(viewRoot);
+		icon = new ImageIcon(
+			image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+		);
+		detailButton.setIcon(icon);
+		detailButton.setName("view");
+		
+		deleteButton = new JButton();
+		deleteButton.setBackground(lightGray);
+		deleteButton.setBorder(null);
+		image = new ImageIcon(deleteRoot);
+		icon = new ImageIcon(
+				image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+			);
+		deleteButton.setIcon(icon);
+		deleteButton.setName("delete");
+		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(360, 200, 1072, 350);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
@@ -185,17 +211,7 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		table.setBackground(lightGray);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		table.setRowHeight(25);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null}
-			},
-			new String[] {
-				"Id", "Fecha", "Valor total", "Proveedor", "Detalle"
-			}
-		));
-		table.getColumnModel().getColumn(4).setCellRenderer(new ImageCellRenderer(viewRoot));
-		table.getColumnModel().getColumn(4).setMaxWidth(80);
-		scrollPane.setViewportView(table);
+		table.addMouseListener(this);
 		
 		generateButton = new JButton("Generar");
 		generateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -204,6 +220,8 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		generateButton.setBorder(new LineBorder(greenButton, 1, true));
 		generateButton.setBackground(greenButton);
 		generateButton.setBounds(800, 580, 169, 40);
+		generateButton.setActionCommand("generate");
+		generateButton.addActionListener(this);
 		add(generateButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -232,11 +250,33 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		if(e.getActionCommand().equals(billButton.getActionCommand())) {
 			event.goToBillFromOrder();
 		}
+		
+		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
+			event.goGenerateOrder();
+		}
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		event.goToHomeFromOrder();
+//		event.goToHomeFromOrder();
+		
+		column = table.getColumnModel().getColumnIndexAtX(e.getX());
+		row = e.getY()/table.getRowHeight();
+		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
+			Object obj = table.getValueAt(row, column);
+			if(obj instanceof JButton) {
+				((JButton) obj).doClick();
+				JButton botones = (JButton) obj;
+				if(botones.getName().equals("view")) {
+					idSelected = Integer.parseInt(String.valueOf(table.getModel().getValueAt(row, 0)));
+					event.viewDetailOrder(idSelected);
+				}
+				if(botones.getName().equals("delete")) {
+					idSelected = Integer.parseInt(String.valueOf(table.getModel().getValueAt(row, 0)));
+					event.deleteOrderById(idSelected);
+				}
+			}
+		}	
 	}
 
 	@Override
@@ -276,32 +316,27 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] { },
-				new String[] {
-						"Id", "Fecha", "Valor total", "Proveedor", "Detalle"
-				}
-		) {
+		
+		table.setDefaultRenderer(Object.class, new RenderTable());
+		
+		DefaultTableModel model = new DefaultTableModel(){
 			private static final long serialVersionUID = 1L;
 
 			@Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
 		};
 		
-		table.setModel(model);
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-		table.setDefaultRenderer(Object.class, centerRenderer);
-		
-		ButtonCellRenderer buttonRenderer = new ButtonCellRenderer(viewRoot);
+		model.setColumnIdentifiers(new String[] { "Id", "Fecha", "Valor total", "Proveedor", "Detalle", "Eliminar" });
+
 		for(int i = 0; i < orders.size(); i++) {
-			model.addRow(new Object[] {
-					orders.get(i).getId(), orders.get(i).getDate(), orders.get(i).getTotalValue(), orders.get(i).getSupplier().getSupplierName(), buttonRenderer
-			});
+			Object struct[] = { orders.get(i).getId(), orders.get(i).getDate(), orders.get(i).getTotalValue(), orders.get(i).getSupplier().getSupplierName(), detailButton, deleteButton };
+			model.addRow(struct);
 		};
-		table.getColumn("Detalle").setCellRenderer(buttonRenderer);
+
+		table.setModel(model);
+
 		scrollPane.setViewportView(table);
 	}
 }

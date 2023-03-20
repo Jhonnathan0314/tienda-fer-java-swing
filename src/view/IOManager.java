@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import controller.Control;
 import model.Bill;
 import model.DetailBill;
+import model.DetailOrder;
 import model.Order;
 import model.Product;
 import model.Section;
@@ -703,10 +704,57 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
+	public void goToSectionFromDetailOrder(List<Section> sections) {
+		((DetailOrderPane) detailOrderPane).setVisible(false);
+		((SectionAllPane) sectionAllPane).setSections(sections);
+		((SectionAllPane) sectionAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToProductFromDetailOrder(List<Product> products) {
+		((DetailOrderPane) detailOrderPane).setVisible(false);
+		((ProductAllPane) productAllPane).setProducts(products);
+		((ProductAllPane) productAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToSupplierFromDetailOrder(List<Supplier> suppliers) {
+		((DetailOrderPane) detailOrderPane).setVisible(false);
+		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
+		((SupplierAllPane) supplierAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToBillFromDetailOrder(List<Bill> bills) {
+		((DetailOrderPane) detailOrderPane).setVisible(false);
+		((BillAllPane) billAllPane).setBills(bills);
+		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromDetailOrder(List<Order> orders) {
+		((DetailOrderPane) detailOrderPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
 	public void goToBillFromGenerateBill(List<Bill> bills) {
 		((GenerateBillPane) generateBillPane).setVisible(false);
 		((BillAllPane) billAllPane).setBills(bills);
 		((BillAllPane) billAllPane).setVisible(true);
+	}
+
+	@Override
+	public void goToOrderFromGenerateOrder(List<Order> orders) {
+		((GenerateOrderPane) generateOrderPane).setVisible(false);
+		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setVisible(true);
+	}
+
+	@Override
+	public void returnProductsFindedByName(List<Product> products) {
+		((GenerateBillPane) generateBillPane).setProducts(products);
 	}
 
 	@Override
@@ -730,12 +778,26 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
+	public void refreshOrders(List<Order> orders) {
+		((OrderAllPane) orderAllPane).setOrders(orders);
+	}
+
+	@Override
 	public void goGenerateBill(Bill bill, List<Product> products) {
 		((BillAllPane) billAllPane).setVisible(false);
 		((GenerateBillPane) generateBillPane).setBill(bill);
 		((GenerateBillPane) generateBillPane).setDetailsBill(new LinkedList<>());
 		((GenerateBillPane) generateBillPane).setProducts(products);
 		((GenerateBillPane) generateBillPane).setVisible(true);
+	}
+
+	@Override
+	public void goGenerateOrder(Order order, List<Product> products) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((GenerateOrderPane) generateOrderPane).setOrder(order);
+		((GenerateOrderPane) generateOrderPane).setDetailsOrder(new LinkedList<>());
+		((GenerateOrderPane) generateOrderPane).setProducts(products);
+		((GenerateOrderPane) generateOrderPane).setVisible(true);
 	}
 
 	@Override
@@ -747,8 +809,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void returnProductsFindedByName(List<Product> products) {
-		((GenerateBillPane) generateBillPane).setProducts(products);
+	public void goToDetailOrder(List<DetailOrder> detailsOrder, Order order) {
+		((OrderAllPane) orderAllPane).setVisible(false);
+		((DetailOrderPane) detailOrderPane).setOrder(order);
+		((DetailOrderPane) detailOrderPane).setDetailsOrder(detailsOrder);
+		((DetailOrderPane) detailOrderPane).setVisible(true);
 	}
 
 }

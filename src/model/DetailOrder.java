@@ -14,19 +14,20 @@ public class DetailOrder {
 	private int receivedQuantity;
 	private float unitValue;
 	private float totalValue;
+	private float saleValue;
 	private float percentageProfit;
 	private Product product;
 	private Order order;
 	
 	//Metodos constructores
-	public DetailOrder(int id, int orderedQuantity, int receivedQuantity, float unitValue, float totalValue,
-			float percentageProfit, Product product, Order order) {
+	public DetailOrder(int id, int orderedQuantity, int receivedQuantity, float unitValue, float totalValue, float saleValue, float percentageProfit, Product product, Order order) {
 		super();
 		this.id = id;
 		this.orderedQuantity = orderedQuantity;
 		this.receivedQuantity = receivedQuantity;
 		this.unitValue = unitValue;
 		this.totalValue = totalValue;
+		this.saleValue = saleValue;
 		this.percentageProfit = percentageProfit;
 		this.product = product;
 		this.order = order;
@@ -73,6 +74,14 @@ public class DetailOrder {
 
 	public void setTotalValue(float totalValue) {
 		this.totalValue = totalValue;
+	}
+
+	public float getSaleValue() {
+		return saleValue;
+	}
+
+	public void setSaleValue(float saleValue) {
+		this.saleValue = saleValue;
 	}
 
 	public float getPercentageProfit() {

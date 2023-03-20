@@ -5,11 +5,19 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,9 +28,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
-import view.ImageCellRenderer;
+import model.DetailOrder;
+import model.Order;
+import model.Product;
+import view.table.RenderTable;
 
-public class GenerateOrderPane extends JPanel {
+public class GenerateOrderPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
@@ -37,12 +48,20 @@ public class GenerateOrderPane extends JPanel {
 	private JLabel orderCodeLbl;
 	private JLabel supplierLbl;
 	private JLabel orderDateLbl;
-	private JLabel stockLbl;
+	private JLabel orderedQuantityLbl;
+	private JLabel receivedQuantityLbl;
+	private JLabel unitValueLbl;
+	private JLabel saleValueLbl;
 	private JLabel totalValueLbl;
 	
 	private JTextField searchField;
-	private JTextField searchStockField;
+	private JTextField orderedQuantityField;
+	private JTextField receivedQuantityField;
+	private JTextField unitValueField;
+	private JTextField saleValueField;
 
+	private JComboBox<String> productsFindedField;
+	
 	private JButton sectionButton;
 	private JButton productButton;
 	private JButton supplierButton;
@@ -52,6 +71,10 @@ public class GenerateOrderPane extends JPanel {
 	private JButton addButton;
 	private JButton cancelButton;
 	private JButton generateButton;
+	private JButton deleteButton;
+
+	private ImageIcon image;
+	private Icon icon;
 	
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -66,6 +89,15 @@ public class GenerateOrderPane extends JPanel {
 	private Color redButton = new Color(255, 92, 92);
 	private Color blueContainer = new Color(15, 51, 66);
 	private Color lightGray = new Color(218, 218, 218);
+	
+	private List<DetailOrder> detailsOrder = new LinkedList<>();
+	private Order order;
+	private List<Product> products = new LinkedList<>();
+	private Product productSelected;
+	private DetailOrder detailOrder;
+	
+	private int column, row, idSelected;
+	private float totalValue;
 	
 	private CustomEvent event;
 		
@@ -135,8 +167,8 @@ public class GenerateOrderPane extends JPanel {
 		containerLbl.setBackground(blueContainer);
 		containerLbl.setOpaque(true);
 		containerLbl.setForeground(Color.WHITE);
-		containerLbl.setSize((int) dim.getWidth() - 360, (int) dim.getHeight() - 320);
-		containerLbl.setLocation(310, 70);
+		containerLbl.setSize((int) dim.getWidth() - 360, (int) dim.getHeight() - 280);
+		containerLbl.setLocation(310, 50);
 		containerLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		containerLbl.setVerticalAlignment(SwingConstants.TOP);
 		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
@@ -146,8 +178,8 @@ public class GenerateOrderPane extends JPanel {
 		orderContainerLbl.setBackground(Color.WHITE);
 		orderContainerLbl.setOpaque(true);
 		orderContainerLbl.setForeground(Color.BLACK);
-		orderContainerLbl.setSize((int) dim.getWidth() - 400, (int) dim.getHeight() - 390);
-		orderContainerLbl.setLocation(330, 120);
+		orderContainerLbl.setSize((int) dim.getWidth() - 400, (int) dim.getHeight() - 350);
+		orderContainerLbl.setLocation(330, 100);
 		orderContainerLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		orderContainerLbl.setVerticalAlignment(SwingConstants.TOP);
 		orderContainerLbl.setFont(new Font("Tahoma", Font.PLAIN, 38));
@@ -155,24 +187,24 @@ public class GenerateOrderPane extends JPanel {
 		
 		orderCodeLbl = new JLabel("Codigo factura: ####");
 		orderCodeLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		orderCodeLbl.setBounds(470, 144, 280, 33);
+		orderCodeLbl.setBounds(470, 100, 280, 33);
 		add(orderCodeLbl, 0);
 		
 		supplierLbl = new JLabel("Proveedor: {nombre del proveedor}");
 		supplierLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		supplierLbl.setBounds(740, 144, 280, 33);
+		supplierLbl.setBounds(740, 100, 280, 33);
 		add(supplierLbl, 0);
 		
 		orderDateLbl = new JLabel("Fecha: dd/mm/yyyy");
 		orderDateLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		orderDateLbl.setBounds(1171, 144, 220, 33);
+		orderDateLbl.setBounds(1171, 100, 220, 33);
 		add(orderDateLbl, 0);
 		
 		searchField = new JTextField();
 		searchField.setBorder(new LineBorder(Color.GRAY, 1, true));
 		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		searchField.setHorizontalAlignment(SwingConstants.CENTER);
-		searchField.setBounds(440, 190, 863, 40);
+		searchField.setBounds(440, 140, 803, 40);
 		add(searchField, 0);
 		
 		searchButton = new JButton("Consultar");
@@ -181,20 +213,67 @@ public class GenerateOrderPane extends JPanel {
 		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		searchButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		searchButton.setBackground(greenButton);
-		searchButton.setBounds(1243, 190, 109, 40);
+		searchButton.setBounds(1243, 140, 109, 40);
+		searchButton.setActionCommand("search");
+		searchButton.addActionListener(this);
 		add(searchButton, 0);
 		
-		stockLbl = new JLabel("Stock disponible: {variable}");
-		stockLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		stockLbl.setBounds(490, 250, 220, 33);
-		add(stockLbl, 0);
+		productsFindedField = new JComboBox<String>();
+		productsFindedField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		productsFindedField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		productsFindedField.setBounds(440, 140, 803, 40);
+		productsFindedField.addActionListener(this);
+		productsFindedField.setActionCommand("product");
+		add(productsFindedField, 0);
+		productsFindedField.setVisible(false);
 		
-		searchStockField = new JTextField();
-		searchStockField.setBorder(new LineBorder(Color.GRAY, 1, true));
-		searchStockField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		searchStockField.setHorizontalAlignment(SwingConstants.CENTER);
-		searchStockField.setBounds(800, 250, 200, 35);
-		add(searchStockField, 0);
+		orderedQuantityLbl = new JLabel("Cantidad pedida: ");
+		orderedQuantityLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		orderedQuantityLbl.setBounds(440, 210, 220, 33);
+		add(orderedQuantityLbl, 0);
+		
+		orderedQuantityField = new JTextField();
+		orderedQuantityField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		orderedQuantityField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		orderedQuantityField.setHorizontalAlignment(SwingConstants.CENTER);
+		orderedQuantityField.setBounds(600, 210, 160, 35);
+		add(orderedQuantityField, 0);
+		
+		receivedQuantityLbl = new JLabel("Cantidad recibida: ");
+		receivedQuantityLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		receivedQuantityLbl.setBounds(440, 260, 220, 33);
+		add(receivedQuantityLbl, 0);
+		
+		receivedQuantityField = new JTextField();
+		receivedQuantityField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		receivedQuantityField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		receivedQuantityField.setHorizontalAlignment(SwingConstants.CENTER);
+		receivedQuantityField.setBounds(600, 260, 160, 35);
+		add(receivedQuantityField, 0);
+		
+		unitValueLbl = new JLabel("Precio compra: ");
+		unitValueLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		unitValueLbl.setBounds(780, 210, 220, 33);
+		add(unitValueLbl, 0);
+		
+		unitValueField = new JTextField();
+		unitValueField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		unitValueField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		unitValueField.setHorizontalAlignment(SwingConstants.CENTER);
+		unitValueField.setBounds(940, 210, 160, 35);
+		add(unitValueField, 0);
+		
+		saleValueLbl = new JLabel("Precio venta: ");
+		saleValueLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		saleValueLbl.setBounds(780, 260, 220, 33);
+		add(saleValueLbl, 0);
+		
+		saleValueField = new JTextField();
+		saleValueField.setBorder(new LineBorder(Color.GRAY, 1, true));
+		saleValueField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		saleValueField.setHorizontalAlignment(SwingConstants.CENTER);
+		saleValueField.setBounds(940, 260, 160, 35);
+		add(saleValueField, 0);
 		
 		addButton = new JButton("Agregar");
 		addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -202,11 +281,23 @@ public class GenerateOrderPane extends JPanel {
 		addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		addButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		addButton.setBackground(greenButton);
-		addButton.setBounds(1163, 250, 129, 35);
+		addButton.setBounds(1163, 240, 129, 35);
+		addButton.addActionListener(this);
+		addButton.setActionCommand("add");
 		add(addButton, 0);
 		
+		deleteButton = new JButton();
+		deleteButton.setBackground(lightGray);
+		deleteButton.setBorder(null);
+		image = new ImageIcon(deleteRoot);
+		icon = new ImageIcon(
+				image.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+			);
+		deleteButton.setIcon(icon);
+		deleteButton.setName("delete");
+		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(360, 310, 1072, 180);
+		scrollPane.setBounds(360, 330, 1072, 180);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
 		add(scrollPane, 0);
 		
@@ -219,21 +310,11 @@ public class GenerateOrderPane extends JPanel {
 		table.setBackground(lightGray);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		table.setRowHeight(25);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null}
-			},
-			new String[] {
-				"Producto", "Cantidad pedida", "Cantidad recibida", "Valor unitario", "Valor total", "Ganacia %", "Eliminar"
-			}
-		));
-		table.getColumnModel().getColumn(6).setCellRenderer(new ImageCellRenderer(deleteRoot));
-		table.getColumnModel().getColumn(6).setMaxWidth(80);
-		scrollPane.setViewportView(table);
+		table.addMouseListener(this);
 		
 		totalValueLbl = new JLabel("Valor total: ${variable}");
 		totalValueLbl.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		totalValueLbl.setBounds(1240, 500, 200, 33);
+		totalValueLbl.setBounds(1240, 515, 200, 33);
 		add(totalValueLbl, 0);
 		
 		cancelButton = new JButton("Cancelar");
@@ -242,7 +323,9 @@ public class GenerateOrderPane extends JPanel {
 		cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		cancelButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		cancelButton.setBackground(redButton);
-		cancelButton.setBounds(450, 530, 129, 40);
+		cancelButton.setBounds(450, 550, 129, 40);
+		cancelButton.addActionListener(this);
+		cancelButton.setActionCommand("cancel");
 		add(cancelButton, 0);
 		
 		generateButton = new JButton("Generar");
@@ -251,7 +334,9 @@ public class GenerateOrderPane extends JPanel {
 		generateButton.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		generateButton.setBorder(new LineBorder(Color.GRAY, 1, true));
 		generateButton.setBackground(greenButton);
-		generateButton.setBounds(1200, 530, 129, 40);
+		generateButton.setBounds(1200, 550, 129, 40);
+		generateButton.addActionListener(this);
+		generateButton.setActionCommand("generate");
 		add(generateButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -265,6 +350,128 @@ public class GenerateOrderPane extends JPanel {
 		add(footerLbl, 0);
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(searchButton.getActionCommand())){
+			if(searchButton.getText().equals("Consultar")) {
+				updateFindedProducts();
+			}else {
+				productsFindedField.setVisible(false);
+				searchButton.setText("Consultar");
+				searchField.setText("");
+				searchField.setVisible(true);
+			}
+		}
+		if(e.getActionCommand().equals(productsFindedField.getActionCommand())) {
+			productSelected = new Product();
+			productSelected.setName(String.valueOf(productsFindedField.getSelectedItem()));
+			for(int i = 0; i < products.size(); i++) {
+				if(products.get(i).getName().equals(productSelected.getName())) {
+					productSelected = products.get(i);
+					i = products.size();
+				}
+			}
+		}
+		if(e.getActionCommand().equals(addButton.getActionCommand())) {
+			int orderedQuantitySelected = Integer.parseInt(orderedQuantityField.getText());
+			int receivedQuantitySelected = Integer.parseInt(receivedQuantityField.getText());
+			int unitValue = Integer.parseInt(unitValueField.getText());
+			int saleValue = Integer.parseInt(saleValueField.getText());
+			detailOrder = new DetailOrder();
+			detailOrder.setProduct(productSelected);
+			detailOrder.setOrderedQuantity(orderedQuantitySelected);
+			detailOrder.setReceivedQuantity(receivedQuantitySelected);
+			detailOrder.setUnitValue(unitValue);
+			detailOrder.setTotalValue(unitValue * receivedQuantitySelected);
+			detailOrder.setSaleValue(saleValue);
+			detailOrder.setPercentageProfit(((detailOrder.getSaleValue() - detailOrder.getUnitValue()) / detailOrder.getUnitValue()) * 100);
+			detailOrder.setOrder(order);
+			detailsOrder.add(detailOrder);
+			setDetailsOrder(detailsOrder);
+			
+			totalValue += detailOrder.getTotalValue();
+
+			for(int i = 0; i < products.size(); i++) {
+				if(productSelected.getId() == products.get(i).getId()) {
+					products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() + receivedQuantitySelected);
+					products.get(i).setSaleValue(saleValue);
+					i = products.size();
+				}
+			}
+			orderedQuantityField.setText("");
+			receivedQuantityField.setText("");
+			unitValueField.setText("");
+			saleValueField.setText("");
+			
+			totalValueLbl.setText("Valor total: $" + totalValue);
+			
+			productsFindedField.setVisible(false);
+			searchButton.setText("Consultar");
+			searchField.setText("");
+			searchField.setVisible(true);
+		}
+		if(e.getActionCommand().equals(cancelButton.getActionCommand())) {
+			event.deleteOrderById(order.getId());
+			event.goToOrderFromGenerateOrder();
+		}
+		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
+			event.generateDetailOrder(detailsOrder);
+		}
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		column = table.getColumnModel().getColumnIndexAtX(e.getX());
+		row = e.getY()/table.getRowHeight();
+		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
+			Object obj = table.getValueAt(row, column);
+			if(obj instanceof JButton) {
+				((JButton) obj).doClick();
+				JButton botones = (JButton) obj;
+				if(botones.getName().equals("delete")) {
+					idSelected = Integer.parseInt(String.valueOf(table.getModel().getValueAt(row, 0)));
+					for(int i = 0; i < detailsOrder.size(); i++) {
+						if(detailsOrder.get(i).getProduct().getId() == idSelected) {
+							for(int j = 0; j < products.size(); j++) {
+								if(products.get(j).getId() == idSelected) {
+									products.get(j).setQuantityAvailable(products.get(j).getQuantityAvailable() - detailsOrder.get(i).getReceivedQuantity());
+									orderedQuantityField.setText("");
+									receivedQuantityField.setText("");
+									unitValueField.setText("");
+									saleValueField.setText("");
+
+									totalValue -= detailsOrder.get(i).getTotalValue();
+									totalValueLbl.setText("Valor total: $" + totalValue);
+									
+									productsFindedField.setVisible(false);
+									searchButton.setText("Consultar");
+									searchField.setText("");
+									searchField.setVisible(true);
+									j = products.size();
+								}
+							}
+							detailsOrder.remove(i);
+							setDetailsOrder(detailsOrder);
+							i = detailsOrder.size();
+						}
+					}
+				}
+			}
+		}	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
 	
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
@@ -283,5 +490,87 @@ public class GenerateOrderPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
+		
+		orderCodeLbl.setText("Codigo pedido: " + order.getId());
+		orderDateLbl.setText("Fecha: " + order.getDate());
+		totalValueLbl.setText("Valor compra: $" + order.getTotalValue());
+		supplierLbl.setText("Proveedor: " + order.getSupplier().getSupplierName());
+	}
+
+	public List<DetailOrder> getDetailsOrder() {
+		return detailsOrder;
+	}
+	
+	public void setDetailsOrder(List<DetailOrder> detailsOrder) {
+		this.detailsOrder = detailsOrder;
+		
+		table.setDefaultRenderer(Object.class, new RenderTable());
+		
+		DefaultTableModel model = new DefaultTableModel(){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		
+		model.setColumnIdentifiers(new String[] { "Id", "Producto", "Cantidad pedida", "Cantidad recibida", "Valor unitario", "Valor total", "Valor venta", "Ganacia %", "Eliminar" });
+
+		for(int i = 0; i < detailsOrder.size(); i++) {
+			Object struct[] = { detailsOrder.get(i).getProduct().getId(), detailsOrder.get(i).getProduct().getName(), detailsOrder.get(i).getOrderedQuantity(), detailsOrder.get(i).getReceivedQuantity(), detailsOrder.get(i).getUnitValue(), detailsOrder.get(i).getTotalValue(), detailsOrder.get(i).getSaleValue(), detailsOrder.get(i).getPercentageProfit()+"%", deleteButton };
+			model.addRow(struct);
+		};
+
+		table.setModel(model);
+
+		scrollPane.setViewportView(table);
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	private void updateFindedProducts() {
+		List<Product> findedProducts = new LinkedList<>();
+		String searchName = searchField.getText();
+		for(int i = 0; i < products.size(); i++) {
+			if(products.get(i).getName().toUpperCase().contains(searchName.toUpperCase())) {
+				findedProducts.add(products.get(i));
+			}
+		}
+		
+		String[] productsObj = new String[findedProducts.size()];
+		for(int i = 0; i < findedProducts.size(); i++) {
+			productsObj[i] = findedProducts.get(i).getName();
+		}
+		DefaultComboBoxModel<String> sectionsComboBox = new DefaultComboBoxModel<String>(productsObj);
+		productsFindedField.setModel(sectionsComboBox);
+		
+		searchField.setVisible(false);
+		
+		searchButton.setText("Volver");
+		
+		productsFindedField.setVisible(true);
+		
+		productSelected = new Product();
+		productSelected.setName(String.valueOf(productsFindedField.getSelectedItem()));
+		for(int i = 0; i < findedProducts.size(); i++) {
+			if(findedProducts.get(i).getName().equals(productSelected.getName())) {
+				productSelected = findedProducts.get(i);
+				i = products.size();
+			}
+		}
 	}
 }

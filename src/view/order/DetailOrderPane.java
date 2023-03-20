@@ -5,6 +5,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -14,14 +18,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
+import model.DetailOrder;
+import model.Order;
+import view.table.RenderTable;
 
-public class DetailOrderPane extends JPanel {
+public class DetailOrderPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -38,7 +44,6 @@ public class DetailOrderPane extends JPanel {
 	private JButton supplierButton;
 	private JButton billButton;
 	private JButton orderButton;
-	private JButton searchButton;
 	private JButton returnButton;
 	
 	private JScrollPane scrollPane;
@@ -53,8 +58,11 @@ public class DetailOrderPane extends JPanel {
 	private Color blueContainer = new Color(15, 51, 66);
 	private Color lightGray = new Color(218, 218, 218);
 	
+	private List<DetailOrder> detailsOrder = new LinkedList<>();
+	
+	private Order order;
+	
 	private CustomEvent event;
-	private JTextField searchField;
 		
 	/**
 	 * Create the panel.
@@ -104,8 +112,8 @@ public class DetailOrderPane extends JPanel {
 		billButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		billButton.setForeground(Color.WHITE);
 		billButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		billButton.setBorder(new LineBorder(blueContainer, 1, true));
-		billButton.setBackground(blueContainer);
+		billButton.setBorder(new LineBorder(greenButton, 1, true));
+		billButton.setBackground(greenButton);
 		billButton.setBounds(29, 440, 234, 49);
 		add(billButton, 0);
 		
@@ -113,12 +121,12 @@ public class DetailOrderPane extends JPanel {
 		orderButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		orderButton.setForeground(Color.WHITE);
 		orderButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		orderButton.setBorder(new LineBorder(greenButton, 1, true));
-		orderButton.setBackground(greenButton);
+		orderButton.setBorder(new LineBorder(blueContainer, 1, true));
+		orderButton.setBackground(blueContainer);
 		orderButton.setBounds(29, 520, 234, 49);
 		add(orderButton, 0);
 		
-		containerLbl = new JLabel("<html><body><center>Detalle pedido<br>Fecha pedido</center></body></html>");
+		containerLbl = new JLabel();
 		containerLbl.setBackground(blueContainer);
 		containerLbl.setOpaque(true);
 		containerLbl.setForeground(Color.WHITE);
@@ -129,24 +137,8 @@ public class DetailOrderPane extends JPanel {
 		containerLbl.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		add(containerLbl, 0);
 		
-		searchField = new JTextField();
-		searchField.setBorder(new LineBorder(Color.WHITE, 1, true));
-		searchField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		searchField.setHorizontalAlignment(SwingConstants.CENTER);
-		searchField.setBounds(360, 170, 903, 40);
-		add(searchField, 0);
-		
-		searchButton = new JButton("Consultar");
-		searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		searchButton.setForeground(Color.WHITE);
-		searchButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		searchButton.setBorder(new LineBorder(greenButton, 1, true));
-		searchButton.setBackground(greenButton);
-		searchButton.setBounds(1263, 170, 169, 40);
-		add(searchButton, 0);
-		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(360, 230, 1072, 350);
+		scrollPane.setBounds(360, 180, 1072, 400);
 		scrollPane.setBorder(BorderFactory.createLineBorder(blueContainer));
 		add(scrollPane, 0);
 		
@@ -159,14 +151,6 @@ public class DetailOrderPane extends JPanel {
 		table.setBackground(lightGray);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		table.setRowHeight(25);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Pedido", "Producto", "Empaque", "Cantidad empaque", "Cantidad pedida", "Cantidad recibida", "Valor unitario", "Valor total", "Porcentaje de beneficio"
-			}
-		));
-		scrollPane.setViewportView(table);
 				
 		returnButton = new JButton("Volver");
 		returnButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -175,6 +159,8 @@ public class DetailOrderPane extends JPanel {
 		returnButton.setBorder(new LineBorder(greenButton, 1, true));
 		returnButton.setBackground(greenButton);
 		returnButton.setBounds(800, 600, 169, 40);
+		returnButton.setActionCommand("return");
+		returnButton.addActionListener(this);
 		add(returnButton, 0);
 		
 		footerLbl = new JLabel("<html><body><center>Creado por: <br>Jonatan Fernando Franco Cardenas<br>William Fernando Roa Vargas</center></body></html>");
@@ -187,6 +173,29 @@ public class DetailOrderPane extends JPanel {
 		footerLbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(footerLbl, 0);
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
+			event.goToSectionFromDetailOrder();
+		}
+		if(e.getActionCommand().equals(productButton.getActionCommand())) {
+			event.goToProductFromDetailOrder();
+		}
+		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
+			event.goToSupplierFromDetailOrder();
+		}
+		if(e.getActionCommand().equals(billButton.getActionCommand())) {
+			event.goToBillFromDetailOrder();
+		}
+		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
+			event.goToOrderFromDetailOrder();
+		}
+		
+		if(e.getActionCommand().equals(returnButton.getActionCommand())) {
+			event.goToOrderFromDetailOrder();
+		}
 	}
 	
 	private void setImageLabel(JLabel label, String root) {
@@ -206,5 +215,45 @@ public class DetailOrderPane extends JPanel {
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
+	}
+
+	public List<DetailOrder> getDetailsOrder() {
+		return detailsOrder;
+	}
+
+	public void setDetailsOrder(List<DetailOrder> detailsOrder) {
+		this.detailsOrder = detailsOrder;
+		
+		table.setDefaultRenderer(Object.class, new RenderTable());
+		
+		DefaultTableModel model = new DefaultTableModel(){
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		
+		model.setColumnIdentifiers(new String[] { "Pedido", "Producto", "Empaque", "Cantidad empaque", "Cantidad pedida", "Cantidad recibida", "Valor unitario", "Valor total", "Porcentaje de beneficio" });
+
+		for(int i = 0; i < detailsOrder.size(); i++) {
+			Object struct[] = { detailsOrder.get(i).getOrder().getId(), detailsOrder.get(i).getProduct().getName(), detailsOrder.get(i).getProduct().getPackaging(), detailsOrder.get(i).getProduct().getQuantityPackaging(), detailsOrder.get(i).getOrderedQuantity(), detailsOrder.get(i).getReceivedQuantity(), detailsOrder.get(i).getUnitValue(), detailsOrder.get(i).getTotalValue(), detailsOrder.get(i).getPercentageProfit()+"%" };
+			model.addRow(struct);
+		};
+
+		table.setModel(model);
+
+		scrollPane.setViewportView(table);
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+		
+		containerLbl.setText("<html><body><center>Detalle pedido<br>" + order.getDate() + "</center></body></html>");
 	}
 }

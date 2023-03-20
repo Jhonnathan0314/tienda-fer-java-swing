@@ -44,6 +44,7 @@ public class DetailOrderDAO implements DetailOrderRepository {
 					detailOrder.setReceivedQuantity(resultSet.getInt("received_quantity"));
 					detailOrder.setUnitValue(resultSet.getFloat("unit_value"));
 					detailOrder.setTotalValue(resultSet.getFloat("total_value"));
+					detailOrder.setSaleValue(resultSet.getFloat("sale_value"));
 					detailOrder.setPercentageProfit(resultSet.getFloat("percentage_profit"));
 					productId = resultSet.getInt("product");
 					detailOrder.setProduct(productDAO.findById(productId));
@@ -61,15 +62,16 @@ public class DetailOrderDAO implements DetailOrderRepository {
 
 	@Override
 	public DetailOrder insert(DetailOrder detailOrder) {
-		String sql = "INSERT INTO detail_order (ordered_quantity, received_quantity, unit_value, total_value, percentage_profit, product, order_bill) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO detail_order (ordered_quantity, received_quantity, unit_value, total_value, sale_value, percentage_profit, product, order_bill) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, detailOrder.getOrderedQuantity());
 			statement.setInt(2, detailOrder.getReceivedQuantity());
 			statement.setFloat(3, detailOrder.getUnitValue());
 			statement.setFloat(4, detailOrder.getTotalValue());
-			statement.setFloat(5, detailOrder.getPercentageProfit());
-			statement.setInt(6, detailOrder.getProduct().getId());
-			statement.setInt(7, detailOrder.getOrder().getId());
+			statement.setFloat(5, detailOrder.getSaleValue());
+			statement.setFloat(6, detailOrder.getPercentageProfit());
+			statement.setInt(7, detailOrder.getProduct().getId());
+			statement.setInt(8, detailOrder.getOrder().getId());
 			statement.executeUpdate();
 			return detailOrder;
 		} catch (SQLException e) {
