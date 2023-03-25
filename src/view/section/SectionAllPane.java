@@ -237,12 +237,6 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromSection();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromSection();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromSection();
-		}
 		
 		if(e.getActionCommand().equals(searchButton.getActionCommand())) {
 			String searchName = searchField.getText();

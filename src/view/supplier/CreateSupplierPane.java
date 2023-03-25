@@ -232,12 +232,6 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromCreateSupplier();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromCreateSupplier();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromCreateSupplier();
-		}
 		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
 			String supplierId = supplierIdField.getText();

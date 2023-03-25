@@ -233,12 +233,6 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromProduct();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromProduct();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromProduct();
-		}
 		
 		if(e.getActionCommand().equals(searchButton.getActionCommand())) {
 			String searchName = searchField.getText();

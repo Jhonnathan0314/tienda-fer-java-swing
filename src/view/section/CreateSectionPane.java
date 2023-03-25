@@ -182,12 +182,6 @@ public class CreateSectionPane extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromCreateSection();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromCreateSection();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromCreateSection();
-		}
 		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
 			String name = nameField.getText();

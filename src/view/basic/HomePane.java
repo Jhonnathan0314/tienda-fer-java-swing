@@ -184,12 +184,6 @@ public class HomePane extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromHome();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromHome();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromHome();
-		}
 	}
 
 	private void setImageLabel(JLabel label, String root) {

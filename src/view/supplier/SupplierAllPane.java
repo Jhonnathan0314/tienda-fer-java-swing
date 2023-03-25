@@ -234,12 +234,6 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		if(e.getActionCommand().equals(productButton.getActionCommand())) {
 			event.goToProductFromSupplier();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromSupplier();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromSupplier();
-		}
 		
 		if(e.getActionCommand().equals(searchButton.getActionCommand())) {
 			String searchName = searchField.getText();

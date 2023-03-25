@@ -273,12 +273,6 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals(supplierButton.getActionCommand())) {
 			event.goToSupplierFromUpdateProduct();
 		}
-		if(e.getActionCommand().equals(billButton.getActionCommand())) {
-			event.goToBillFromUpdateProduct();
-		}
-		if(e.getActionCommand().equals(orderButton.getActionCommand())) {
-			event.goToOrderFromUpdateProduct();
-		}
 		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
 			String name = nameField.getText();
