@@ -30,34 +30,17 @@ public class CreateProductPane extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	//Variables declaration
+	private JLabel logo, background, footerLbl, containerLbl;
 	
-	//Declaracion de variables
-	private JLabel logo;
-	private JLabel background;
-	private JLabel footerLbl;
-	private JLabel containerLbl;
+	private JLabel nameLabel, quantityAvailableLabel, saleValueLabel, packagingLabel, quantityPackagingLabel, sectionLabel;
 	
-	private JLabel nameLabel;
-	private JLabel quantityAvailableLabel;
-	private JLabel saleValueLabel;
-	private JLabel packagingLabel;
-	private JLabel quantityPackagingLabel;
-	private JLabel sectionLabel;
-	
-	private JTextField nameField;
-	private JTextField quantityAvailableField;
-	private JTextField saleValueField;
-	private JTextField packagingField;
-	private JTextField quantityPackagingField;
+	private JTextField nameField, quantityAvailableField, saleValueField, packagingField, quantityPackagingField;
 	
 	private JComboBox<String> sectionField;
 
-	private JButton sectionButton;
-	private JButton productButton;
-	private JButton supplierButton;
-	private JButton billButton;
-	private JButton orderButton;
-	private JButton createButton;
+	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, createButton;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
@@ -259,7 +242,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		add(footerLbl, 0);
 		
 	}
-
+	
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -290,6 +276,11 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * 	Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -299,11 +290,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -313,6 +303,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		return sections;
 	}
 
+	/**
+	 * Method that put into the JComboBox sections received
+	 * @param sections -> Sections received
+	 */
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 		

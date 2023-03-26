@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  *
  */
 public class Product {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private String name;
 	private int quantityAvailable;
@@ -20,7 +20,8 @@ public class Product {
 	private Timestamp updateDate;
 	private Section section;
 	
-	//Metodos constructores
+	
+	//Construct method than receives a product attributes
 	public Product(int id, String name, int quantityAvailable, float saleValue, String packaging, String quantityPackaging, Timestamp updateDate, Section section) {
 		super();
 		this.id = id;
@@ -33,9 +34,11 @@ public class Product {
 		this.section = section;
 	}
 	
+	//Empty construct method
 	public Product() { }
 
-	//Metodos get y set
+	
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

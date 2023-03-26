@@ -10,22 +10,25 @@ import java.sql.Timestamp;
  *
  */
 public class Section {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private String name;
 	private Timestamp updateDate;
+
 	
-	//Metodos constructores
+	//Construct method than receives a section attributes
 	public Section(int id, String name, Timestamp updateDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.updateDate = updateDate;
 	}
-	
+
+	//Empty construct method
 	public Section() { }
 
-	//Metodos get y set
+	
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

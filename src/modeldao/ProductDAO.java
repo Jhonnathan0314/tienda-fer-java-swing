@@ -21,14 +21,21 @@ import repositories.ProductRepository;
  *
  */
 public class ProductDAO implements ProductRepository {
-	//Declaracion de variables
+	//Variables declaration
 	private Connection connection = null;
 	private SectionDAO sectionDAO;
 	
+	
+	//Construct method that receive a database connection
 	public ProductDAO(Connection connection) {
 		this.connection = connection;
 	}
 	
+	
+	/**
+	 * Method that find all products
+	 * @return products finded
+	 */
 	@Override
 	public List<Product> findAll() {
 		List<Product> products = new ArrayList<>();
@@ -60,6 +67,11 @@ public class ProductDAO implements ProductRepository {
 	    return products;
 	}
 
+	/**
+	 * Method that find product by id
+	 * @param id -> id to search
+	 * @return product finded by id
+	 */
 	@Override
 	public Product findById(int id) {
 		String query = "SELECT * FROM product WHERE id = ?";
@@ -87,6 +99,11 @@ public class ProductDAO implements ProductRepository {
 		return null;
 	}
 
+	/**
+	 * Method that find product by name
+	 * @param searchName -> product name string to search in database
+	 * @return products finded by name
+	 */
 	@Override
 	public List<Product> findByName(String name) {
 		List<Product> products = new ArrayList<>();
@@ -119,6 +136,11 @@ public class ProductDAO implements ProductRepository {
 		return products;
 	}
 
+	/**
+	 * Method that find product by section id
+	 * @param idSection -> section id to search
+	 * @return product finded by section id
+	 */
 	@Override
 	public List<Product> findBySection(int idSection) {
 		List<Product> products = new ArrayList<>();
@@ -149,7 +171,11 @@ public class ProductDAO implements ProductRepository {
 		}
 		return products;
 	}
-	
+
+	/**
+	 * Method that find scarced products
+	 * @return products finded
+	 */
 	@Override
 	public List<Product> findScarceProducts() {
 		List<Product> products = new ArrayList<>();
@@ -181,6 +207,11 @@ public class ProductDAO implements ProductRepository {
 		return products;
 	}
 
+	/**
+	 * Method that create a product
+	 * @param product -> product object to will be created
+	 * @return product received or null if creation fails
+	 */
 	@Override
 	public Product create(Product product) {
 		String query = "INSERT INTO product (name, quantity_available, sale_value, packaging, quantity_packaging, section) VALUES (?, ?, ?, ?, ?, ?)";
@@ -200,6 +231,12 @@ public class ProductDAO implements ProductRepository {
 		}
 	}
 
+	/**
+	 * Method that update a product
+	 * @param id -> id of the product to update
+	 * @param product -> product object to will be updated
+	 * @return product received or null if update fails
+	 */
 	@Override
 	public Product update(int id, Product product) {
 		String query = "UPDATE product SET name = ?, quantity_available = ?, sale_value = ?, packaging = ?, quantity_packaging = ?, section = ? WHERE id = ?";
@@ -221,6 +258,11 @@ public class ProductDAO implements ProductRepository {
 		}
 	}
 
+	/**
+	 * Method that delete a product by id
+	 * @param id -> id of the product to delete
+	 * @return true if delete was successful
+	 */
 	@Override
 	public boolean deleteById(int id) {
 		String query = "DELETE FROM product WHERE id = ?";
@@ -235,7 +277,7 @@ public class ProductDAO implements ProductRepository {
         }
 	}
 
-	//Metodos get y set
+	//Get and set methods
 	public SectionDAO getSectionDAO() {
 		return sectionDAO;
 	}

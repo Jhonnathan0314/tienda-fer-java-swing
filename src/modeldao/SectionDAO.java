@@ -20,13 +20,19 @@ import repositories.SectionRepository;
  *
  */
 public class SectionDAO implements SectionRepository {
-	//Declaracion de variables
+	//Variables declaration
 	private Connection connection = null;
+
 	
+	//Construct method that receive a database connection
 	public SectionDAO(Connection connection) {
 		this.connection = connection;
 	}
-	
+
+	/**
+	 * Method that find all sections
+	 * @return sections finded
+	 */
 	@Override
 	public List<Section> findAll() {
 		List<Section> sections = new ArrayList<>();
@@ -49,7 +55,12 @@ public class SectionDAO implements SectionRepository {
 		}
         return sections;
 	}
-	
+
+	/**
+	 * Method that find section by name
+	 * @param searchName -> section name string to search in database
+	 * @return sections finded by name
+	 */
 	@Override
 	public List<Section> findByName(String searchName) {
 		List<Section> sections = new ArrayList<>();
@@ -74,6 +85,11 @@ public class SectionDAO implements SectionRepository {
 		return sections;
 	}
 
+	/**
+	 * Method that find section by id
+	 * @param id -> id to search
+	 * @return section finded by id
+	 */
 	@Override
 	public Section findById(int id) {
 		String query = "SELECT * FROM section WHERE id = ?";
@@ -95,6 +111,11 @@ public class SectionDAO implements SectionRepository {
 		return null;
 	}
 
+	/**
+	 * Method that create a section
+	 * @param section -> section object to will be created
+	 * @return section received or null if creation fails
+	 */
 	@Override
 	public Section create(Section section) {
 		String query = "INSERT INTO section (name) VALUES (?)";
@@ -109,6 +130,12 @@ public class SectionDAO implements SectionRepository {
         }
 	}
 
+	/**
+	 * Method that update a section
+	 * @param id -> id of the section to update
+	 * @param section -> section object to will be updated
+	 * @return section received or null if update fails
+	 */
 	@Override
 	public Section update(int id, Section section) {
 		String query = "UPDATE section SET name = ? WHERE id = ?";
@@ -125,6 +152,11 @@ public class SectionDAO implements SectionRepository {
         }
 	}
 
+	/**
+	 * Method that delete a section by id
+	 * @param id -> id of the section to delete
+	 * @return true if delete was successful
+	 */
 	@Override
 	public boolean deleteById(int id) {
 		String query = "DELETE FROM section WHERE id = ?";

@@ -24,29 +24,15 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
-	private JLabel logo;
-	private JLabel background;
-	private JLabel footerLbl;
-	private JLabel containerLbl;
 
-	private JLabel supplierIdLabel;
-	private JLabel supplierNameLabel;
-	private JLabel sellerNameLabel;
-	private JLabel phoneLabel;
+	//Variables declaration
+	private JLabel logo, background, footerLbl, containerLbl;
 
-	private JTextField supplierIdField;
-	private JTextField supplierNameField;
-	private JTextField sellerNameField;
-	private JTextField phoneField;
+	private JLabel supplierIdLabel, supplierNameLabel, sellerNameLabel, phoneLabel;
 
-	private JButton sectionButton;
-	private JButton productButton;
-	private JButton supplierButton;
-	private JButton billButton;
-	private JButton orderButton;
-	private JButton createButton;
+	private JTextField supplierIdField, supplierNameField, sellerNameField, phoneField;
+
+	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, createButton;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
@@ -221,6 +207,9 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -241,7 +230,12 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 			event.createSupplier(supplierId, supplierName, sellerName, phone);
 		}
 	}
-	
+
+	/**
+	 * 	Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(

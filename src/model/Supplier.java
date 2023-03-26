@@ -10,14 +10,15 @@ import java.sql.Timestamp;
  *
  */
 public class Supplier {
-	//Declaracion de variables
+	//Variables declaration
 	private String id;
 	private String supplierName;
 	private String sellerName;
 	private String phone;
 	private Timestamp updateDate;
 	
-	//Metodos constructores
+
+	//Construct method than receives a supplier attributes
 	public Supplier(String id, String supplierName, String sellerName, String phone, Timestamp updateDate) {
 		super();
 		this.id = id;
@@ -26,10 +27,12 @@ public class Supplier {
 		this.phone = phone;
 		this.updateDate = updateDate;
 	}
-	
+
+	//Empty construct method
 	public Supplier() { }
 
-	//Metodos get y set
+
+	//Get and set methods
 	public String getId() {
 		return id;
 	}

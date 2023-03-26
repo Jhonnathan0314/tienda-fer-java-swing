@@ -36,8 +36,8 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
+
+	//Variables declaration
 	private JLabel logo, background, footerLbl, containerLbl;
 	
 	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, searchButton, createButton, updateButton, deleteButton;
@@ -228,7 +228,10 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 		add(footerLbl, 0);
 		
 	}
-	
+
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(productButton.getActionCommand())) {
@@ -246,10 +249,12 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 			event.goToCreateSection();
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		event.goToHomeFromSection();
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		row = e.getY()/table.getRowHeight();
 		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
@@ -281,6 +286,11 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 	@Override
 	public void mouseExited(MouseEvent e) { }
 	
+	/**
+	 * 	Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -290,7 +300,7 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
@@ -304,6 +314,10 @@ public class SectionAllPane extends JPanel implements ActionListener, MouseListe
 		return sections;
 	}
 
+	/**
+	 * Method that put into the table sections received
+	 * @param sections -> Sections received
+	 */
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 				

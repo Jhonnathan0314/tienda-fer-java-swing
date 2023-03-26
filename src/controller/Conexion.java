@@ -12,9 +12,12 @@ import java.sql.SQLException;
  *
  */
 public class Conexion {
-	//Declaracion de variables
+	//Variables declaration
 	private Connection connect = null;
 	
+	/**
+	 * @return MySQL database connection
+	 */
 	public Connection getConexion() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

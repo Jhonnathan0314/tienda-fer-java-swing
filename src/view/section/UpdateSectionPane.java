@@ -26,21 +26,12 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//Declaracion de variables
-	private JLabel logo;
-	private JLabel background;
-	private JLabel footerLbl;
-	private JLabel containerLbl;
-	private JLabel nameLabel;
+	//Variables declaration
+	private JLabel logo, background, footerLbl, containerLbl, nameLabel;
 
 	private JTextField nameField;
 
-	private JButton sectionButton;
-	private JButton productButton;
-	private JButton supplierButton;
-	private JButton billButton;
-	private JButton orderButton;
-	private JButton createButton;
+	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, createButton;
 
 	private String logoRoot = "src/img/logoTienda.png";
 	private String backgroundRoot = "src/img/fondoPrincipal.png";
@@ -173,7 +164,10 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		add(footerLbl, 0);
 
 	}
-
+	
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -192,7 +186,12 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 			event.updateSection(section);
 		}
 	}
-
+	
+	/**
+	 * 	Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -202,7 +201,7 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
@@ -216,6 +215,10 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		return section;
 	}
 
+	/**
+	 * Method that put into the fields section selected
+	 * @param section -> Section selected
+	 */
 	public void setSection(Section section) {
 		this.section = section;
 		nameField.setText(section.getName());
