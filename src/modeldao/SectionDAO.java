@@ -17,7 +17,9 @@ import repositories.SectionRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF1
+ * @version V1 -> 24-03-2023
  */
 public class SectionDAO implements SectionRepository {
 	//Variables declaration

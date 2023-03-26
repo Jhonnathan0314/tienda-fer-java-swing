@@ -20,6 +20,12 @@ import javax.swing.border.LineBorder;
 import controller.CustomEvent;
 import model.Supplier;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> @ 24-03-2023
+ */
 public class UpdateSupplierPane extends JPanel implements ActionListener {
 	/**
 	 * 

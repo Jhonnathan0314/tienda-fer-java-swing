@@ -7,7 +7,9 @@ import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> @ 24-03-2023
  */
 public class Supplier {
 	//Variables declaration

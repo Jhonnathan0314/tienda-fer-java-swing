@@ -19,6 +19,12 @@ import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF1
+ * @version V1 -> 24-03-2023
+ */
 public class CreateSectionPane extends JPanel implements ActionListener {
 	/**
 	 * 

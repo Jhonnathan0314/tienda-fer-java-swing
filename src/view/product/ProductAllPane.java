@@ -29,6 +29,12 @@ import controller.CustomEvent;
 import model.Product;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
+ */
 public class ProductAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 

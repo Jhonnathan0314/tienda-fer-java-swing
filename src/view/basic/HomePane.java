@@ -28,6 +28,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF6 - RF2
+ * @version V2 -> 24-03-2023
+ */
 public class HomePane extends JPanel implements ActionListener {
 	/**
 	 * 

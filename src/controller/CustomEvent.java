@@ -9,7 +9,9 @@ import model.Supplier;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote CUSTOMEVENT INTERFACE
+ * @version V2 -> 24-03-2023
  */
 public interface CustomEvent {
 	

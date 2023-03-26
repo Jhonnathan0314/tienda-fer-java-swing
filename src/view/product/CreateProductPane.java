@@ -25,6 +25,12 @@ import model.Section;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
+ */
 public class CreateProductPane extends JPanel implements ActionListener {
 	/**
 	 * 

@@ -9,7 +9,9 @@ import java.sql.SQLException;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote CREACION BASE DE DATOS
+ * @version V1 -> 06-03-2023
  */
 public class Conexion {
 	//Variables declaration

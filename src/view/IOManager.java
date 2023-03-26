@@ -21,6 +21,12 @@ import view.supplier.CreateSupplierPane;
 import view.supplier.SupplierAllPane;
 import view.supplier.UpdateSupplierPane;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote JFRAME PRINCIPAL
+ * @version V2 -> 24-03-2023
+ */
 public class IOManager extends JFrame implements CustomEventAnswer {
 	
 	/**

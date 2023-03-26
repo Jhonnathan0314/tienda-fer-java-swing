@@ -14,7 +14,9 @@ import repositories.UserSecurityRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF6
+ * @version V1 -> 13-03-2023
  */
 public class UserSecurityDAO implements UserSecurityRepository{
 	//Variables declaration

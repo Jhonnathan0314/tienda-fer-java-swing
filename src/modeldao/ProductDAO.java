@@ -18,7 +18,9 @@ import repositories.ProductRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
  */
 public class ProductDAO implements ProductRepository {
 	//Variables declaration

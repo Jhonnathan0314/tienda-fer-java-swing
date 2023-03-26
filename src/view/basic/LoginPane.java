@@ -21,6 +21,12 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF6
+ * @version V1 -> 13-03-2023
+ */
 public class LoginPane extends JPanel implements ActionListener {
 	/**
 	 * 

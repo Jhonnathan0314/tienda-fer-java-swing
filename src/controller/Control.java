@@ -17,7 +17,9 @@ import view.IOManager;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote CONTROLADOR
+ * @version V2 -> 24-03-2023
  */
 public class Control implements CustomEvent {
 	//Variables declaration
