@@ -17,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.CustomEvent;
 import model.Order;
+import model.Supplier;
 import view.table.RenderTable;
 
 public class OrderAllPane extends JPanel implements ActionListener, MouseListener {
@@ -71,6 +73,7 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 	private Color lightGray = new Color(218, 218, 218);
 	
 	private List<Order> orders = new LinkedList<>();
+	private List<Supplier> suppliers = new LinkedList<>();
 	
 	private int column, row, idSelected;
 	
@@ -252,10 +255,41 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		}
 		
 		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
-			event.goGenerateOrder();
+			String idSupplier = selectSupplier();
+			event.goGenerateOrder(idSupplier);
 		}
 	}
 	
+	private String selectSupplier() {
+		String[] sectionsIds = new String[suppliers.size()];
+		String[] sectionsNames = new String[suppliers.size()];
+		for(int i = 0; i < suppliers.size(); i++) {
+			sectionsIds[i] = suppliers.get(i).getId();
+			sectionsNames[i] = suppliers.get(i).getSupplierName();
+		}
+
+        // Muestra un JOptionPane con un JComboBox para seleccionar una opción
+        String optionSelected = (String) JOptionPane.showInputDialog(
+                null,
+                "Selecciona una opción:",
+                "Selección de opción",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                sectionsNames,
+                sectionsNames[0]);
+
+        // Verifica si se seleccionó una opción y muestra un mensaje con la opción seleccionada
+        int posOptionSelected = 0;
+        if (optionSelected != null) {
+        	for(int i = 0; i < sectionsNames.length; i++) {
+        		if(sectionsNames[i].equals(optionSelected)) {
+        			posOptionSelected = i;
+        		}
+        	}
+        }
+		return sectionsIds[posOptionSelected];
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 //		event.goToHomeFromOrder();
@@ -338,5 +372,13 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		table.setModel(model);
 
 		scrollPane.setViewportView(table);
+	}
+
+	public List<Supplier> getSuppliers() {
+		return suppliers;
+	}
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
 	}
 }

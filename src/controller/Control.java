@@ -234,31 +234,36 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromHome() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromHome(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromHome(orders, suppliers);
 	}
 	
 	@Override
 	public void goToOrderFromSection() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromSection(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromSection(orders, suppliers);
 	}
 
 	@Override
 	public void goToOrderFromProduct() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromProduct(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromProduct(orders, suppliers);
 	}
 
 	@Override
 	public void goToOrderFromSupplier() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromSupplier(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromSupplier(orders, suppliers);
 	}
 
 	@Override
 	public void goToOrderFromBill() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromBill(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromBill(orders, suppliers);
 	}
 
 	@Override
@@ -326,7 +331,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromCreateSection() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromCreateSection(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromCreateSection(orders, suppliers);
 	}
 
 	@Override
@@ -356,7 +362,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromUpdateSection() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromUpdateSection(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromUpdateSection(orders, suppliers);
 	}
 
 	@Override
@@ -386,7 +393,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromCreateProduct() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromCreateProduct(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromCreateProduct(orders, suppliers);
 	}
 
 	@Override
@@ -416,7 +424,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromUpdateProduct() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromUpdateProduct(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromUpdateProduct(orders, suppliers);
 	}
 
 	@Override
@@ -446,7 +455,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromCreateSupplier() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromCreateSupplier(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromCreateSupplier(orders, suppliers);
 	}
 
 	@Override
@@ -476,7 +486,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromUpdateSupplier() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromUpdateSupplier(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromUpdateSupplier(orders, suppliers);
 	}
 
 	@Override
@@ -506,7 +517,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromDetailBill() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromDetailBill(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromDetailBill(orders, suppliers);
 	}
 
 	@Override
@@ -518,7 +530,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromGenerateOrder() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromGenerateOrder(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromGenerateOrder(orders, suppliers);
 	}
 
 	@Override
@@ -548,7 +561,8 @@ public class Control implements CustomEvent {
 	@Override
 	public void goToOrderFromDetailOrder() {
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromDetailOrder(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromDetailOrder(orders, suppliers);
 	}
 
 	@Override
@@ -615,11 +629,11 @@ public class Control implements CustomEvent {
 	}
 
 	@Override
-	public void goGenerateOrder() {
+	public void goGenerateOrder(String idSupplier) {
 		Order order = new Order();
 		order.setTotalValue(0);
 		Supplier supplier = new Supplier();
-		supplier.setId("0");
+		supplier.setId(idSupplier);
 		order.setSupplier(supplier);
 		order = orderDAO.create(order);
 		order = orderDAO.findById(order.getId());
@@ -718,7 +732,8 @@ public class Control implements CustomEvent {
 			detailOrderDAO.insert(detailsOrder.get(i));
 		}
 		List<Order> orders = orderDAO.findAll();
-		answer.goToOrderFromGenerateOrder(orders);
+		List<Supplier> suppliers = supplierDAO.findAll();
+		answer.goToOrderFromGenerateOrder(orders, suppliers);
 	}
 
 }

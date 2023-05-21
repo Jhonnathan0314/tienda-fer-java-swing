@@ -368,37 +368,42 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromHome(List<Order> orders) {
+	public void goToOrderFromHome(List<Order> orders, List<Supplier> suppliers) {
 		((HomePane) homePane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
 	@Override
-	public void goToOrderFromSection(List<Order> orders) {
+	public void goToOrderFromSection(List<Order> orders, List<Supplier> suppliers) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
 	@Override
-	public void goToOrderFromProduct(List<Order> orders) {
+	public void goToOrderFromProduct(List<Order> orders, List<Supplier> suppliers) {
 		((ProductAllPane) productAllPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
 	@Override
-	public void goToOrderFromSupplier(List<Order> orders) {
+	public void goToOrderFromSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
 	@Override
-	public void goToOrderFromBill(List<Order> orders) {
+	public void goToOrderFromBill(List<Order> orders, List<Supplier> suppliers) {
 		((BillAllPane) billAllPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -487,9 +492,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromCreateSection(List<Order> orders) {
+	public void goToOrderFromCreateSection(List<Order> orders, List<Supplier> suppliers) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -522,9 +528,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromUpdateSection(List<Order> orders) {
+	public void goToOrderFromUpdateSection(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -557,9 +564,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromCreateProduct(List<Order> orders) {
+	public void goToOrderFromCreateProduct(List<Order> orders, List<Supplier> suppliers) {
 		((CreateProductPane) createProductPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -592,9 +600,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromUpdateProduct(List<Order> orders) {
+	public void goToOrderFromUpdateProduct(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -627,9 +636,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromCreateSupplier(List<Order> orders) {
+	public void goToOrderFromCreateSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -662,9 +672,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromUpdateSupplier(List<Order> orders) {
+	public void goToOrderFromUpdateSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -697,9 +708,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromDetailBill(List<Order> orders) {
+	public void goToOrderFromDetailBill(List<Order> orders, List<Supplier> suppliers) {
 		((DetailBillPane) detailBillPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -732,9 +744,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromDetailOrder(List<Order> orders) {
+	public void goToOrderFromDetailOrder(List<Order> orders, List<Supplier> suppliers) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
@@ -746,9 +759,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	}
 
 	@Override
-	public void goToOrderFromGenerateOrder(List<Order> orders) {
+	public void goToOrderFromGenerateOrder(List<Order> orders, List<Supplier> suppliers) {
 		((GenerateOrderPane) generateOrderPane).setVisible(false);
 		((OrderAllPane) orderAllPane).setOrders(orders);
+		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 

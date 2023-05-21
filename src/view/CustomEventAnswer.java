@@ -77,15 +77,15 @@ public interface CustomEventAnswer {
 	public void goToBillFromOrder(List<Bill> bills);
 	
 	
-	public void goToOrderFromHome(List<Order> orders);
+	public void goToOrderFromHome(List<Order> orders, List<Supplier> suppliers);
 
-	public void goToOrderFromSection(List<Order> orders);
+	public void goToOrderFromSection(List<Order> orders, List<Supplier> suppliers);
 
-	public void goToOrderFromProduct(List<Order> orders);
+	public void goToOrderFromProduct(List<Order> orders, List<Supplier> suppliers);
 
-	public void goToOrderFromSupplier(List<Order> orders);
+	public void goToOrderFromSupplier(List<Order> orders, List<Supplier> suppliers);
 
-	public void goToOrderFromBill(List<Order> orders);
+	public void goToOrderFromBill(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void goToCreateSection();
@@ -117,7 +117,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromCreateSection(List<Bill> bills);
 
-	public void goToOrderFromCreateSection(List<Order> orders);
+	public void goToOrderFromCreateSection(List<Order> orders, List<Supplier> suppliers);
 
 	
 	public void goToSectionFromUpdateSection(List<Section> sections);
@@ -128,7 +128,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromUpdateSection(List<Bill> bills);
 
-	public void goToOrderFromUpdateSection(List<Order> orders);
+	public void goToOrderFromUpdateSection(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void goToSectionFromCreateProduct(List<Section> sections);
@@ -139,7 +139,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromCreateProduct(List<Bill> bills);
 
-	public void goToOrderFromCreateProduct(List<Order> orders);
+	public void goToOrderFromCreateProduct(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void goToSectionFromUpdateProduct(List<Section> sections);
@@ -150,7 +150,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromUpdateProduct(List<Bill> bills);
 
-	public void goToOrderFromUpdateProduct(List<Order> orders);
+	public void goToOrderFromUpdateProduct(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void goToSectionFromCreateSupplier(List<Section> sections);
@@ -161,7 +161,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromCreateSupplier(List<Bill> bills);
 
-	public void goToOrderFromCreateSupplier(List<Order> orders);
+	public void goToOrderFromCreateSupplier(List<Order> orders, List<Supplier> suppliers);
 	
 
 	public void goToSectionFromUpdateSupplier(List<Section> sections);
@@ -172,7 +172,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromUpdateSupplier(List<Bill> bills);
 	
-	public void goToOrderFromUpdateSupplier(List<Order> orders);
+	public void goToOrderFromUpdateSupplier(List<Order> orders, List<Supplier> suppliers);
 
 
 	public void goToSectionFromDetailBill(List<Section> sections);
@@ -183,7 +183,7 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromDetailBill(List<Bill> bills);
 
-	public void goToOrderFromDetailBill(List<Order> orders);
+	public void goToOrderFromDetailBill(List<Order> orders, List<Supplier> suppliers);
 	
 
 	public void goToSectionFromDetailOrder(List<Section> sections);
@@ -194,13 +194,13 @@ public interface CustomEventAnswer {
 
 	public void goToBillFromDetailOrder(List<Bill> bills);
 
-	public void goToOrderFromDetailOrder(List<Order> orders);
+	public void goToOrderFromDetailOrder(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void goToBillFromGenerateBill(List<Bill> bills);
 
 	
-	public void goToOrderFromGenerateOrder(List<Order> orders);
+	public void goToOrderFromGenerateOrder(List<Order> orders, List<Supplier> suppliers);
 	
 	
 	public void refreshSections(List<Section> sections);

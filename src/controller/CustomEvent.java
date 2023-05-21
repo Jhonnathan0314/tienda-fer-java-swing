@@ -209,7 +209,7 @@ public interface CustomEvent {
 
 	public void goGenerateBill();
 
-	public void goGenerateOrder();
+	public void goGenerateOrder(String idSupplier);
 	
 	
 	public void updateSection(Section section);
