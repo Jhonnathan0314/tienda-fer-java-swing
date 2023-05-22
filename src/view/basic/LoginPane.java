@@ -123,7 +123,9 @@ public class LoginPane extends JPanel implements ActionListener {
 		if(e.getActionCommand().equals(loginButton.getActionCommand())) {
 			String username = userField.getText();
 			String password = new String(passwordField.getPassword());
-			event.validateUserLogin(username, password);
+			if(username != null && password != null) {				
+				event.validateUserLogin(username, password);
+			}
 		}
 	}
 	
@@ -155,6 +157,8 @@ public class LoginPane extends JPanel implements ActionListener {
 		if(!isValid) {
 			passwordField.setText("");
 			passwordField.setBorder(new LineBorder(Color.RED, 3, true));
+			userField.setText("");
+			userField.setBorder(new LineBorder(Color.RED, 3, true));
 		}
 	}
 }

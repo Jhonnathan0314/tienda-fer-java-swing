@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -355,9 +356,15 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(searchButton.getActionCommand())){
 			if(searchButton.getText().equals("Consultar")) {
-				updateFindedProducts();
+				if(searchField.getText().isEmpty()) {
+					searchField.setBorder(new LineBorder(Color.RED, 3, true));
+				}else {			
+					searchField.setBorder(new LineBorder(Color.GRAY, 1, true));		
+					updateFindedProducts();
+				}
 			}else {
 				productsFindedField.setVisible(false);
+				searchField.setBorder(new LineBorder(Color.GRAY, 1, true));
 				searchButton.setText("Consultar");
 				searchField.setText("");
 				searchField.setVisible(true);
@@ -374,42 +381,87 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 			}
 		}
 		if(e.getActionCommand().equals(addButton.getActionCommand())) {
-			int orderedQuantitySelected = Integer.parseInt(orderedQuantityField.getText());
-			int receivedQuantitySelected = Integer.parseInt(receivedQuantityField.getText());
-			int unitValue = Integer.parseInt(unitValueField.getText());
-			int saleValue = Integer.parseInt(saleValueField.getText());
-			detailOrder = new DetailOrder();
-			detailOrder.setProduct(productSelected);
-			detailOrder.setOrderedQuantity(orderedQuantitySelected);
-			detailOrder.setReceivedQuantity(receivedQuantitySelected);
-			detailOrder.setUnitValue(unitValue);
-			detailOrder.setTotalValue(unitValue * receivedQuantitySelected);
-			detailOrder.setSaleValue(saleValue);
-			detailOrder.setPercentageProfit(((detailOrder.getSaleValue() - detailOrder.getUnitValue()) / detailOrder.getUnitValue()) * 100);
-			detailOrder.setOrder(order);
-			detailsOrder.add(detailOrder);
-			setDetailsOrder(detailsOrder);
+			boolean isFormValid = true;
 			
-			totalValue += detailOrder.getTotalValue();
-
-			for(int i = 0; i < products.size(); i++) {
-				if(productSelected.getId() == products.get(i).getId()) {
-					products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() + receivedQuantitySelected);
-					products.get(i).setSaleValue(saleValue);
-					i = products.size();
-				}
+			int orderedQuantitySelected = 0;
+			if(validateNumberField(orderedQuantityField)) {				
+				orderedQuantitySelected = Integer.parseInt(orderedQuantityField.getText());
+				orderedQuantityField.setBorder(new LineBorder(Color.GRAY, 1, true));
+			}else {
+				isFormValid = false;
+				orderedQuantityField.setText("");
+				orderedQuantityField.setBorder(new LineBorder(Color.RED, 3, true));
 			}
-			orderedQuantityField.setText("");
-			receivedQuantityField.setText("");
-			unitValueField.setText("");
-			saleValueField.setText("");
 			
-			totalValueLbl.setText("Valor total: $" + totalValue);
+			int receivedQuantitySelected = 0;
+			if(validateNumberField(receivedQuantityField)) {				
+				receivedQuantitySelected = Integer.parseInt(receivedQuantityField.getText());
+				receivedQuantityField.setBorder(new LineBorder(Color.GRAY, 1, true));
+			}else {
+				isFormValid = false;
+				receivedQuantityField.setText("");
+				receivedQuantityField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
 			
-			productsFindedField.setVisible(false);
-			searchButton.setText("Consultar");
-			searchField.setText("");
-			searchField.setVisible(true);
+			int unitValue = 0;
+			if(validateNumberField(unitValueField)) {				
+				unitValue = Integer.parseInt(unitValueField.getText());
+				unitValueField.setBorder(new LineBorder(Color.GRAY, 1, true));
+			}else {
+				isFormValid = false;
+				unitValueField.setText("");
+				unitValueField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			
+			int saleValue = 0;
+			if(validateNumberField(saleValueField)) {				
+				saleValue = Integer.parseInt(saleValueField.getText());
+				saleValueField.setBorder(new LineBorder(Color.GRAY, 1, true));
+				if(saleValue <= unitValue) {
+					isFormValid = false;
+					saleValueField.setBorder(new LineBorder(Color.ORANGE, 3, true));
+				}
+			}else {
+				isFormValid = false;
+				saleValueField.setText("");
+				saleValueField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			
+			if(isFormValid) {
+				detailOrder = new DetailOrder();
+				detailOrder.setProduct(productSelected);
+				detailOrder.setOrderedQuantity(orderedQuantitySelected);
+				detailOrder.setReceivedQuantity(receivedQuantitySelected);
+				detailOrder.setUnitValue(unitValue);
+				detailOrder.setTotalValue(unitValue * receivedQuantitySelected);
+				detailOrder.setSaleValue(saleValue);
+				detailOrder.setPercentageProfit(((detailOrder.getSaleValue() - detailOrder.getUnitValue()) / detailOrder.getUnitValue()) * 100);
+				detailOrder.setOrder(order);
+				detailsOrder.add(detailOrder);
+				setDetailsOrder(detailsOrder);
+				
+				totalValue += detailOrder.getTotalValue();
+				
+				for(int i = 0; i < products.size(); i++) {
+					if(productSelected.getId() == products.get(i).getId()) {
+						products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() + receivedQuantitySelected);
+						products.get(i).setSaleValue(saleValue);
+						i = products.size();
+					}
+				}
+				orderedQuantityField.setText("");
+				receivedQuantityField.setText("");
+				unitValueField.setText("");
+				saleValueField.setText("");
+				
+				totalValueLbl.setText("Valor total: $" + totalValue);
+				
+				productsFindedField.setVisible(false);
+				searchButton.setText("Consultar");
+				searchField.setText("");
+				searchField.setVisible(true);
+			}
+			
 		}
 		if(e.getActionCommand().equals(cancelButton.getActionCommand())) {
 			event.deleteOrderById(order.getId());
@@ -417,6 +469,15 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 		}
 		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
 			event.generateDetailOrder(detailsOrder);
+		}
+	}
+	
+	private boolean validateNumberField(JTextField field) {
+		try {
+			new BigInteger(field.getText());
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 	

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 	private Product productSelected;
 	private DetailBill detailBill;
 
-	private int column, row, idSelected;
+	private int column, row, idSelected, actualProductStock;
 	private float totalValue = 0;
 	
 	private CustomEvent event;
@@ -307,9 +308,15 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(searchButton.getActionCommand())){
 			if(searchButton.getText().equals("Consultar")) {
-				updateFindedProducts();
+				if(searchField.getText().isEmpty()) {
+					searchField.setBorder(new LineBorder(Color.RED, 3, true));
+				}else {			
+					searchField.setBorder(new LineBorder(Color.GRAY, 1, true));		
+					updateFindedProducts();
+				}
 			}else {
 				productsFindedField.setVisible(false);
+				searchField.setBorder(new LineBorder(Color.GRAY, 1, true));
 				searchButton.setText("Consultar");
 				searchField.setText("");
 				searchField.setVisible(true);
@@ -327,33 +334,52 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 			stockLbl.setText("Stock disponible: " + productSelected.getQuantityAvailable());
 		}
 		if(e.getActionCommand().equals(addButton.getActionCommand())) {
-			int quantitySelected = Integer.parseInt(searchStockField.getText());
-			detailBill = new DetailBill();
-			detailBill.setProduct(productSelected);
-			detailBill.setQuantity(quantitySelected);
-			detailBill.setUnitValue(productSelected.getSaleValue());
-			detailBill.setTotalValue(productSelected.getSaleValue() * quantitySelected);
-			detailBill.setBill(bill);
-			detailsBill.add(detailBill);
-			setDetailsBill(detailsBill);
+			boolean isFormValid = true;
 			
-			totalValue += detailBill.getTotalValue();
-
-			for(int i = 0; i < products.size(); i++) {
-				if(productSelected.getId() == products.get(i).getId()) {
-					products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() - quantitySelected);
-					i = products.size();
+			int quantitySelected = 0;
+			if(validateNumberField(searchStockField)) {				
+				quantitySelected = Integer.parseInt(searchStockField.getText());
+				searchStockField.setBorder(new LineBorder(Color.GRAY, 1, true));
+				if(actualProductStock < quantitySelected) {
+					isFormValid = false;
+					searchStockField.setText("");
+					searchStockField.setBorder(new LineBorder(Color.RED, 3, true));
 				}
+			}else {
+				isFormValid = false;
+				searchStockField.setText("");
+				searchStockField.setBorder(new LineBorder(Color.RED, 3, true));
 			}
-			stockLbl.setText("Stock disponible: ");
-			searchStockField.setText("");
 			
-			totalValueLbl.setText("Valor total: $" + totalValue);
 			
-			productsFindedField.setVisible(false);
-			searchButton.setText("Consultar");
-			searchField.setText("");
-			searchField.setVisible(true);
+			if(isFormValid) {
+				detailBill = new DetailBill();
+				detailBill.setProduct(productSelected);
+				detailBill.setQuantity(quantitySelected);
+				detailBill.setUnitValue(productSelected.getSaleValue());
+				detailBill.setTotalValue(productSelected.getSaleValue() * quantitySelected);
+				detailBill.setBill(bill);
+				detailsBill.add(detailBill);
+				setDetailsBill(detailsBill);
+				
+				totalValue += detailBill.getTotalValue();
+				
+				for(int i = 0; i < products.size(); i++) {
+					if(productSelected.getId() == products.get(i).getId()) {
+						products.get(i).setQuantityAvailable(products.get(i).getQuantityAvailable() - quantitySelected);
+						i = products.size();
+					}
+				}
+				stockLbl.setText("Stock disponible: ");
+				searchStockField.setText("");
+				
+				totalValueLbl.setText("Valor total: $" + totalValue);
+				
+				productsFindedField.setVisible(false);
+				searchButton.setText("Consultar");
+				searchField.setText("");
+				searchField.setVisible(true);
+			}
 		}
 		if(e.getActionCommand().equals(cancelButton.getActionCommand())) {
 			event.deleteBillById(bill.getId());
@@ -364,6 +390,15 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 		}
 	}
 
+	private boolean validateNumberField(JTextField field) {
+		try {
+			new BigInteger(field.getText());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
@@ -515,5 +550,6 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 			}
 		}
 		stockLbl.setText("Stock disponible: " + productSelected.getQuantityAvailable());
+		actualProductStock = productSelected.getQuantityAvailable();
 	}
 }

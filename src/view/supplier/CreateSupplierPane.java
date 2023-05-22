@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -240,11 +241,47 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 		}
 		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
+			boolean isFormValid = true;
+			
 			String supplierId = supplierIdField.getText();
+			if(validateNumberField(supplierIdField)) {				
+				supplierIdField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}else {
+				isFormValid = false;
+				supplierIdField.setText("");
+				supplierIdField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			
 			String supplierName = supplierNameField.getText();
+			if(supplierName.isEmpty()) {
+				isFormValid = false;
+				supplierNameField.setBorder(new LineBorder(Color.RED, 3, true));
+			}else {
+				supplierNameField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}
+			
 			String sellerName = sellerNameField.getText();
+			
 			String phone = phoneField.getText();
-			event.createSupplier(supplierId, supplierName, sellerName, phone);
+			if(validateNumberField(phoneField)) {				
+				phoneField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}else {
+				isFormValid = false;
+				phoneField.setText("");
+				phoneField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			if(isFormValid) {
+				event.createSupplier(supplierId, supplierName, sellerName, phone);
+			}
+		}
+	}
+	
+	private boolean validateNumberField(JTextField field) {
+		try {
+			new BigInteger(field.getText());
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 	

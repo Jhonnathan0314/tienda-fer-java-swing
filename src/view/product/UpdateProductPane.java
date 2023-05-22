@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -281,9 +282,35 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		}
 		
 		if(e.getActionCommand().equals(createButton.getActionCommand())) {
+			boolean isFormValid = true;
 			String name = nameField.getText();
-			int quantityAvailable = Integer.parseInt(quantityAvailableField.getText());
-			float saleValue = Float.parseFloat(saleValueField.getText());
+			if(name.isEmpty()) {
+				isFormValid = false;
+				nameField.setBorder(new LineBorder(Color.RED, 3, true));
+			}else {
+				nameField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}
+			
+			int quantityAvailable = 0;
+			if(validateNumberField(quantityAvailableField)) {				
+				quantityAvailable = Integer.parseInt(quantityAvailableField.getText());
+				quantityAvailableField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}else {
+				isFormValid = false;
+				quantityAvailableField.setText("");
+				quantityAvailableField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			
+			float saleValue = 0;
+			if(validateNumberField(saleValueField)) {				
+				saleValue = Float.parseFloat(saleValueField.getText());
+				saleValueField.setBorder(new LineBorder(Color.WHITE, 1, true));
+			}else {
+				isFormValid = false;
+				saleValueField.setText("");
+				saleValueField.setBorder(new LineBorder(Color.RED, 3, true));
+			}
+			
 			String packaging = packagingField.getText();
 			String quantityPackaging = quantityPackagingField.getText();
 			String sectionName = String.valueOf(sectionField.getSelectedItem());
@@ -300,7 +327,19 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 			product.setPackaging(packaging);
 			product.setQuantityPackaging(quantityPackaging);
 			product.setSection(new Section(sectionId, "", null));
-			event.updateProduct(product); 
+			
+			if(isFormValid) {
+				event.updateProduct(product); 
+			}
+		}
+	}
+	
+	private boolean validateNumberField(JTextField field) {
+		try {
+			new BigInteger(field.getText());
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 
@@ -346,7 +385,7 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		this.product = product;
 		nameField.setText(product.getName());
 		quantityAvailableField.setText(String.valueOf(product.getQuantityAvailable()));
-		saleValueField.setText(String.valueOf(product.getSaleValue()));
+		saleValueField.setText(String.valueOf((int) product.getSaleValue()));
 		packagingField.setText(product.getPackaging());
 		quantityPackagingField.setText(product.getQuantityPackaging());
 		for(int i = 0; i < sections.size(); i++) {
