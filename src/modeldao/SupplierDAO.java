@@ -17,16 +17,23 @@ import repositories.SupplierRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> 24-03-2023
  */
 public class SupplierDAO implements SupplierRepository {
-	//Declaracion de variables
+	//Variables declaration
 	private Connection connection = null;
 	
+	//Construct method that receive a database connection
 	public SupplierDAO(Connection connection) {
 		this.connection = connection;
 	}
 	
+	/**
+	 * Method that find all suppliers
+	 * @return suppliers finded
+	 */
 	@Override
 	public List<Supplier> findAll() {
 		List<Supplier> suppliers = new ArrayList<>();
@@ -55,6 +62,11 @@ public class SupplierDAO implements SupplierRepository {
         return suppliers;
 	}
 	
+	/**
+	 * Method that find supplier by name
+	 * @param searchName -> supplier name string to search in database
+	 * @return suppliers finded by name
+	 */
 	@Override
 	public List<Supplier> findByName(String searchName) {
 		List<Supplier> suppliers = new ArrayList<>();
@@ -82,6 +94,11 @@ public class SupplierDAO implements SupplierRepository {
 		return suppliers;
 	}
 
+	/**
+	 * Method that find supplier by id
+	 * @param id -> id to search
+	 * @return supplier finded by id
+	 */
 	@Override
 	public Supplier findById(String id) {
 		String query = "SELECT * FROM supplier WHERE id = ?";
@@ -104,6 +121,11 @@ public class SupplierDAO implements SupplierRepository {
         return null;
 	}
 
+	/**
+	 * Method that create a supplier
+	 * @param supplier -> supplier object to will be created
+	 * @return supplier received or null if creation fails
+	 */
 	@Override
 	public Supplier create(Supplier supplier) {
 		String query = "INSERT INTO supplier (id, supplier_name, seller_name, phone) VALUES (?, ?, ?, ?)";
@@ -121,6 +143,12 @@ public class SupplierDAO implements SupplierRepository {
 		}
 	}
 
+	/**
+	 * Method that update a supplier
+	 * @param id -> id of the supplier to update
+	 * @param supplier -> supplier object to will be updated
+	 * @return supplier received or null if update fails
+	 */
 	@Override
 	public Supplier update(String id, Supplier supplier) {
 		String query = "UPDATE supplier SET supplier_name = ?, seller_name = ?, phone = ?, update_date = current_timestamp WHERE id = ?";
@@ -139,6 +167,11 @@ public class SupplierDAO implements SupplierRepository {
 		}
 	}
 
+	/**
+	 * Method that delete a supplier by id
+	 * @param id -> id of the supplier to delete
+	 * @return true if delete was successful
+	 */
 	@Override
 	public boolean deleteById(String id) {
 		String query = "DELETE FROM supplier WHERE id = ?";

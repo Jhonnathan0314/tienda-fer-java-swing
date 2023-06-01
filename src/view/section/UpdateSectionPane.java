@@ -20,6 +20,12 @@ import javax.swing.border.LineBorder;
 import controller.CustomEvent;
 import model.Section;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF1
+ * @version V1 -> 24-03-2023
+ */
 public class UpdateSectionPane extends JPanel implements ActionListener {
 	/**
 	 * 
@@ -174,6 +180,9 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -199,6 +208,11 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 	Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -208,11 +222,10 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -222,6 +235,10 @@ public class UpdateSectionPane extends JPanel implements ActionListener {
 		return section;
 	}
 
+	/**
+	 * Method that put into the fields section selected
+	 * @param section -> Section selected
+	 */
 	public void setSection(Section section) {
 		this.section = section;
 		nameField.setText(section.getName());

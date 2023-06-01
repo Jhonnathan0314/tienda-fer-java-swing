@@ -18,18 +18,25 @@ import repositories.OrderRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
  */
 public class OrderDAO implements OrderRepository {
-	//Declaracion de variables	
+	//Variables declaration
 	private SupplierDAO supplierDAO;
 	
 	private Connection connection = null;
 
+	//Construct method that receive a database connection
 	public OrderDAO(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 * Method that find all orders
+	 * @return orders finded
+	 */
 	@Override
 	public List<Order> findAll() {
 		List<Order> orders = new ArrayList<>();
@@ -59,6 +66,11 @@ public class OrderDAO implements OrderRepository {
 		return orders;
 	}
 
+	/**
+	 * Method that find order by id
+	 * @param id -> id to search
+	 * @return order finded by id
+	 */
 	@Override
 	public Order findById(int id) {
 		String query = "SELECT * FROM order_bill WHERE id = ?";
@@ -81,6 +93,11 @@ public class OrderDAO implements OrderRepository {
 		return null;
 	}
 
+	/**
+	 * Method that find order by year
+	 * @param year -> order year to search in database
+	 * @return orders finded by year
+	 */
 	@Override
 	public List<Order> findByYear(int year) {
 		List<Order> orders = new ArrayList<>();
@@ -109,6 +126,12 @@ public class OrderDAO implements OrderRepository {
 		return orders;
 	}
 
+	/**
+	 * Method that find order by year and month
+	 * @param year -> order year to search in database
+	 * @param month -> order month to search in database
+	 * @return orders finded by year and month
+	 */
 	public List<Order> findByYearAndMonth(int year, int month) {
 		List<Order> orders = new ArrayList<>();
 		String sql = "SELECT * FROM order_bill WHERE YEAR(date) = ? AND MONTH(date) = ?";
@@ -137,6 +160,13 @@ public class OrderDAO implements OrderRepository {
 		return orders;
 	}
 
+	/**
+	 * Method that find order by year, month and day
+	 * @param year -> order year to search in database
+	 * @param month -> order month to search in database
+	 * @param day -> order day to search in database
+	 * @return orders finded by year, month and day
+	 */
 	public List<Order> findByYearAndMonthAndDay(int year, int month, int day) {
 		List<Order> orders = new ArrayList<>();
 		String sql = "SELECT * FROM order_bill WHERE YEAR(date) = ? AND MONTH(date) = ? AND DAY(date) = ?";
@@ -166,6 +196,11 @@ public class OrderDAO implements OrderRepository {
 		return orders;
 	}
 	
+	/**
+	 * Method that find order by supplier
+	 * @param idSupplier -> supplier id to search in database
+	 * @return orders finded by supplier
+	 */
 	@Override
 	public List<Order> findBySupplier(String idSupplier) {
 		List<Order> orders = new ArrayList<>();
@@ -192,6 +227,11 @@ public class OrderDAO implements OrderRepository {
 		return orders;
 	}
 
+	/**
+	 * Method that create a order
+	 * @param order -> order object to will be created
+	 * @return order received or null if creation fails
+	 */
 	@Override
 	public Order create(Order order) {
 		String query = "INSERT INTO order_bill (total_value, supplier) VALUES (?, ?)";
@@ -213,6 +253,11 @@ public class OrderDAO implements OrderRepository {
 		}
 	}
 
+	/**
+	 * Method that delete an order by id
+	 * @param id -> id of the order to delete
+	 * @return true if delete was successful
+	 */
 	@Override
 	public boolean deleteById(int id) {
 		String query = "DELETE FROM order_bill WHERE id = ?";
@@ -227,7 +272,7 @@ public class OrderDAO implements OrderRepository {
 		}
 	}
 
-	//Metodos get y set
+	//Get and set methods
 	public SupplierDAO getSupplierDAO() {
 		return supplierDAO;
 	}

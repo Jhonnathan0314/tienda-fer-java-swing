@@ -27,13 +27,19 @@ import model.DetailOrder;
 import model.Order;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
+ */
 public class DetailOrderPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
+
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -175,6 +181,9 @@ public class DetailOrderPane extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -197,7 +206,12 @@ public class DetailOrderPane extends JPanel implements ActionListener {
 			event.goToOrderFromDetailOrder();
 		}
 	}
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -207,11 +221,10 @@ public class DetailOrderPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -221,6 +234,10 @@ public class DetailOrderPane extends JPanel implements ActionListener {
 		return detailsOrder;
 	}
 
+	/**
+	 * Method that put into the table details bills received
+	 * @param detailsOrder -> Details bill received
+	 */
 	public void setDetailsOrder(List<DetailOrder> detailsOrder) {
 		this.detailsOrder = detailsOrder;
 		

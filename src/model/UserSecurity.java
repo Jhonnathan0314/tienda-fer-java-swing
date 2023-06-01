@@ -5,15 +5,17 @@ package model;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF6
+ * @version V1 -> 13-03-2023
  */
 public class UserSecurity {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private String username;
 	private String password;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public UserSecurity(int id, String username, String password) {
 		super();
 		this.id = id;
@@ -21,9 +23,10 @@ public class UserSecurity {
 		this.password = password;
 	}
 	
+	//Empty construct method
 	public UserSecurity() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

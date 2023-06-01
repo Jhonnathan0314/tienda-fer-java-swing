@@ -9,7 +9,9 @@ import model.DetailBill;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
  */
 public interface DetailBillRepository {
 	

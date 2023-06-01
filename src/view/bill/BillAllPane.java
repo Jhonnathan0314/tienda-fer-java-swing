@@ -29,13 +29,19 @@ import controller.CustomEvent;
 import model.Bill;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
+ */
 public class BillAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
+
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -233,7 +239,10 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 		add(footerLbl, 0);
 		
 	}
-	
+
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -253,11 +262,12 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 			event.goGenerateBill();
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		event.goToHomeFromBill();
-		
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		row = e.getY()/table.getRowHeight();
 		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
@@ -288,7 +298,12 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -298,11 +313,10 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -312,6 +326,10 @@ public class BillAllPane extends JPanel implements ActionListener, MouseListener
 		return bills;
 	}
 
+	/**
+	 * Method that put into the table bills received
+	 * @param bills -> Bills received
+	 */
 	public void setBills(List<Bill> bills) {
 		this.bills = bills;
 		

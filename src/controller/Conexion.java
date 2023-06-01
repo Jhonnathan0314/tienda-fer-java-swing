@@ -9,12 +9,17 @@ import java.sql.SQLException;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote CREACION BASE DE DATOS
+ * @version V1 -> 06-03-2023
  */
 public class Conexion {
 	//Declaracion de variables
 	private Connection connect = null;
 	
+	/**
+	 * @return MySQL database connection
+	 */
 	public Connection getConexion() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

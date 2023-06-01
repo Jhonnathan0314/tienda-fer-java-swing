@@ -26,13 +26,19 @@ import model.Section;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
+ */
 public class CreateProductPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -261,6 +267,9 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -334,7 +343,12 @@ public class CreateProductPane extends JPanel implements ActionListener {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -344,7 +358,7 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
@@ -358,6 +372,10 @@ public class CreateProductPane extends JPanel implements ActionListener {
 		return sections;
 	}
 
+	/**
+	 * Method that put into the JComboBox sections received
+	 * @param sections -> Sections received
+	 */
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 		

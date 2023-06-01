@@ -15,19 +15,27 @@ import repositories.DetailBillRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
  */
 public class DetailBillDAO implements DetailBillRepository {
-	//Declaracion de variables	
+	//Variables declaration
 	private BillDAO billDAO;
 	private ProductDAO productDAO;
 	
 	private Connection connection = null;
 
+	//Construct method that receive a database connection
 	public DetailBillDAO(Connection connection) {
 		this.connection = connection;
 	}
 	
+	/**
+	 * Method that find detail order by supplier
+	 * @param billId -> biull id to search in database
+	 * @return detail orders finded by id
+	 */
 	@Override
 	public List<DetailBill> findByBill(int billId) {
 		List<DetailBill> detailBills = new ArrayList<>();
@@ -56,6 +64,11 @@ public class DetailBillDAO implements DetailBillRepository {
         return detailBills;
 	}
 
+	/**
+	 * Method that create a detail bill
+	 * @param detailBill -> detail bill object to will be created
+	 * @return detail bill received or null if creation fails
+	 */
 	@Override
 	public DetailBill insert(DetailBill detailBill) {
 		String sql = "INSERT INTO detail_bill (quantity, unit_value, total_value, product, bill) VALUES (?, ?, ?, ?, ?)";

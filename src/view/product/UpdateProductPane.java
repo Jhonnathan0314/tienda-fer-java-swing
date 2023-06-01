@@ -26,13 +26,19 @@ import controller.CustomEvent;
 import model.Product;
 import model.Section;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
+ */
 public class UpdateProductPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -263,6 +269,9 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -343,6 +352,11 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -352,11 +366,10 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -366,6 +379,10 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		return sections;
 	}
 
+	/**
+	 * Method that put into the JComboBox sections received
+	 * @param sections -> Sections received
+	 */
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 		String[] sectionsObj = new String[sections.size()];
@@ -381,6 +398,10 @@ public class UpdateProductPane extends JPanel implements ActionListener {
 		return product;
 	}
 
+	/**
+	 * Method that put into the fields product selected
+	 * @param product -> Product selected
+	 */
 	public void setProduct(Product product) {
 		this.product = product;
 		nameField.setText(product.getName());

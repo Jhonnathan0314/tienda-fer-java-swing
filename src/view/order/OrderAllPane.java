@@ -31,6 +31,12 @@ import model.Order;
 import model.Supplier;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
+ */
 public class OrderAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
@@ -238,7 +244,10 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		add(footerLbl, 0);
 		
 	}
-	
+
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -290,10 +299,11 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		return sectionsIds[posOptionSelected];
 	}
 
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		event.goToHomeFromOrder();
-		
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		row = e.getY()/table.getRowHeight();
 		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
@@ -324,7 +334,12 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -334,11 +349,10 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -348,6 +362,10 @@ public class OrderAllPane extends JPanel implements ActionListener, MouseListene
 		return orders;
 	}
 
+	/**
+	 * Method that put into the table orders received
+	 * @param orders -> Orders received
+	 */
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 		

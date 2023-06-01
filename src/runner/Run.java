@@ -7,7 +7,7 @@ import controller.Control;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
  */
 public class Run {
 

@@ -7,15 +7,17 @@ import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF1
+ * @version V1 -> 24-03-2023
  */
 public class Section {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private String name;
 	private Timestamp updateDate;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public Section(int id, String name, Timestamp updateDate) {
 		super();
 		this.id = id;
@@ -23,9 +25,10 @@ public class Section {
 		this.updateDate = updateDate;
 	}
 	
+	//Empty construct method
 	public Section() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

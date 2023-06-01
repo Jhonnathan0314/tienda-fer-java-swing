@@ -29,13 +29,19 @@ import controller.CustomEvent;
 import model.Supplier;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> @ 24-03-2023
+ */
 public class SupplierAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo, background, footerLbl, containerLbl;
 	
 	private JButton sectionButton, productButton, supplierButton, billButton, orderButton, searchButton, createButton, updateButton, deleteButton;
@@ -226,6 +232,9 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -249,11 +258,12 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 			event.goToCreateSupplier();
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		event.goToHomeFromProduct();
-		
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		row = e.getY()/table.getRowHeight();
 		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
@@ -284,7 +294,12 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -294,11 +309,10 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -308,6 +322,10 @@ public class SupplierAllPane extends JPanel implements ActionListener, MouseList
 		return suppliers;
 	}
 
+	/**
+	 * Method that put into the table suppliers received
+	 * @param suppliers -> Suppliers received
+	 */
 	public void setSuppliers(List<Supplier> suppliers) {
 		this.suppliers = suppliers;
 		

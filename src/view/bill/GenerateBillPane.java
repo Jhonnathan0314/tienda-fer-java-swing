@@ -34,13 +34,19 @@ import model.DetailBill;
 import model.Product;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
+ */
 public class GenerateBillPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
+
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -304,6 +310,9 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(searchButton.getActionCommand())){
@@ -398,7 +407,10 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 			return false;
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
@@ -449,7 +461,12 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -459,11 +476,10 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;

@@ -5,10 +5,12 @@ package model;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
  */
 public class DetailOrder {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private int orderedQuantity;
 	private int receivedQuantity;
@@ -19,7 +21,7 @@ public class DetailOrder {
 	private Product product;
 	private Order order;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public DetailOrder(int id, int orderedQuantity, int receivedQuantity, float unitValue, float totalValue, float saleValue, float percentageProfit, Product product, Order order) {
 		super();
 		this.id = id;
@@ -33,9 +35,10 @@ public class DetailOrder {
 		this.order = order;
 	}
 	
+	//Empty construct method
 	public DetailOrder() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

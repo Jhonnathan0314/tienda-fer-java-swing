@@ -28,13 +28,19 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF6 - RF2
+ * @version V2 -> 24-03-2023
+ */
 public class HomePane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -173,6 +179,9 @@ public class HomePane extends JPanel implements ActionListener {
 
 	}
 	
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -192,6 +201,11 @@ public class HomePane extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -201,7 +215,7 @@ public class HomePane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods 
 	public CustomEvent getEvent() {
 		return event;
 	}
@@ -215,6 +229,10 @@ public class HomePane extends JPanel implements ActionListener {
 		return products;
 	}
 
+	/**
+	 * Method that put into the table products received
+	 * @param products -> Products received
+	 */
 	public void setProducts(List<Product> products) {
 		this.products = products;
 		DefaultTableModel model = new DefaultTableModel(

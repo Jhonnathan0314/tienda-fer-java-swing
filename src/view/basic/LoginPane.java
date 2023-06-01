@@ -21,13 +21,19 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF6
+ * @version V1 -> 13-03-2023
+ */
 public class LoginPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel userLbl;
@@ -118,6 +124,9 @@ public class LoginPane extends JPanel implements ActionListener {
 		
 	}
 	
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(loginButton.getActionCommand())) {
@@ -129,6 +138,11 @@ public class LoginPane extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -138,11 +152,10 @@ public class LoginPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods 
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -152,6 +165,10 @@ public class LoginPane extends JPanel implements ActionListener {
 		return isValid;
 	}
 
+	/**
+	 * Method than if credentials digited are not valid, cleans and paint a red border in fields
+	 * @param isValid -> cretencials are valid?
+	 */
 	public void setValid(boolean isValid) {
 		this.isValid = isValid;
 		if(!isValid) {

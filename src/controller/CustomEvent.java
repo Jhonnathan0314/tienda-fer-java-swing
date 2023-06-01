@@ -13,13 +13,18 @@ import model.Supplier;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote CUSTOMEVENT INTERFACE
+ * @version V3 -> 20-05-2023
  */
 public interface CustomEvent {
 	
+	//Login method
 	public void validateUserLogin(String username, String password);
 	
-	
+	/*
+	 * Methods to go to home
+	 */
 	public void goToHomeFromSection();
 	
 	public void goToHomeFromProduct();
@@ -30,7 +35,9 @@ public interface CustomEvent {
 	
 	public void goToHomeFromOrder();
 	
-	
+	/*
+	 * Methods to go to section
+	 */
 	public void goToSectionFromHome();
 
 	public void goToSectionFromProduct();
@@ -41,7 +48,9 @@ public interface CustomEvent {
 
 	public void goToSectionFromOrder();
 	
-	
+	/*
+	 * Methods to go to product
+	 */
 	public void goToProductFromHome();
 	
 	public void goToProductFromSection();
@@ -52,7 +61,9 @@ public interface CustomEvent {
 
 	public void goToProductFromOrder();
 	
-	
+	/*
+	 * Methods to go to supplier
+	 */
 	public void goToSupplierFromHome();
 
 	public void goToSupplierFromSection();
@@ -63,7 +74,9 @@ public interface CustomEvent {
 
 	public void goToSupplierFromOrder();
 	
-	
+	/*
+	 * Methods to go to bill
+	 */
 	public void goToBillFromHome();
 
 	public void goToBillFromSection();
@@ -74,7 +87,9 @@ public interface CustomEvent {
 
 	public void goToBillFromOrder();
 	
-	
+	/*
+	 * Methods to go to order
+	 */
 	public void goToOrderFromHome();
 
 	public void goToOrderFromSection();
@@ -85,7 +100,9 @@ public interface CustomEvent {
 
 	public void goToOrderFromBill();
 	
-	
+	/*
+	 * Methods to go to create section
+	 */
 	public void goToCreateSection();
 
 	public void goToCreateProduct();
@@ -93,6 +110,9 @@ public interface CustomEvent {
 	public void goToCreateSupplier();
 	
 	
+	/*
+	 * Methods to go to update section
+	 */
 	public void goToUpdateSection(int idSelected);
 	
 	public void goToUpdateProduct(int idSelected);

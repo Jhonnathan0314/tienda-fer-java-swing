@@ -20,13 +20,19 @@ import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> @ 24-03-2023
+ */
 public class CreateSupplierPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//Declaracion de variables
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -222,6 +228,9 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -284,7 +293,12 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -294,11 +308,9 @@ public class CreateSupplierPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;

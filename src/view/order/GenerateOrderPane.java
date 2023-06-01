@@ -34,6 +34,12 @@ import model.Order;
 import model.Product;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
+ */
 public class GenerateOrderPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
@@ -352,6 +358,9 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(searchButton.getActionCommand())){
@@ -480,7 +489,10 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 			return false;
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
@@ -533,7 +545,12 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(

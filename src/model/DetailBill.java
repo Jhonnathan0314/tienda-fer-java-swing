@@ -5,10 +5,12 @@ package model;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
  */
 public class DetailBill {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private int quantity;
 	private float unitValue;
@@ -16,7 +18,7 @@ public class DetailBill {
 	private Product product;
 	private Bill bill;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public DetailBill(int id, int quantity, float unitValue, float totalValue, Product product, Bill bill) {
 		super();
 		this.id = id;
@@ -27,9 +29,10 @@ public class DetailBill {
 		this.bill = bill;
 	}
 	
+	//Empty construct method
 	public DetailBill() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

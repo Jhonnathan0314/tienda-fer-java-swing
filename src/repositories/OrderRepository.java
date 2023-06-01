@@ -9,7 +9,9 @@ import model.Order;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
  */
 public interface OrderRepository {
 

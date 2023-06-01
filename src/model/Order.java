@@ -7,16 +7,18 @@ import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
  */
 public class Order {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private Timestamp date;
 	private float totalValue;
 	private Supplier supplier;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public Order(int id, Timestamp date, float totalValue, Supplier supplier) {
 		super();
 		this.id = id;
@@ -25,9 +27,10 @@ public class Order {
 		this.supplier = supplier;
 	}
 
+	//Empty construct method
 	public Order() { }
 	
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

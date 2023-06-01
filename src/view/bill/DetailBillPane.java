@@ -27,13 +27,19 @@ import model.Bill;
 import model.DetailBill;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
+ */
 public class DetailBillPane extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	//Declaracion de variables
+
+	//Variables declaration
 	private JLabel logo;
 	private JLabel background;
 	private JLabel footerLbl;
@@ -184,6 +190,9 @@ public class DetailBillPane extends JPanel implements ActionListener {
 		add(footerLbl, 0);
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -206,7 +215,12 @@ public class DetailBillPane extends JPanel implements ActionListener {
 			event.goToBillFromDetailBill();
 		}
 	}
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -216,11 +230,10 @@ public class DetailBillPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
-
 
 	public void setEvent(CustomEvent event) {
 		this.event = event;
@@ -230,6 +243,10 @@ public class DetailBillPane extends JPanel implements ActionListener {
 		return detailsBill;
 	}
 
+	/**
+	 * Method that put into the table details bills received
+	 * @param detailsBill -> Details bill received
+	 */
 	public void setDetailsBill(List<DetailBill> detailsBill) {
 		this.detailsBill = detailsBill;
 		

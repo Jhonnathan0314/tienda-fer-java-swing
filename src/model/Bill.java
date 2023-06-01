@@ -7,15 +7,17 @@ import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF4
+ * @version V1 -> 20-04-2023
  */
 public class Bill {
-	//Declaracion de variables
+	//Variables declaration
 	private int id;
 	private Timestamp date;
 	private float totalValue;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public Bill(int id, Timestamp date, float totalValue) {
 		super();
 		this.id = id;
@@ -23,9 +25,10 @@ public class Bill {
 		this.totalValue = totalValue;
 	}
 	
+	//Empty construct method
 	public Bill() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public int getId() {
 		return id;
 	}

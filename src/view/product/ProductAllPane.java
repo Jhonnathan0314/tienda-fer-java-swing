@@ -29,6 +29,12 @@ import controller.CustomEvent;
 import model.Product;
 import view.table.RenderTable;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF2
+ * @version V1 -> 24-03-2023
+ */
 public class ProductAllPane extends JPanel implements ActionListener, MouseListener {
 	/**
 	 * 
@@ -225,6 +231,9 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 		
 	}
 
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -248,11 +257,12 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 			event.goToCreateProduct();
 		}
 	}
-	
+
+	/**
+	 * 	Methods excecuted when persons do a click
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		event.goToHomeFromProduct();
-		
 		column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		row = e.getY()/table.getRowHeight();
 		if(column <= table.getColumnCount() && column >= 0 && row <= table.getRowCount() && row >= 0) {
@@ -283,7 +293,12 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 
 	@Override
 	public void mouseExited(MouseEvent e) { }
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -293,7 +308,7 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
@@ -307,6 +322,10 @@ public class ProductAllPane extends JPanel implements ActionListener, MouseListe
 		return products;
 	}
 
+	/**
+	 * Method that put into the table products received
+	 * @param products -> Products received
+	 */
 	public void setProducts(List<Product> products) {
 		this.products = products;
 		

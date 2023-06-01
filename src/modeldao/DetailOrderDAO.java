@@ -15,19 +15,27 @@ import repositories.DetailOrderRepository;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF5
+ * @version V1 -> 20-04-2023
  */
 public class DetailOrderDAO implements DetailOrderRepository {
-	//Declaracion de variables	
+	//Variables declaration
 	private OrderDAO orderDAO;
 	private ProductDAO productDAO;
 
 	private Connection connection = null;
 
+	//Construct method that receive a database connection
 	public DetailOrderDAO(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 * Method that find detail order by supplier
+	 * @param orderId -> order id to search in database
+	 * @return detail orders finded by id
+	 */
 	@Override
 	public List<DetailOrder> findByOrder(int orderId) {
 		List<DetailOrder> detailOrders = new ArrayList<>();
@@ -60,6 +68,11 @@ public class DetailOrderDAO implements DetailOrderRepository {
 		return detailOrders;
 	}
 
+	/**
+	 * Method that create a detail order
+	 * @param detailOrder -> detail order object to will be created
+	 * @return detail order received or null if creation fails
+	 */
 	@Override
 	public DetailOrder insert(DetailOrder detailOrder) {
 		String sql = "INSERT INTO detail_order (ordered_quantity, received_quantity, unit_value, total_value, sale_value, percentage_profit, product, order_bill) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -81,7 +94,7 @@ public class DetailOrderDAO implements DetailOrderRepository {
 		}
 	}
 
-	//Metodos get y set
+	//Get and set methods
 	public OrderDAO getOrderDAO() {
 		return orderDAO;
 	}

@@ -7,17 +7,19 @@ import java.sql.Timestamp;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF3
+ * @version V1 -> @ 24-03-2023
  */
 public class Supplier {
-	//Declaracion de variables
+	//Variables declaration
 	private String id;
 	private String supplierName;
 	private String sellerName;
 	private String phone;
 	private Timestamp updateDate;
 	
-	//Metodos constructores
+	//Construct method than receives a product attributes
 	public Supplier(String id, String supplierName, String sellerName, String phone, Timestamp updateDate) {
 		super();
 		this.id = id;
@@ -27,9 +29,10 @@ public class Supplier {
 		this.updateDate = updateDate;
 	}
 	
+	//Empty construct method
 	public Supplier() { }
 
-	//Metodos get y set
+	//Get and set methods
 	public String getId() {
 		return id;
 	}

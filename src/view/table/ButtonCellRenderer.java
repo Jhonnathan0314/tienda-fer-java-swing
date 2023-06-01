@@ -15,7 +15,9 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * @author JONATAN FRANCO
- *
+ * @author WILLIAM ROA
+ * @apiNote RF1, RF2, RF3, RF4, RF5
+ * @version V1 -> @ 24-03-2023
  */
 public class ButtonCellRenderer extends JButton implements TableCellRenderer {
     

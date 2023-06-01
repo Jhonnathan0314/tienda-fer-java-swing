@@ -32,6 +32,12 @@ import view.supplier.CreateSupplierPane;
 import view.supplier.SupplierAllPane;
 import view.supplier.UpdateSupplierPane;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote JFRAME PRINCIPAL
+ * @version V2 -> 24-03-2023
+ */
 public class IOManager extends JFrame implements CustomEventAnswer {
 	
 	/**
@@ -39,6 +45,7 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	//Variables declaration
 	private Dimension dim;
 	
 	private LoginPane loginPane;
@@ -181,6 +188,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		add(generateOrderPane);
 	}
 
+	/**
+	 * @param isValid -> Response if login is valid
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void isValidResponse(boolean isValid, List<Product> products) {
 		if(isValid) {
@@ -191,7 +202,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 			((LoginPane) loginPane).setValid(isValid);			
 		}
 	}
-	
+
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToHomeFromSection(List<Product> products) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -199,6 +213,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((HomePane) homePane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToHomeFromProduct(List<Product> products) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -206,6 +223,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((HomePane) homePane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToHomeFromSupplier(List<Product> products) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
@@ -213,6 +233,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((HomePane) homePane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToHomeFromBill(List<Product> products) {
 		((BillAllPane) billAllPane).setVisible(false);
@@ -220,6 +243,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((HomePane) homePane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToHomeFromOrder(List<Product> products) {
 		((OrderAllPane) orderAllPane).setVisible(false);
@@ -227,6 +253,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((HomePane) homePane).setVisible(true);
 	}
 
+	/**
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromHome(List<Section> sections) {
 		((HomePane) homePane).setVisible(false);
@@ -234,6 +263,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromProduct(List<Section> sections) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -241,6 +273,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromSupplier(List<Section> sections) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
@@ -248,6 +283,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromBill(List<Section> sections) {
 		((BillAllPane) billAllPane).setVisible(false);
@@ -255,6 +293,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromOrder(List<Section> sections) {
 		((OrderAllPane) orderAllPane).setVisible(false);
@@ -262,6 +303,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToProductFromHome(List<Product> products) {
 		((HomePane) homePane).setVisible(false);
@@ -269,6 +313,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToProductFromSection(List<Product> products) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -276,6 +323,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToProductFromSupplier(List<Product> products) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
@@ -283,6 +333,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToProductFromBill(List<Product> products) {
 		((BillAllPane) billAllPane).setVisible(false);
@@ -290,6 +343,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param products -> Scarced products
+	 */
 	@Override
 	public void goToProductFromOrder(List<Product> products) {
 		((OrderAllPane) orderAllPane).setVisible(false);
@@ -297,6 +353,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromHome(List<Supplier> suppliers) {
 		((HomePane) homePane).setVisible(false);
@@ -304,6 +363,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromSection(List<Supplier> suppliers) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -311,6 +373,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromProduct(List<Supplier> suppliers) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -318,6 +383,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromBill(List<Supplier> suppliers) {
 		((BillAllPane) billAllPane).setVisible(false);
@@ -325,6 +393,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromOrder(List<Supplier> suppliers) {
 		((OrderAllPane) orderAllPane).setVisible(false);
@@ -332,6 +403,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromHome(List<Bill> bills) {
 		((HomePane) homePane).setVisible(false);
@@ -339,6 +413,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromSection(List<Bill> bills) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -346,6 +423,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromProduct(List<Bill> bills) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -353,6 +433,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromSupplier(List<Bill> bills) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
@@ -360,6 +443,9 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromOrder(List<Bill> bills) {
 		((OrderAllPane) orderAllPane).setVisible(false);
@@ -367,6 +453,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromHome(List<Order> orders, List<Supplier> suppliers) {
 		((HomePane) homePane).setVisible(false);
@@ -375,6 +465,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromSection(List<Order> orders, List<Supplier> suppliers) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -383,6 +477,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromProduct(List<Order> orders, List<Supplier> suppliers) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -391,6 +489,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
@@ -399,6 +501,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromBill(List<Order> orders, List<Supplier> suppliers) {
 		((BillAllPane) billAllPane).setVisible(false);
@@ -407,12 +513,19 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show CreateSectionPane and hide SectionAllPane
+	 */
 	@Override
 	public void goToCreateSection() {
 		((SectionAllPane) sectionAllPane).setVisible(false);
 		((CreateSectionPane) createSectionPane).setVisible(true);
 	}
 
+	/**
+	 * Show CreateProductPane and hide ProductAllPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToCreateProduct(List<Section> sections) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -420,12 +533,19 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((CreateProductPane) createProductPane).setVisible(true);
 	}
 
+	/**
+	 * Show CreateSupplierPane and hide SupplierAllPane
+	 */
 	@Override
 	public void goToCreateSupplier() {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
 		((CreateSupplierPane) createSupplierPane).setVisible(true);
 	}
 
+	/**
+	 * Show UpdateSectionPane and hide SectionAllPane
+	 * @param section -> section selected
+	 */
 	@Override
 	public void goToUpdateSection(Section section) {
 		((SectionAllPane) sectionAllPane).setVisible(false);
@@ -433,6 +553,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((UpdateSectionPane) updateSectionPane).setVisible(true);
 	}
 
+	/**
+	 * Show UpdateProductPane and hide ProductAllPane
+	 * @param product -> product selected
+	 * @param sections -> all sections
+	 */
 	@Override
 	public void goToUpdateProduct(Product product, List<Section> sections) {
 		((ProductAllPane) productAllPane).setVisible(false);
@@ -441,28 +566,45 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((UpdateProductPane) updateProductPane).setVisible(true);
 	}
 
+	/**
+	 * Show UpdateSupplierPane and hide SupplierAllPane
+	 * @param supplier -> supplier selected
+	 */
 	@Override
 	public void goToUpdateSupplier(Supplier supplier) {
 		((SupplierAllPane) supplierAllPane).setVisible(false);
 		((UpdateSupplierPane) updateSupplierPane).setSupplier(supplier);
 		((UpdateSupplierPane) updateSupplierPane).setVisible(true);
 	}
-	
+
+	/**
+	 * @param sections -> sections finded
+	 */
 	@Override
 	public void filteredSectionsResponse(List<Section> sections) {
 		((SectionAllPane) sectionAllPane).setSections(sections);
 	}
 
+	/**
+	 * @param products -> products finded
+	 */
 	@Override
 	public void filteredProductsByNameResponse(List<Product> products) {
 		((ProductAllPane) productAllPane).setProducts(products);
 	}
 
+	/**
+	 * @param suppliers -> suppliers finded
+	 */
 	@Override
 	public void filteredSuppliersBySupplierNameResponse(List<Supplier> suppliers) {
 		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);
 	}
 
+	/**
+	 * Show SectionAllPane and hide CreateSectionPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromCreateSection(List<Section> sections) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
@@ -470,6 +612,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide CreateSectionPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromCreateSection(List<Product> products) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
@@ -477,6 +623,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide CreateSectionPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromCreateSection(List<Supplier> suppliers) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
@@ -484,6 +634,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide CreateSectionPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromCreateSection(List<Bill> bills) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
@@ -491,6 +645,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide CreateSectionPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromCreateSection(List<Order> orders, List<Supplier> suppliers) {
 		((CreateSectionPane) createSectionPane).setVisible(false);
@@ -499,6 +658,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide UpdateSectionPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromUpdateSection(List<Section> sections) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
@@ -506,6 +669,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide UpdateSectionPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromUpdateSection(List<Product> products) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
@@ -513,6 +680,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide UpdateSectionPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromUpdateSection(List<Supplier> suppliers) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
@@ -520,6 +691,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide UpdateSectionPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromUpdateSection(List<Bill> bills) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
@@ -527,6 +702,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide UpdateSectionPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromUpdateSection(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateSectionPane) updateSectionPane).setVisible(false);
@@ -535,6 +715,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide CreateProductPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromCreateProduct(List<Section> sections) {
 		((CreateProductPane) createProductPane).setVisible(false);
@@ -542,6 +726,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide CreateProductPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromCreateProduct(List<Product> products) {
 		((CreateProductPane) createProductPane).setVisible(false);
@@ -549,6 +737,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide CreateProductPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromCreateProduct(List<Supplier> suppliers) {
 		((CreateProductPane) createProductPane).setVisible(false);
@@ -556,6 +748,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide CreateProductPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromCreateProduct(List<Bill> bills) {
 		((CreateProductPane) createProductPane).setVisible(false);
@@ -563,6 +759,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide CreateProductPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromCreateProduct(List<Order> orders, List<Supplier> suppliers) {
 		((CreateProductPane) createProductPane).setVisible(false);
@@ -571,13 +772,21 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide UpdateProductPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromUpdateProduct(List<Section> sections) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
 		((SectionAllPane) sectionAllPane).setSections(sections);
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
-	
+
+	/**
+	 * Show ProductAllPane and hide UpdateProductPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromUpdateProduct(List<Product> products) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
@@ -585,6 +794,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide UpdateProductPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromUpdateProduct(List<Supplier> suppliers) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
@@ -592,6 +805,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide UpdateProductPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromUpdateProduct(List<Bill> bills) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
@@ -599,6 +816,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide UpdateProductPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromUpdateProduct(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateProductPane) updateProductPane).setVisible(false);
@@ -607,6 +829,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide CreateSupplierPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromCreateSupplier(List<Section> sections) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
@@ -614,6 +840,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide CreateSupplierPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromCreateSupplier(List<Product> products) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
@@ -621,6 +851,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide CreateSupplierPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromCreateSupplier(List<Supplier> suppliers) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
@@ -628,6 +862,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide CreateSupplierPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromCreateSupplier(List<Bill> bills) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
@@ -635,6 +873,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide CreateSupplierPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromCreateSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((CreateSupplierPane) createSupplierPane).setVisible(false);
@@ -643,6 +886,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide UpdateSupplierPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromUpdateSupplier(List<Section> sections) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
@@ -650,6 +897,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide UpdateSupplierPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromUpdateSupplier(List<Product> products) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
@@ -657,6 +908,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide UpdateSupplierPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromUpdateSupplier(List<Supplier> suppliers) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
@@ -664,6 +919,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide UpdateSupplierPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromUpdateSupplier(List<Bill> bills) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
@@ -671,6 +930,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide UpdateSupplierPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromUpdateSupplier(List<Order> orders, List<Supplier> suppliers) {
 		((UpdateSupplierPane) updateSupplierPane).setVisible(false);
@@ -679,6 +943,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide DetailBillPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromDetailBill(List<Section> sections) {
 		((DetailBillPane) detailBillPane).setVisible(false);
@@ -686,6 +954,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide DetailBillPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromDetailBill(List<Product> products) {
 		((DetailBillPane) detailBillPane).setVisible(false);
@@ -693,6 +965,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide DetailBillPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromDetailBill(List<Supplier> suppliers) {
 		((DetailBillPane) detailBillPane).setVisible(false);
@@ -700,6 +976,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide DetailBillPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromDetailBill(List<Bill> bills) {
 		((DetailBillPane) detailBillPane).setVisible(false);
@@ -707,6 +987,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide DetailBillPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromDetailBill(List<Order> orders, List<Supplier> suppliers) {
 		((DetailBillPane) detailBillPane).setVisible(false);
@@ -715,6 +1000,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SectionAllPane and hide DetailOrderPane
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void goToSectionFromDetailOrder(List<Section> sections) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
@@ -722,6 +1011,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SectionAllPane) sectionAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show ProductAllPane and hide DetailOrderPane
+	 * @param products -> All products
+	 */
 	@Override
 	public void goToProductFromDetailOrder(List<Product> products) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
@@ -729,6 +1022,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((ProductAllPane) productAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show SupplierAllPane and hide DetailOrderPane
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToSupplierFromDetailOrder(List<Supplier> suppliers) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
@@ -736,6 +1033,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((SupplierAllPane) supplierAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide DetailOrderPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromDetailOrder(List<Bill> bills) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
@@ -743,6 +1044,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide DetailOrderPane
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromDetailOrder(List<Order> orders, List<Supplier> suppliers) {
 		((DetailOrderPane) detailOrderPane).setVisible(false);
@@ -751,6 +1057,10 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show BillAllPane and hide GenerateBillPane
+	 * @param bills -> All bills
+	 */
 	@Override
 	public void goToBillFromGenerateBill(List<Bill> bills) {
 		((GenerateBillPane) generateBillPane).setVisible(false);
@@ -758,6 +1068,11 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((BillAllPane) billAllPane).setVisible(true);
 	}
 
+	/**
+	 * Show OrderAllPane and hide GenerateOrderPane 
+	 * @param orders -> All orders
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void goToOrderFromGenerateOrder(List<Order> orders, List<Supplier> suppliers) {
 		((GenerateOrderPane) generateOrderPane).setVisible(false);
@@ -765,22 +1080,34 @@ public class IOManager extends JFrame implements CustomEventAnswer {
 		((OrderAllPane) orderAllPane).setSuppliers(suppliers);
 		((OrderAllPane) orderAllPane).setVisible(true);
 	}
-
+	
 	@Override
 	public void returnProductsFindedByName(List<Product> products) {
 		((GenerateBillPane) generateBillPane).setProducts(products);
 	}
-
+	
+	/**
+	 * update all sections after delete section by id
+	 * @param sections -> All sections
+	 */
 	@Override
 	public void refreshSections(List<Section> sections) {
 		((SectionAllPane) sectionAllPane).setSections(sections);
 	}
-
+	
+	/**
+	 * update all products after delete product by id
+	 * @param products -> All products
+	 */
 	@Override
 	public void refreshProducts(List<Product> products) {
 		((ProductAllPane) productAllPane).setProducts(products);
 	}
-
+	
+	/**
+	 * update all suppliers after delete supplier by id
+	 * @param suppliers -> All suppliers
+	 */
 	@Override
 	public void refreshSuppliers(List<Supplier> suppliers) {
 		((SupplierAllPane) supplierAllPane).setSuppliers(suppliers);

@@ -19,6 +19,12 @@ import javax.swing.border.LineBorder;
 
 import controller.CustomEvent;
 
+/**
+ * @author JONATAN FRANCO
+ * @author WILLIAM ROA
+ * @apiNote RF1
+ * @version V1 -> 24-03-2023
+ */
 public class CreateSectionPane extends JPanel implements ActionListener {
 	/**
 	 * 
@@ -170,7 +176,10 @@ public class CreateSectionPane extends JPanel implements ActionListener {
 		add(footerLbl, 0);
 		
 	}
-	
+
+	/**
+	 * 	Method excecuted when a button with action listener is clicked
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals(sectionButton.getActionCommand())) {
@@ -194,7 +203,12 @@ public class CreateSectionPane extends JPanel implements ActionListener {
 			event.createSection(name);
 		}
 	}
-	
+
+	/**
+	 * Method that put an image on a label
+	 * @param label -> label object
+	 * @param root -> image to put root
+	 */
 	private void setImageLabel(JLabel label, String root) {
 		ImageIcon image = new ImageIcon(root);
 		Icon icon = new ImageIcon(
@@ -204,7 +218,7 @@ public class CreateSectionPane extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
-
+	//Get and sets methods
 	public CustomEvent getEvent() {
 		return event;
 	}
