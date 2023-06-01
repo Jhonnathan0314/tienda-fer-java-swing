@@ -407,7 +407,11 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 	private boolean validateNumberField(JTextField field) {
 		try {
 			new BigInteger(field.getText());
-			return true;
+			if(new BigInteger(field.getText()).intValue() > 0) {				
+				return true;
+			}else {
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
