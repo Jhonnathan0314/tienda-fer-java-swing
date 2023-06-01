@@ -25,9 +25,7 @@ import view.IOManager;
 
 /**
  * @author JONATAN FRANCO
- * @author WILLIAM ROA
- * @apiNote CONTROLADOR
- * @version V3 -> 20-05-2023
+ *
  */
 public class Control implements CustomEvent {
 	//Declaracion de variables
@@ -40,13 +38,10 @@ public class Control implements CustomEvent {
 	private DetailOrderDAO detailOrderDAO;
 	private UserSecurityDAO userSecurityDAO;
 	
-	//Interface that sends answers to IOManager
 	private CustomEventAnswer answer;
 	
-	//Constructor method, that dont make a database connection
 	public Control(String empty) { }
 	
-	//Constructor method, that make a database connection and send it to DAO classes
 	public Control() {
 		Conexion conexion = new Conexion();
 		conexion.getConexion();
@@ -66,13 +61,11 @@ public class Control implements CustomEvent {
 		userSecurityDAO = new UserSecurityDAO(conexion.getConnect());
 	}
 
-	//Method called from runner, that shows JFrame
 	public void init() {
 		IOManager frame = new IOManager();
 		frame.setVisible(true);
 	}
 
-	//Get and set methods of CustomEventAnswer interface
 	public CustomEventAnswer getAnswer() {
 		return answer;
 	}

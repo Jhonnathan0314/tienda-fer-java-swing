@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -477,7 +478,11 @@ public class GenerateOrderPane extends JPanel implements ActionListener, MouseLi
 			event.goToOrderFromGenerateOrder();
 		}
 		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
-			event.generateDetailOrder(detailsOrder);
+			if(detailsOrder.size() > 0) {				
+				event.generateDetailOrder(detailsOrder);
+			}else {
+				JOptionPane.showMessageDialog(null, "NO PUEDE GENERAR UN PEDIDO VACIO, SI DESEA VOLVER, PRESIONE CANCELAR");
+			}
 		}
 	}
 	

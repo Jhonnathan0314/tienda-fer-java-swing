@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -395,7 +396,11 @@ public class GenerateBillPane extends JPanel implements ActionListener, MouseLis
 			event.goToBillFromGenerateBill();
 		}
 		if(e.getActionCommand().equals(generateButton.getActionCommand())) {
-			event.generateDetailBill(detailsBill);
+			if(detailsBill.size() > 0) {				
+				event.generateDetailBill(detailsBill);
+			}else {
+				JOptionPane.showMessageDialog(null, "NO PUEDE GENERAR UNA FACTURA VACIA, SI DESEA VOLVER, PRESIONE CANCELAR");
+			}
 		}
 	}
 
